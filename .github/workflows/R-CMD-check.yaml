@@ -58,18 +58,11 @@ jobs:
             any::remotes
           needs: check
 
-      - name: Install package itself (special case)
-        run: |
-          install.packages(".", repos = NULL, type = "source")  ## needed by parallel workers
-          
         shell: Rscript {0}
 
       - name: Session info
         run: |
           options(width = 100)
-          parallelly::availableCores(which = "all")
-          sapply(c(physical_cores = FALSE, logical_cores = TRUE), parallel::detectCores)
-          if (require(RhpcBLASctl, quietly=TRUE)) c(get_num_procs = get_num_procs(), get_num_cores = get_num_cores(), blas_get_num_procs = blas_get_num_procs(), omp_get_num_procs = omp_get_num_procs(), omp_get_max_threads = omp_get_max_threads())
           capabilities()
           pkgs <- installed.packages()[, "Package"]
           sessioninfo::session_info(pkgs, include_base = TRUE)
