@@ -2,14 +2,27 @@
 % Please edit documentation in R/progressify.R
 \name{progressify}
 \alias{progressify}
+\alias{pz}
 \title{Evaluate a regular map-reduce call in parallel}
 \usage{
-progressify(expr, substitute = TRUE, ..., envir = parent.frame())
+progressify(
+  expr,
+  substitute = TRUE,
+  ...,
+  when = TRUE,
+  eval = TRUE,
+  envir = parent.frame()
+)
 }
 \arguments{
 \item{expr}{An R expression.}
 
 \item{substitute}{If TRUE, \code{expr} is quoted.}
+
+\item{when}{If TRUE (default), the expression is progressified, otherwise not.}
+
+\item{eval}{If TRUE (default), the progressified expression is evaluated,
+other it is returned.}
 
 \item{envir}{The environment in which \code{expr} is evaluated.}
 
