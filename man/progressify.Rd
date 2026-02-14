@@ -36,13 +36,6 @@ Evaluate a regular map-reduce call in parallel
 }
 \examples{
 xs <- list(1, 1:2, 1:2, 1:5)
-
-# ------------------------------------------
-# Base R apply functions
-# ------------------------------------------
-y <- lapply(X = xs, FUN = function(x) {
-  sum(x)
-}) |>
-  progressify()
+y <- lapply(X = xs, FUN = sum) |> progressify()
 str(y)
 }

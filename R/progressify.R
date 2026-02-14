@@ -22,7 +22,7 @@
 #' @importFrom progressr progressor
 #' @export
 progressify <- local({
-  transpile <- import_from("transpile", package = "futurize")
+  transpile <- import_futurize("transpile")
   
   function(expr, substitute = TRUE, ..., when = TRUE, eval = TRUE, envir = parent.frame()) {
     if (substitute) expr <- substitute(expr)

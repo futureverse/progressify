@@ -8,3 +8,9 @@ import_from <- function(name, default = NULL, package) {
     stop(sprintf("No such '%s' function: %s()", package, name))
   }
 }
+
+
+#' @importFrom futurize futurize
+import_futurize <- function(name, default = NULL) {
+  import_from(name, default = default, package = "futurize")
+}

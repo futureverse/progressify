@@ -1,19 +1,3 @@
-known_fcns <- list()
-known_fcns[["base"]] <- list(
-  apply = c,
-  by = c,
-  eapply = c,              ## done
-  lapply = c,              ## done
-  .mapply = c,
-  mapply = c,
-  Map = c,
-  replicate = c,
-  sapply = c,              ## done
-  tapply = c,
-  vapply = c              ## done
-)
-
-
 # lapply(X = xs, FUN = FUN, ...) =>
 #
 # local(
@@ -24,8 +8,6 @@ known_fcns[["base"]] <- list(
 # )
 #
 progressify_base <- function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
-  fcns <- known_fcns[["base"]]
-
   names <- names(expr)
   if (is.null(names)) names <- rep("", length.out = length(expr))
   names <- names[-1]
@@ -74,14 +56,27 @@ progressify_base <- function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
 
 
 append_builtin_transpilers_for_base <- local({
+  known_fcns <- list(
+    apply = c,
+    by = c,
+    eapply = c,              ## done
+    lapply = c,              ## done
+    .mapply = c,
+    mapply = c,
+    Map = c,
+    replicate = c,
+    sapply = c,              ## done
+    tapply = c,
+    vapply = c              ## done
+  )
+
   append_transpilers <- import_from("append_transpilers", package = "futurize")
   function() {
     ## base::apply(), ...
     transpilers <- list()
   
     ## Create all transpilers
-    fcns <- known_fcns[["base"]]
-    for (fcn_name in names(fcns)) {
+    for (fcn_name in names(known_fcns)) {
       label <- sprintf("base::%s() transpiler", fcn_name)
       make_transpiler_expr <- bquote(function(expr, options) {
         fcn_name <- .(fcn_name)
