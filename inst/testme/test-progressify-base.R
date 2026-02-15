@@ -25,10 +25,12 @@ es <- as.environment(xs)
 exprs <- list(
   lapply = quote(lapply(X = xs, FUN = FUN)),
   lapply = quote(base::lapply(X = xs, FUN = FUN)),
+  
   sapply = quote(sapply(X = xs, FUN = FUN)),
   sapply = quote(base::sapply(X = xs, FUN = FUN)),
   sapply = quote(base::sapply(X = xs, FUN = FUN, simplify = FALSE)),
   sapply = quote(base::sapply(X = xs, FUN = FUN, USE.NAMES = FALSE)),
+  
   vapply = quote(base::vapply(X = xs, FUN.VALUE = NA_real_, FUN = FUN)),
   vapply = quote(base::vapply(
     X = xs,
@@ -36,9 +38,14 @@ exprs <- list(
     FUN = FUN,
     USE.NAMES = FALSE
   )),
+  
   eapply = quote(base::eapply(env = es, FUN = FUN)),
   eapply = quote(base::eapply(env = es, FUN = FUN, all.names = TRUE)),
-  eapply = quote(base::eapply(env = es, FUN = FUN, USE.NAMES = FALSE))
+  eapply = quote(base::eapply(env = es, FUN = FUN, USE.NAMES = FALSE)),
+  
+  replicate = quote(replicate(10, { 42 })),
+  replicate = quote(replicate(n = 10, { 1 + 2 })),
+  replicate = quote(base::replicate(n = 10, 3 + 4))
 )
 
 for (kk in seq_along(exprs)) {

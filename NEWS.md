@@ -1,3 +1,8 @@
+# Version (development version)
+
+ * Add support for `replicate()`.
+ 
+
 # Version 0.0.1 (2025-05-06)
 
  * The `progressify()` function makes common map-reduce functions

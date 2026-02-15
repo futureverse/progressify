@@ -17,6 +17,8 @@ progressify_base <- local({
     names[names == ""] <- unnamed
     names <- c("", names)
 
+    idx_X <- idx_FUN <- idx_n <- idx_expr <- NULL
+
     if (fcn_name %in% c("eapply")) {
       idx_X <- which(names == "env")
       idx_FUN <- which(names == "FUN")
@@ -24,9 +26,9 @@ progressify_base <- local({
       idx_X <- which(names == "X")
       idx_FUN <- which(names == "FUN")
     } else if (fcn_name %in% c("replicate")) {
-      stop("Not implemented")
+      idx_n <- which(names == "n")
+      idx_expr <- which(names == "expr")
     } else {
-      idx_X <- NULL
       idx_FUN <- which(names == "FUN")
     }
 
@@ -45,15 +47,32 @@ progressify_base <- local({
         .(FUN)(...)
       })
       parts[[idx_FUN]] <- t_FUN
+      
+      progressr_args <- list(
+        .progressr_progressor = quote(progressr::progressor(along = .progressr_along))
+      )
+      parts <- c(parts, progressr_args)
     }
 
-    progressr_args <- list(
-      .progressr_progressor = quote(progressr::progressor(along = .progressr_along))
-    )
-    parts <- c(parts, progressr_args)
-    t_expr <- bquote(local(.(as.call(parts))))
-  
-    t_expr
+    if (!is.null(idx_n)) {
+      stopifnot(length(idx_n) == 1L)
+      parts[[idx_n]] <- bquote({
+        .progressr_progressor <- progressr::progressor(steps = .(parts[[idx_n]]))
+        .(parts[[idx_n]])
+      })
+    }
+
+    if (!is.null(idx_expr)) {
+      stopifnot(length(idx_expr) == 1L)
+      arg_expr <- expr[[idx_expr]]
+      t_expr <- bquote(local({
+        on.exit(.progressr_progressor())
+        .(arg_expr)
+      }))
+      parts[[idx_expr]] <- t_expr
+    }
+
+    bquote(local(.(as.call(parts))))
   } ## progressify_base()
 })
 
@@ -66,13 +85,13 @@ append_builtin_transpilers_for_base <- local({
   known_fcns <- list(
     apply = c,
     by = c,
-    eapply = c,              ## done
-    lapply = c,              ## done
+    eapply = c,             ## done
+    lapply = c,             ## done
     .mapply = c,
     mapply = c,
     Map = c,
-    replicate = c,
-    sapply = c,              ## done
+    replicate = c,          ## done
+    sapply = c,             ## done
     tapply = c,
     vapply = c              ## done
   )
