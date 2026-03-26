@@ -21,20 +21,16 @@
 #' @aliases pz
 #' @importFrom progressr progressor
 #' @export
-progressify <- local({
-  transpile <- import_futurize("transpile")
-  
-  function(expr, substitute = TRUE, ..., when = TRUE, eval = TRUE, envir = parent.frame()) {
-    if (substitute) expr <- substitute(expr)
-    debug <- isTRUE(getOption("progressify.debug"))
-    if (debug) {
-      mdebug_push("progressify() ...")
-      on.exit(mdebug_pop())
-    }
-  
-    transpile(expr, substitute = FALSE, when = when, eval = eval, type = "progressify::built-in", envir = envir, what = "progressify", debug = debug)
-  } ## progressify()
-})
+progressify <- function(expr, substitute = TRUE, ..., when = TRUE, eval = TRUE, envir = parent.frame()) {
+  if (substitute) expr <- substitute(expr)
+  debug <- isTRUE(getOption("progressify.debug"))
+  if (debug) {
+    mdebug_push("progressify() ...")
+    on.exit(mdebug_pop())
+  }
+
+  transpile(expr, substitute = FALSE, when = when, eval = eval, type = "progressify::built-in", envir = envir, what = "progressify", debug = debug)
+} ## progressify()
 class(progressify) <- c("transpiler", class(progressify))
 
 #' @export

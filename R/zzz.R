@@ -5,7 +5,7 @@
 .onLoad <- function(libname, pkgname) {
   .package[["version"]] <- packageVersion(pkgname)
 
-  update_package_option <- import_from("update_package_option", package = "future")
+  update_package_option <- import_progressr("update_package_option")
   update_package_option("progressify.debug", mode = "logical")
   debug <- isTRUE(getOption("progressify.debug"))
 

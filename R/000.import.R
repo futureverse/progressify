@@ -9,8 +9,6 @@ import_from <- function(name, default = NULL, package) {
   }
 }
 
-
-#' @importFrom futurize futurize
-import_futurize <- function(name, default = NULL) {
-  import_from(name, default = default, package = "futurize")
+import_progressr <- function(name, default = NULL) {
+  import_from(name, default = default, package = "progressr")
 }

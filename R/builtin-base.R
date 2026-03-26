@@ -17,9 +17,12 @@ progressify_base <- local({
     names[names == ""] <- unnamed
     names <- c("", names)
 
-    idx_X <- idx_FUN <- idx_n <- idx_expr <- NULL
+    idx_X <- idx_data <- idx_FUN <- idx_n <- idx_expr <- NULL
 
-    if (fcn_name %in% c("eapply")) {
+    if (fcn_name %in% c("by")) {
+      idx_data <- which(names == "data")
+      idx_FUN <- which(names == "FUN")
+    } else if (fcn_name %in% c("eapply")) {
       idx_X <- which(names == "env")
       idx_FUN <- which(names == "FUN")
     } else if (fcn_name %in% c("lapply", "sapply", "vapply")) {
@@ -36,7 +39,18 @@ progressify_base <- local({
 
     if (!is.null(idx_X)) {
       stopifnot(length(idx_X) == 1L)
-      parts[[idx_X]] <- bquote({ .progressr_along <- .(parts[[idx_X]]) })
+      parts[[idx_X]] <- bquote({
+       .progressr_progressor <- progressr::progressor(along = .(parts[[idx_X]]))
+       .(parts[[idx_X]])
+      })
+    }
+
+    if (!is.null(idx_data)) {
+      stopifnot(length(idx_data) == 1L)
+      parts[[idx_data]] <- bquote({
+        .progressr_progressor <- progressr::progressor(steps = nrow(.(parts[[idx_data]])))
+        .(parts[[idx_data]])
+      })
     }
 
     if (!is.null(idx_FUN)) {
@@ -49,7 +63,7 @@ progressify_base <- local({
       parts[[idx_FUN]] <- t_FUN
       
       progressr_args <- list(
-        .progressr_progressor = quote(progressr::progressor(along = .progressr_along))
+        .progressr_progressor = quote(.progressr_progressor)
       )
       parts <- c(parts, progressr_args)
     }
@@ -78,10 +92,6 @@ progressify_base <- local({
 
 
 append_builtin_transpilers_for_base <- local({
-  append_transpilers <- import_futurize("append_transpilers")
-  bquote_compile <- import_futurize("bquote_compile")
-  bquote_apply <- import_futurize("bquote_apply")
-  
   known_fcns <- list(
     apply = c,
     by = c,
