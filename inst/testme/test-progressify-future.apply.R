@@ -1,4 +1,7 @@
+if (requireNamespace("future.apply")) {
+
 library(progressify)
+library(future.apply)
 
 options(progressify.debug = TRUE)
 
@@ -22,29 +25,29 @@ es <- as.environment(xs)
 
 
 exprs <- list(
-  lapply = quote(lapply(X = xs, FUN = FUN)),
-  lapply = quote(base::lapply(X = xs, FUN = FUN)),
+  future_lapply = quote(future_lapply(X = xs, FUN = FUN)),
+  future_lapply = quote(future.apply::future_lapply(X = xs, FUN = FUN)),
   
-  sapply = quote(sapply(X = xs, FUN = FUN)),
-  sapply = quote(base::sapply(X = xs, FUN = FUN)),
-  sapply = quote(base::sapply(X = xs, FUN = FUN, simplify = FALSE)),
-  sapply = quote(base::sapply(X = xs, FUN = FUN, USE.NAMES = FALSE)),
+  future_sapply = quote(future_sapply(X = xs, FUN = FUN)),
+  future_sapply = quote(future.apply::future_sapply(X = xs, FUN = FUN)),
+  future_sapply = quote(future.apply::future_sapply(X = xs, FUN = FUN, simplify = FALSE)),
+  future_sapply = quote(future.apply::future_sapply(X = xs, FUN = FUN, USE.NAMES = FALSE)),
   
-  vapply = quote(base::vapply(X = xs, FUN.VALUE = NA_real_, FUN = FUN)),
-  vapply = quote(base::vapply(
+  future_vapply = quote(future.apply::future_vapply(X = xs, FUN.VALUE = NA_real_, FUN = FUN)),
+  future_vapply = quote(future.apply::future_vapply(
     X = xs,
     FUN.VALUE = NA_real_,
     FUN = FUN,
     USE.NAMES = FALSE
   )),
   
-  eapply = quote(base::eapply(env = es, FUN = FUN)),
-  eapply = quote(base::eapply(env = es, FUN = FUN, all.names = TRUE)),
-  eapply = quote(base::eapply(env = es, FUN = FUN, USE.NAMES = FALSE)),
+  future_eapply = quote(future.apply::future_eapply(env = es, FUN = FUN)),
+  future_eapply = quote(future.apply::future_eapply(env = es, FUN = FUN, all.names = TRUE)),
+  future_eapply = quote(future.apply::future_eapply(env = es, FUN = FUN, USE.NAMES = FALSE)),
   
-  replicate = quote(replicate(10, { 42 })),
-  replicate = quote(replicate(n = 10, { 1 + 2 })),
-  replicate = quote(base::replicate(n = 10, 3 + 4))
+  future_replicate = quote(future_replicate(10, { 42 })),
+  future_replicate = quote(future_replicate(n = 10, { 1 + 2 })),
+  future_replicate = quote(future.apply::future_replicate(n = 10, 3 + 4))
 )
 
 for (kk in seq_along(exprs)) {
@@ -82,3 +85,5 @@ for (kk in seq_along(exprs)) {
   res3 <- eval(expr_f3)
   stopifnot(identical(res3, res))
 }
+
+} # if (requireNamespace("future.apply"))
