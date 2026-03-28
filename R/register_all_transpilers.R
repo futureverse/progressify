@@ -5,4 +5,5 @@ register_all_transpilers <- function() {
   append_builtin_transpilers_for_base()
   append_builtin_transpilers_for_future.apply()
   append_builtin_transpilers_for_purrr()
+  append_builtin_transpilers_for_furrr()
 } ## register_all_transpilers()

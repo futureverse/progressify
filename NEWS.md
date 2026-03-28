@@ -1,8 +1,10 @@
 # Version (development version)
 
- * Add support for map-reduce CRAN package **purrr**.
+ * Add support for map-reduce CRAN package **furrr**.
 
  * Add support for map-reduce CRAN package **future.apply**.
+
+ * Add support for map-reduce CRAN package **purrr**.
 
  * Add support for `replicate()`.
  
