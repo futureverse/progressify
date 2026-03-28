@@ -8,6 +8,32 @@
 # )
 #
 progressify_future.apply <- local({
+  ## Pre-compiled bquote templates
+  template_along <- bquote_compile({
+    .progressr_progressor <- progressr::progressor(along = .(ALONG))
+    .(ALONG)
+  })
+
+  template_steps_nrow <- bquote_compile({
+    .progressr_progressor <- progressr::progressor(steps = nrow(.(DATA)))
+    .(DATA)
+  })
+
+  template_steps <- bquote_compile({
+    .progressr_progressor <- progressr::progressor(steps = .(STEPS))
+    .(STEPS)
+  })
+
+  template_FUN <- bquote_compile(function(..., .progressr_progressor) {
+    on.exit(.progressr_progressor())
+    .(FUN)(...)
+  })
+
+  template_expr <- bquote_compile(local({
+    on.exit(.progressr_progressor())
+    .(EXPR)
+  }))
+
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))
@@ -44,29 +70,19 @@ progressify_future.apply <- local({
 
     if (!is.null(idx_X)) {
       stopifnot(length(idx_X) == 1L)
-      parts[[idx_X]] <- bquote({
-       .progressr_progressor <- progressr::progressor(along = .(parts[[idx_X]]))
-       .(parts[[idx_X]])
-      })
+      parts[[idx_X]] <- bquote_apply(template_along, ALONG = parts[[idx_X]])
     }
 
     if (!is.null(idx_data)) {
       stopifnot(length(idx_data) == 1L)
-      parts[[idx_data]] <- bquote({
-        .progressr_progressor <- progressr::progressor(steps = nrow(.(parts[[idx_data]])))
-        .(parts[[idx_data]])
-      })
+      parts[[idx_data]] <- bquote_apply(template_steps_nrow, DATA = parts[[idx_data]])
     }
 
     if (!is.null(idx_FUN)) {
       stopifnot(length(idx_FUN) == 1L)
       FUN <- expr[[idx_FUN]]
-      t_FUN <- bquote(function(..., .progressr_progressor) {
-        on.exit(.progressr_progressor())
-        .(FUN)(...)
-      })
-      parts[[idx_FUN]] <- t_FUN
-      
+      parts[[idx_FUN]] <- bquote_apply(template_FUN, FUN = FUN)
+
       progressr_args <- list(
         .progressr_progressor = quote(.progressr_progressor)
       )
@@ -75,20 +91,12 @@ progressify_future.apply <- local({
 
     if (!is.null(idx_n)) {
       stopifnot(length(idx_n) == 1L)
-      parts[[idx_n]] <- bquote({
-        .progressr_progressor <- progressr::progressor(steps = .(parts[[idx_n]]))
-        .(parts[[idx_n]])
-      })
+      parts[[idx_n]] <- bquote_apply(template_steps, STEPS = parts[[idx_n]])
     }
 
     if (!is.null(idx_expr)) {
       stopifnot(length(idx_expr) == 1L)
-      arg_expr <- expr[[idx_expr]]
-      t_expr <- bquote(local({
-        on.exit(.progressr_progressor())
-        .(arg_expr)
-      }))
-      parts[[idx_expr]] <- t_expr
+      parts[[idx_expr]] <- bquote_apply(template_expr, EXPR = expr[[idx_expr]])
     }
 
     bquote(local(.(as.call(parts))))
@@ -132,9 +140,9 @@ append_builtin_transpilers_for_future.apply <- local({
       )
     } ## for (fcn_name ...)
     transpilers <- list(future.apply = transpilers)
-    
+
     append_transpilers("progressify::built-in", transpilers)
-    
+
     ## Return required packages
     c("future.apply", "progressr")
   }

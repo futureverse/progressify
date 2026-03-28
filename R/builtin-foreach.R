@@ -9,6 +9,17 @@
 # })
 #
 progressify_foreach <- local({
+  ## Pre-compiled bquote templates
+  template_body <- bquote_compile(local({
+    on.exit(.progressr_progressor())
+    .(BODY)
+  }))
+
+  template_outer <- bquote_compile(local({
+    .progressr_progressor <- progressr::progressor(along = .(ITER))
+    .(EXPR)
+  }))
+
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     ## expr is:  %do%(foreach(...), { body })
     ## expr[[1]] = `%do%`
@@ -16,7 +27,6 @@ progressify_foreach <- local({
     ## expr[[3]] = body expression
 
     foreach_call <- expr[[2]]
-    body_expr <- expr[[3]]
 
     ## Find the first iteration argument in the foreach() call.
     ## Iteration arguments are passed via ... and do NOT start with "."
@@ -29,20 +39,11 @@ progressify_foreach <- local({
     iter_expr <- foreach_call[[iter_idxs[1]]]
 
     ## Wrap body with on.exit() progress signal
-    wrapped_body <- bquote({
-      on.exit(.progressr_progressor())
-      .(body_expr)
-    })
-
-    ## Reconstruct the %do% call with wrapped body
     parts <- as.list(expr)
-    parts[[3]] <- wrapped_body
+    parts[[3]] <- bquote_apply(template_body, BODY = expr[[3]])
 
     ## Wrap everything in local() with progressor initialization
-    bquote(local({
-      .progressr_progressor <- progressr::progressor(along = .(iter_expr))
-      .(as.call(parts))
-    }))
+    bquote_apply(template_outer, ITER = iter_expr, EXPR = as.call(parts))
   } ## progressify_foreach()
 })
 

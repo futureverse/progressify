@@ -12,6 +12,25 @@
 # )
 #
 progressify_furrr <- local({
+  ## Pre-compiled bquote templates
+  template_along <- bquote_compile({
+    .progressr_progressor <- progressr::progressor(along = .(ALONG))
+    .(ALONG)
+  })
+
+  template_along_first <- bquote_compile({
+    .progressr_progressor <- progressr::progressor(along = .(ALONG)[[1]])
+    .(ALONG)
+  })
+
+  template_f <- bquote_compile(local({
+    .progressr_f <- purrr::as_mapper(.(FUN))
+    function(..., .progressr_progressor) {
+      on.exit(.progressr_progressor())
+      .progressr_f(...)
+    }
+  }))
+
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))
@@ -50,18 +69,12 @@ progressify_furrr <- local({
 
     if (!is.null(idx_x)) {
       stopifnot(length(idx_x) == 1L)
-      parts[[idx_x]] <- bquote({
-        .progressr_progressor <- progressr::progressor(along = .(parts[[idx_x]]))
-        .(parts[[idx_x]])
-      })
+      parts[[idx_x]] <- bquote_apply(template_along, ALONG = parts[[idx_x]])
     }
 
     if (!is.null(idx_l)) {
       stopifnot(length(idx_l) == 1L)
-      parts[[idx_l]] <- bquote({
-        .progressr_progressor <- progressr::progressor(along = .(parts[[idx_l]])[[1]])
-        .(parts[[idx_l]])
-      })
+      parts[[idx_l]] <- bquote_apply(template_along_first, ALONG = parts[[idx_l]])
     }
 
     if (!is.null(idx_f)) {
@@ -69,14 +82,7 @@ progressify_furrr <- local({
       FUN <- expr[[idx_f]]
       ## NOTE: furrr's .f can be a function, formula, string, or integer,
       ## so we use purrr::as_mapper() to convert it to a callable function
-      t_f <- bquote(local({
-        .progressr_f <- purrr::as_mapper(.(FUN))
-        function(..., .progressr_progressor) {
-          on.exit(.progressr_progressor())
-          .progressr_f(...)
-        }
-      }))
-      parts[[idx_f]] <- t_f
+      parts[[idx_f]] <- bquote_apply(template_f, FUN = FUN)
 
       progressr_args <- list(
         .progressr_progressor = quote(.progressr_progressor)
