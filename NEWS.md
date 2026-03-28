@@ -18,7 +18,11 @@ which implements closely related "parallelization" transpilers.
  * Add support for map-reduce CRAN package **future.apply**, e.g. `y
    <- future.apply::future_lapply(xs, fcn) |> progressify()`.
 
- * Add support for **purrr**, e.g. `y <- map(xs, fcn) |> progressify()`.
+ * Add support for **plyr**, e.g. `y <- plyr::llply(xs, fcn) |>
+   progressify()`.
+ 
+ * Add support for **purrr**, e.g. `y <- purrr::map(xs, fcn) |>
+   progressify()`.
  
  * Add support for `replicate()`, e.g. `y <- replicate(n, rnorm(10))
    |> progressify()`.
