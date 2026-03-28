@@ -1,5 +1,3 @@
-# progressify: Progress Updates Everywhere
-
 <div id="badges"><!-- pkgdown markup -->
 <a href="https://github.com/HenrikBengtsson/progressify/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/progressify/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main" alt="R CMD check status"/></a>
 <!--
