@@ -1,5 +1,7 @@
 # Version (development version)
 
+ * Add support for map-reduce CRAN package **foreach**.
+
  * Add support for map-reduce CRAN package **furrr**.
 
  * Add support for map-reduce CRAN package **future.apply**.
