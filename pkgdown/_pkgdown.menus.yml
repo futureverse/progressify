@@ -1,0 +1,16 @@
+articles-mapreduce:
+  text: Map Reduce
+  menu:
+  - text: "Map-reduce packages supporting progressify()"
+  - text: Progress updates for base-R apply functions
+    href: articles/progressify-11-apply.html
+  - text: Progress updates for 'future.apply' functions
+    href: articles/progressify-12-future.apply.html
+  - text: Progress updates for 'purrr' functions
+    href: articles/progressify-21-purrr.html
+  - text: Progress updates for 'furrr' functions
+    href: articles/progressify-22-furrr.html
+  - text: Progress updates for 'plyr' functions
+    href: articles/progressify-31-plyr.html
+  - text: Progress updates for 'foreach' functions
+    href: articles/progressify-51-foreach.html
