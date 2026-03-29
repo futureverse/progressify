@@ -78,8 +78,8 @@ ys <- plyr::llply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 The **progressify** package is compatible with the
 **[futurize](https://futurize.futureverse.org)** package, which
 parallelizes code via the [futureverse](https://www.futureverse.org).
-You can combine the two to get both progress reporting and
-parallelization:
+You can combine the two, in either order, to get both progress reporting
+and parallelization:
 
 ``` r
 
