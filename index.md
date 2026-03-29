@@ -72,3 +72,28 @@ ys <- foreach(x = xs) %do% { Sys.sleep(0.1); sqrt(x) } |> progressify()
 xs <- 1:10
 ys <- plyr::llply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 ```
+
+## Compatible with futurize
+
+The **progressify** package is compatible with the
+**[futurize](https://futurize.futureverse.org)** package, which
+parallelizes code via the [futureverse](https://www.futureverse.org).
+You can combine the two to get both progress reporting and
+parallelization:
+
+``` r
+
+library(progressify)
+library(futurize)
+plan(multisession)
+
+xs <- 1:100
+ys <- lapply(xs, slow_fcn) |> progressify() |> futurize()
+
+ys <- purrr::map(xs, slow_fcn) |> progressify() |> futurize()
+
+library(foreach)
+ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
+
+ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
+```
