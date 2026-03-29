@@ -32,6 +32,14 @@ which implements closely related “parallelization” transpilers.
 - Add support for [`replicate()`](https://rdrr.io/r/base/lapply.html),
   e.g. `y <- replicate(n, rnorm(10)) |> progressify()`.
 
+- Add
+  [`progressify_supported_packages()`](https://progressify.futureverse.org/reference/progressify_supported_packages.md)
+  and
+  [`progressify_supported_functions()`](https://progressify.futureverse.org/reference/progressify_supported_packages.md)
+  for programmatically querying which packages and functions are
+  supported by
+  [`progressify()`](https://progressify.futureverse.org/reference/progressify.md).
+
 ## Version 0.0.1
 
 ### New Features
