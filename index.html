@@ -120,7 +120,12 @@
 <div class="section level2">
 <h2 id="supported-map-reduce-packages">Supported map-reduce packages<a class="anchor" aria-label="anchor" href="#supported-map-reduce-packages"></a>
 </h2>
-<p>The <strong>progressify</strong> package supports transpilation of functions from multiple packages. The table below summarizes the supported map-reduce functions.</p>
+<p>The <strong>progressify</strong> package supports transpilation of functions from multiple packages. The table below summarizes the supported map-reduce functions. To programmatically see which packages are currently supported, use:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/progressify_supported_packages.html">progressify_supported_packages</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>To see which functions are supported for a specific package, use:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/progressify_supported_packages.html">progressify_supported_functions</a></span><span class="op">(</span><span class="st">"purrr"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="14%">
@@ -180,7 +185,7 @@
 </table>
 <p><em>Table 1: Map-reduce functions currently supported by <code><a href="reference/progressify.html">progressify()</a></code> for progress reporting.</em></p>
 <p>Here are some examples:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
 <span><span class="fu">handlers</span><span class="op">(</span><span class="st">"txtprogressbar"</span><span class="op">)</span></span>
 <span></span>
@@ -204,7 +209,7 @@
 <h2 id="compatible-with-futurize">Compatible with futurize<a class="anchor" aria-label="anchor" href="#compatible-with-futurize"></a>
 </h2>
 <p>The <strong>progressify</strong> package is compatible with the <strong><a href="https://futurize.futureverse.org" class="external-link">futurize</a></strong> package, which parallelizes code via the <a href="https://www.futureverse.org" class="external-link">futureverse</a>. You can combine the two, in either order, to get both progress reporting and parallelization:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://futurize.futureverse.org" class="external-link">futurize</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span>

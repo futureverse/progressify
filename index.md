@@ -36,7 +36,20 @@ and it works seamlessly across different environments and frontends.
 
 The **progressify** package supports transpilation of functions from
 multiple packages. The table below summarizes the supported map-reduce
-functions.
+functions. To programmatically see which packages are currently
+supported, use:
+
+``` r
+
+progressify_supported_packages()
+```
+
+To see which functions are supported for a specific package, use:
+
+``` r
+
+progressify_supported_functions("purrr")
+```
 
 | Package | Functions |
 |----|----|
