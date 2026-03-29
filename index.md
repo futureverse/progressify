@@ -113,4 +113,6 @@ library(foreach)
 ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
+
+ys <- BiocParallel::bplapply(xs, slow_fcn) |> progressify() |> futurize()
 ```
