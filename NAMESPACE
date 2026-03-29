@@ -2,6 +2,8 @@
 
 S3method(print,transpiled_call)
 export(progressify)
+export(progressify_supported_functions)
+export(progressify_supported_packages)
 export(pz)
 importFrom(progressr,progressor)
 importFrom(utils,capture.output)

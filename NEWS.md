@@ -29,6 +29,10 @@ which implements closely related "parallelization" transpilers.
 
  * Add support for `replicate()`, e.g. `y <- replicate(n, rnorm(10))
    |> progressify()`.
+
+ * Add `progressify_supported_packages()` and
+   `progressify_supported_functions()` for programmatically querying
+   which packages and functions are supported by `progressify()`.
  
 
 # Version 0.0.1 (2025-05-06)

@@ -37,7 +37,18 @@ different environments and frontends.
 
 The **progressify** package supports transpilation of functions from
 multiple packages. The table below summarizes the supported map-reduce
-functions.
+functions. To programmatically see which packages are currently
+supported, use:
+
+```r
+progressify_supported_packages()
+```
+
+To see which functions are supported for a specific package, use:
+
+```r
+progressify_supported_functions("purrr")
+```
 
 | Package            | Functions                                                                                                          |
 |--------------------|--------------------------------------------------------------------------------------------------------------------|
@@ -97,6 +108,8 @@ library(foreach)
 ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
+
+ys <- BiocParallel::bplapply(xs, slow_fcn) |> progressify() |> futurize()
 ```
 
 
