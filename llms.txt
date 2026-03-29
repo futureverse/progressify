@@ -47,6 +47,7 @@ functions.
 | **[foreach](https://foreach.futureverse.org)** | `%do%`, `%dopar%` |
 | **[doFuture](https://doFuture.futureverse.org)** | `%dofuture%` |
 | **[plyr](https://cran.r-project.org/package=plyr)** | `llply()` and variants, `mlply()` and variants, `rdply()`, `rlply()`, `raply()`, `r_ply()` |
+| **[BiocParallel](https://bioconductor.org/packages/BiocParallel)** | `bplapply()`, `bpmapply()` |
 
 *Table 1: Map-reduce functions currently supported by
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
@@ -71,6 +72,9 @@ ys <- foreach(x = xs) %do% { Sys.sleep(0.1); sqrt(x) } |> progressify()
 
 xs <- 1:10
 ys <- plyr::llply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
+
+xs <- 1:10
+ys <- BiocParallel::bplapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 ```
 
 ## Compatible with futurize

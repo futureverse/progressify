@@ -8,23 +8,26 @@ which implements closely related “parallelization” transpilers.
 
 ### New Features
 
-- Add support for map-reduce CRAN package **doFuture**,
-  e.g. `y <- foreach(x = xs) %dofuture% { fcn(x) } |> progressify()`.
+- Add support for map-reduce CRAN package **future.apply**,
+  e.g. `y <- future.apply::future_lapply(xs, fcn) |> progressify()`.
 
-- Add support for map-reduce CRAN package **foreach**,
-  e.g. `y <- foreach(x = xs) %do% { fcn(x) } |> progressify()`.
+- Add support for **purrr**,
+  e.g. `y <- purrr::map(xs, fcn) |> progressify()`.
 
 - Add support for map-reduce CRAN package **furrr**,
   e.g. `y <- furrr::future_map(xs, fcn) |> progressify()`.
 
-- Add support for map-reduce CRAN package **future.apply**,
-  e.g. `y <- future.apply::future_lapply(xs, fcn) |> progressify()`.
+- Add support for map-reduce CRAN package **foreach**,
+  e.g. `y <- foreach(x = xs) %do% { fcn(x) } |> progressify()`.
+
+- Add support for map-reduce CRAN package **doFuture**,
+  e.g. `y <- foreach(x = xs) %dofuture% { fcn(x) } |> progressify()`.
 
 - Add support for **plyr**,
   e.g. `y <- plyr::llply(xs, fcn) |> progressify()`.
 
-- Add support for **purrr**,
-  e.g. `y <- purrr::map(xs, fcn) |> progressify()`.
+- Add support for Bioconductor package **BiocParallel**,
+  e.g. `y <- BiocParallel::bplapply(xs, fcn) |> progressify()`.
 
 - Add support for [`replicate()`](https://rdrr.io/r/base/lapply.html),
   e.g. `y <- replicate(n, rnorm(10)) |> progressify()`.
