@@ -10,7 +10,9 @@ articles-mapreduce:
     href: articles/progressify-21-purrr.html
   - text: Progress updates for 'furrr' functions
     href: articles/progressify-22-furrr.html
-  - text: Progress updates for 'plyr' functions
-    href: articles/progressify-31-plyr.html
   - text: Progress updates for 'foreach' functions
     href: articles/progressify-51-foreach.html
+  - text: Progress updates for 'plyr' functions
+    href: articles/progressify-31-plyr.html
+  - text: Progress updates for 'BiocParallel' functions
+    href: articles/progressify-41-BiocParallel.html
