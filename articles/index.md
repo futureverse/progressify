@@ -12,5 +12,7 @@
   functions](https://progressify.futureverse.org/articles/progressify-22-furrr.md):
 - [Progress updates for 'plyr'
   functions](https://progressify.futureverse.org/articles/progressify-31-plyr.md):
+- [Progress updates for 'BiocParallel'
+  functions](https://progressify.futureverse.org/articles/progressify-41-BiocParallel.md):
 - [Progress updates for 'foreach'
   functions](https://progressify.futureverse.org/articles/progressify-51-foreach.md):

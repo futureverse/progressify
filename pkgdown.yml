@@ -7,8 +7,9 @@ articles:
   progressify-21-purrr: progressify-21-purrr.html
   progressify-22-furrr: progressify-22-furrr.html
   progressify-31-plyr: progressify-31-plyr.html
+  progressify-41-BiocParallel: progressify-41-BiocParallel.html
   progressify-51-foreach: progressify-51-foreach.html
-last_built: 2026-03-29T14:44Z
+last_built: 2026-03-29T14:47Z
 urls:
   reference: https://progressify.futureverse.org/reference
   article: https://progressify.futureverse.org/articles
