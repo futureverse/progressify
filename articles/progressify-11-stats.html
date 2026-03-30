@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Progress updates for 'plyr' functions • progressify</title>
+<title>Progress updates for 'stats' functions • progressify</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Progress updates for 'plyr' functions">
+<meta property="og:title" content="Progress updates for 'stats' functions">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-SB3EQSD9FR"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -47,14 +47,14 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-map-reduce" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Map Reduce</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-map-reduce">
 <li><h6 class="dropdown-header" data-toc-skip>Map-reduce packages supporting progressify()</h6></li>
-    <li><a class="dropdown-item" href="../articles/progressify-11-apply.html">Progress updates for base-R apply functions</a></li>
-    <li><a class="dropdown-item" href="../articles/progressify-13-stats.html">Progress updates for 'stats' functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-11-base.html">Progress updates for base-R apply functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-11-stats.html">Progress updates for 'stats' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-12-future.apply.html">Progress updates for 'future.apply' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-21-purrr.html">Progress updates for 'purrr' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-22-furrr.html">Progress updates for 'furrr' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-23-crossmap.html">Progress updates for 'crossmap' functions</a></li>
-    <li><a class="dropdown-item" href="../articles/progressify-51-foreach.html">Progress updates for 'foreach' functions</a></li>
-    <li><a class="dropdown-item" href="../articles/progressify-31-plyr.html">Progress updates for 'plyr' functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-41-foreach.html">Progress updates for 'foreach' functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-51-plyr.html">Progress updates for 'plyr' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-41-BiocParallel.html">Progress updates for 'BiocParallel' functions</a></li>
   </ul>
 </li>
@@ -62,7 +62,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-cran-focus" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">CRAN Focus</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-cran-focus">
 <li><h6 class="dropdown-header" data-toc-skip>CRAN packages supporting progressify()</h6></li>
-    <li><a class="dropdown-item" href="../articles/progressify-42-partykit.html">Progress updates for 'partykit' functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-81-partykit.html">Progress updates for 'partykit' functions</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
@@ -116,23 +116,23 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Progress updates for 'plyr' functions</h1>
+      <h1>Progress updates for 'stats' functions</h1>
                         <h4 data-toc-skip class="author">Henrik
 Bengtsson</h4>
             
       
 
-      <div class="d-none name"><code>progressify-31-plyr.Rmd</code></div>
+      <div class="d-none name"><code>progressify-11-stats.Rmd</code></div>
     </div>
 
     
     
 <!--
-%\VignetteIndexEntry{Progress updates for 'plyr' functions}
+%\VignetteIndexEntry{Progress updates for 'stats' functions}
 %\VignetteAuthor{Henrik Bengtsson}
 %\VignetteKeyword{R}
 %\VignetteKeyword{package}
-%\VignetteKeyword{plyr}
+%\VignetteKeyword{stats}
 %\VignetteKeyword{vignette}
 %\VignetteKeyword{progressify}
 %\VignetteEngine{progressify::selfonly}
@@ -144,42 +144,30 @@ to the <code><a href="../reference/progressify.html">progressify()</a></code> fu
 <h2 id="tldr">TL;DR<a class="anchor" aria-label="anchor" href="#tldr"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr" class="external-link">plyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">slow_fcn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>  <span class="co"># emulate work</span></span>
-<span>  <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">slow_fcn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html" class="external-link">as.dendrogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>; <span class="va">n</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>This vignette demonstrates how to use this approach to add progress
-reporting to <strong><a href="https://cran.r-project.org/package=plyr" class="external-link">plyr</a></strong>
-functions such as <code><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply()</a></code>, <code><a href="https://rdrr.io/pkg/plyr/man/maply.html" class="external-link">maply()</a></code>, and
-<code><a href="https://rdrr.io/pkg/plyr/man/ddply.html" class="external-link">ddply()</a></code>.</p>
-<p>The <strong>plyr</strong> <code><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply()</a></code> function is commonly
-used to apply a function to the elements of a list and return a list.
-For example,</p>
+reporting to functions such as <code><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply()</a></code> in the
+<strong>stats</strong> package. For example, consider the
+<code><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply()</a></code> function, which is commonly used to apply a
+function to the nodes of a dendrogram, as in:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr" class="external-link">plyr</a></span><span class="op">)</span></span>
-<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">slow_fcn</span><span class="op">)</span></span></code></pre></div>
-<p>Here <code><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply()</a></code> provides no feedback on how far it has
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html" class="external-link">as.dendrogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>; <span class="va">n</span> <span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<p>Here <code><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply()</a></code> provides no feedback on how far it has
 progressed, but we can easily add progress reporting, by using:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://had.co.nz/plyr" class="external-link">plyr</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">slow_fcn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>; <span class="va">n</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Using the default progress handler, the progress reporting will
 appear as:</p>
 <pre class="plain"><code>  |=====                    |  20%</code></pre>
@@ -188,20 +176,9 @@ appear as:</p>
 <h2 id="supported-functions">Supported Functions<a class="anchor" aria-label="anchor" href="#supported-functions"></a>
 </h2>
 <p>The <code><a href="../reference/progressify.html">progressify()</a></code> function supports the following
-<strong>plyr</strong> functions:</p>
+<strong>stats</strong> package functions:</p>
 <ul>
-<li>
-<code><a href="https://rdrr.io/pkg/plyr/man/l_ply.html" class="external-link">l_ply()</a></code>, <code><a href="https://rdrr.io/pkg/plyr/man/laply.html" class="external-link">laply()</a></code>, <code><a href="https://rdrr.io/pkg/plyr/man/ldply.html" class="external-link">ldply()</a></code>,
-<code><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply()</a></code>
-</li>
-<li>
-<code><a href="https://rdrr.io/pkg/plyr/man/m_ply.html" class="external-link">m_ply()</a></code>, <code><a href="https://rdrr.io/pkg/plyr/man/maply.html" class="external-link">maply()</a></code>, <code><a href="https://rdrr.io/pkg/plyr/man/mdply.html" class="external-link">mdply()</a></code>,
-<code><a href="https://rdrr.io/pkg/plyr/man/mlply.html" class="external-link">mlply()</a></code>
-</li>
-<li>
-<code><a href="https://rdrr.io/pkg/plyr/man/r_ply.html" class="external-link">r_ply()</a></code>, <code><a href="https://rdrr.io/pkg/plyr/man/raply.html" class="external-link">raply()</a></code>, <code><a href="https://rdrr.io/pkg/plyr/man/rdply.html" class="external-link">rdply()</a></code>,
-<code><a href="https://rdrr.io/pkg/plyr/man/rlply.html" class="external-link">rlply()</a></code>
-</li>
+<li><code><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply()</a></code></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

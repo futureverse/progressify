@@ -1,16 +1,16 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://progressify.futureverse.org/404.html</loc></url>
 <url><loc>https://progressify.futureverse.org/articles/index.html</loc></url>
-<url><loc>https://progressify.futureverse.org/articles/progressify-11-apply.html</loc></url>
+<url><loc>https://progressify.futureverse.org/articles/progressify-11-base.html</loc></url>
+<url><loc>https://progressify.futureverse.org/articles/progressify-11-stats.html</loc></url>
 <url><loc>https://progressify.futureverse.org/articles/progressify-12-future.apply.html</loc></url>
-<url><loc>https://progressify.futureverse.org/articles/progressify-13-stats.html</loc></url>
 <url><loc>https://progressify.futureverse.org/articles/progressify-21-purrr.html</loc></url>
 <url><loc>https://progressify.futureverse.org/articles/progressify-22-furrr.html</loc></url>
 <url><loc>https://progressify.futureverse.org/articles/progressify-23-crossmap.html</loc></url>
-<url><loc>https://progressify.futureverse.org/articles/progressify-31-plyr.html</loc></url>
 <url><loc>https://progressify.futureverse.org/articles/progressify-41-BiocParallel.html</loc></url>
-<url><loc>https://progressify.futureverse.org/articles/progressify-42-partykit.html</loc></url>
-<url><loc>https://progressify.futureverse.org/articles/progressify-51-foreach.html</loc></url>
+<url><loc>https://progressify.futureverse.org/articles/progressify-41-foreach.html</loc></url>
+<url><loc>https://progressify.futureverse.org/articles/progressify-51-plyr.html</loc></url>
+<url><loc>https://progressify.futureverse.org/articles/progressify-81-partykit.html</loc></url>
 <url><loc>https://progressify.futureverse.org/authors.html</loc></url>
 <url><loc>https://progressify.futureverse.org/index.html</loc></url>
 <url><loc>https://progressify.futureverse.org/news/index.html</loc></url>
