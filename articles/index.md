@@ -6,6 +6,8 @@
   functions](https://progressify.futureverse.org/articles/progressify-11-apply.md):
 - [Progress updates for 'future.apply'
   functions](https://progressify.futureverse.org/articles/progressify-12-future.apply.md):
+- [Progress updates for 'stats'
+  functions](https://progressify.futureverse.org/articles/progressify-13-stats.md):
 - [Progress updates for 'purrr'
   functions](https://progressify.futureverse.org/articles/progressify-21-purrr.md):
 - [Progress updates for 'furrr'
