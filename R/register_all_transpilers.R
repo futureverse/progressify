@@ -8,6 +8,7 @@ register_all_transpilers <- function() {
   append_builtin_transpilers_for_purrr()
   append_builtin_transpilers_for_furrr()
   append_builtin_transpilers_for_plyr()
+  append_builtin_transpilers_for_stats()
   append_builtin_transpilers_for_foreach()
   append_builtin_transpilers_for_doFuture()
 } ## register_all_transpilers()

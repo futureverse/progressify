@@ -30,6 +30,9 @@ which implements closely related "parallelization" transpilers.
  * Add support for `replicate()`, e.g. `y <- replicate(n, rnorm(10))
    |> progressify()`.
 
+ * Add support for base-R package **stats**, e.g. `d2 <-
+   dendrapply(d, fcn) |> progressify()`.
+
  * Add `progressify_supported_packages()` and
    `progressify_supported_functions()` for programmatically querying
    which packages and functions are supported by `progressify()`.

@@ -4,6 +4,8 @@ articles-mapreduce:
   - text: "Map-reduce packages supporting progressify()"
   - text: Progress updates for base-R apply functions
     href: articles/progressify-11-apply.html
+  - text: Progress updates for 'stats' functions
+    href: articles/progressify-13-stats.html
   - text: Progress updates for 'future.apply' functions
     href: articles/progressify-12-future.apply.html
   - text: Progress updates for 'purrr' functions

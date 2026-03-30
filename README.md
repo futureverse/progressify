@@ -53,6 +53,7 @@ progressify_supported_functions("purrr")
 | Package            | Functions                                                                                                          |
 |--------------------|--------------------------------------------------------------------------------------------------------------------|
 | **base**           | `apply()`, `by()`, `eapply()`, `lapply()`, `.mapply()`, `mapply()`, `Map()`, `replicate()`, `sapply()`, `tapply()`, `vapply()` |
+| **stats**          | `dendrapply()`                                                                                             |
 | **[future.apply]** | `future_apply()`, `future_by()`, `future_eapply()`, `future_lapply()`, `future_.mapply()`, `future_mapply()`, `future_Map()`, `future_replicate()`, `future_sapply()`, `future_tapply()`, `future_vapply()` |
 | **[purrr]**        | `map()` and variants, `walk()` and variants, `map2()` and variants, `walk2()` and variants, `pmap()` and variants, `pwalk()`, `imap()` and variants, `modify()`, `modify2()`, `imodify()` |
 | **[furrr]**        | `future_map()` and variants, `future_walk()` and variants, `future_map2()` and variants, `future_walk2()` and variants, `future_pmap()` and variants, `future_pwalk()`, `future_imap()` and variants |
@@ -71,6 +72,9 @@ handlers("txtprogressbar")
 
 xs <- 1:10
 ys <- lapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
+
+d <- as.dendrogram(hclust(dist(USArrests)))
+d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n }) |> progressify()
 
 xs <- 1:10
 ys <- purrr::map(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
