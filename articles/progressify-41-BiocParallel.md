@@ -11,7 +11,6 @@ function. Easy!
 
 library(BiocParallel)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x) {
@@ -53,7 +52,6 @@ progress reporting, by using:
 library(BiocParallel)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

@@ -11,7 +11,6 @@ function. Easy!
 
 library(crossmap)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x, y) {
@@ -53,7 +52,6 @@ progress reporting, by using:
 library(crossmap)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- list(1:5, 1:5)

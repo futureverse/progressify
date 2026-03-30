@@ -12,7 +12,6 @@ function. Easy!
 library(furrr)
 plan(multisession)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x) {
@@ -59,7 +58,6 @@ library(furrr)
 plan(multisession)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

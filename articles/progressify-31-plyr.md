@@ -11,7 +11,6 @@ function. Easy!
 
 library(plyr)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x) {
@@ -51,7 +50,6 @@ reporting, by using:
 library(plyr)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

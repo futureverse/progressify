@@ -11,7 +11,6 @@ function. Easy!
 
 library(partykit)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 data("Titanic", package = "datasets")
@@ -48,7 +47,6 @@ progress reporting, by using:
 library(partykit)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 data("Titanic", package = "datasets")

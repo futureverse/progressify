@@ -10,7 +10,6 @@ function. Easy!
 ``` r
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 library(purrr)
 
@@ -60,7 +59,6 @@ reporting, by using:
 library(purrr)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

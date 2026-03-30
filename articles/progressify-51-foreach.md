@@ -10,7 +10,6 @@ function. Easy!
 ``` r
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 library(foreach)
 
@@ -51,7 +50,6 @@ easily add progress reporting by piping to
 library(foreach)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100
@@ -77,7 +75,6 @@ library(doFuture)
 plan(multisession)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

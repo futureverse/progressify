@@ -12,7 +12,6 @@ function. Easy!
 library(future.apply)
 plan(multisession)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x) {
@@ -61,7 +60,6 @@ library(future.apply)
 plan(multisession)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 ys <- future_lapply(xs, slow_fcn) |> progressify()
