@@ -11,7 +11,7 @@ home:
 
 navbar:
   structure:
-    left: [intro, reference, articles-mapreduce, news]
+    left: [intro, reference, articles-mapreduce, cran-focus, news]
     right: [search, futureverse, pkgs, cran, github, lightswitch]
   components:
     articles-mapreduce:
@@ -36,6 +36,12 @@ navbar:
         href: articles/progressify-31-plyr.html
       - text: Progress updates for 'BiocParallel' functions
         href: articles/progressify-41-BiocParallel.html
+    cran-focus:
+      text: CRAN Focus
+      menu:
+      - text: CRAN packages supporting progressify()
+      - text: Progress updates for 'partykit' functions
+        href: articles/progressify-42-partykit.html
 
     news:
       text: News
