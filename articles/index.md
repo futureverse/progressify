@@ -10,6 +10,8 @@
   functions](https://progressify.futureverse.org/articles/progressify-21-purrr.md):
 - [Progress updates for 'furrr'
   functions](https://progressify.futureverse.org/articles/progressify-22-furrr.md):
+- [Progress updates for 'crossmap'
+  functions](https://progressify.futureverse.org/articles/progressify-23-crossmap.md):
 - [Progress updates for 'plyr'
   functions](https://progressify.futureverse.org/articles/progressify-31-plyr.md):
 - [Progress updates for 'BiocParallel'

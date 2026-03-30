@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,7 @@
     <li><a class="dropdown-item" href="../articles/progressify-12-future.apply.html">Progress updates for 'future.apply' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-21-purrr.html">Progress updates for 'purrr' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-22-furrr.html">Progress updates for 'furrr' functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-23-crossmap.html">Progress updates for 'crossmap' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-51-foreach.html">Progress updates for 'foreach' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-31-plyr.html">Progress updates for 'plyr' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-41-BiocParallel.html">Progress updates for 'BiocParallel' functions</a></li>
@@ -83,6 +84,7 @@
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li><p>Add support for map-reduce CRAN package <strong>future.apply</strong>, e.g. <code>y &lt;- future.apply::future_lapply(xs, fcn) |&gt; progressify()</code>.</p></li>
+<li><p>Add support for CRAN package <strong>crossmap</strong>, e.g. <code>y &lt;- crossmap::xmap(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <strong>purrr</strong>, e.g. <code>y &lt;- purrr::map(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for map-reduce CRAN package <strong>furrr</strong>, e.g. <code>y &lt;- furrr::future_map(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for map-reduce CRAN package <strong>foreach</strong>, e.g. <code>y &lt;- foreach(x = xs) %do% { fcn(x) } |&gt; progressify()</code>.</p></li>

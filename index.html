@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9017</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,6 +54,7 @@
     <li><a class="dropdown-item" href="articles/progressify-12-future.apply.html">Progress updates for 'future.apply' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-21-purrr.html">Progress updates for 'purrr' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-22-furrr.html">Progress updates for 'furrr' functions</a></li>
+    <li><a class="dropdown-item" href="articles/progressify-23-crossmap.html">Progress updates for 'crossmap' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-51-foreach.html">Progress updates for 'foreach' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-31-plyr.html">Progress updates for 'plyr' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-41-BiocParallel.html">Progress updates for 'BiocParallel' functions</a></li>
@@ -161,6 +162,12 @@
 </td>
 </tr>
 <tr>
+<td><strong><a href="https://cran.r-project.org/package=crossmap" class="external-link">crossmap</a></strong></td>
+<td>
+<code>xmap()</code> and variants, <code>xwalk()</code>, <code>map_vec()</code>, <code>map2_vec()</code>, <code>pmap_vec()</code>, <code>imap_vec()</code>
+</td>
+</tr>
+<tr>
 <td><strong><a href="https://furrr.futureverse.org" class="external-link">furrr</a></strong></td>
 <td>
 <code>future_map()</code> and variants, <code>future_walk()</code> and variants, <code>future_map2()</code> and variants, <code>future_walk2()</code> and variants, <code>future_pmap()</code> and variants, <code>future_pwalk()</code>, <code>future_imap()</code> and variants</td>
@@ -203,6 +210,9 @@
 <span></span>
 <span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">xs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">crossmap</span><span class="fu">::</span><span class="fu"><a href="https://pkg.rossellhayes.com/crossmap/reference/xmap.html" class="external-link">xmap</a></span><span class="op">(</span><span class="va">xs</span>, <span class="op">~</span> <span class="va">.y</span> <span class="op">*</span> <span class="va">.x</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/foreach" class="external-link">foreach</a></span><span class="op">)</span></span>
 <span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
