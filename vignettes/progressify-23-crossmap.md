@@ -19,7 +19,6 @@ reporting to sequential and parallel map-reduce code by piping to the
 ```r
 library(crossmap)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x, y) {
@@ -54,7 +53,6 @@ but we can easily add progress reporting, by using:
 library(crossmap)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- list(1:5, 1:5)

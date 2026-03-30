@@ -19,7 +19,6 @@ reporting to sequential and parallel map-reduce code by piping to the
 ```r
 library(BiocParallel)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x) {
@@ -54,7 +53,6 @@ but we can easily add progress reporting, by using:
 library(BiocParallel)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

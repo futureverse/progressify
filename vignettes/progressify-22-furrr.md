@@ -20,7 +20,6 @@ reporting to sequential and parallel map-reduce code by piping to the
 library(furrr)
 plan(multisession)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x) {
@@ -59,7 +58,6 @@ library(furrr)
 plan(multisession)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

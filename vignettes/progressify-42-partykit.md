@@ -19,7 +19,6 @@ reporting to sequential and parallel map-reduce code by piping to the
 ```r
 library(partykit)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 data("Titanic", package = "datasets")
@@ -51,7 +50,6 @@ but we can easily add progress reporting, by using:
 library(partykit)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 data("Titanic", package = "datasets")

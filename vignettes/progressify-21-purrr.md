@@ -18,7 +18,6 @@ reporting to sequential and parallel map-reduce code by piping to the
 
 ```r
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 library(purrr)
 
@@ -61,7 +60,6 @@ but we can easily add progress reporting, by using:
 library(purrr)
 
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100

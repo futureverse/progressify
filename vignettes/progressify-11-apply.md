@@ -17,7 +17,6 @@ reporting to sequential and parallel map-reduce code by piping to the
 
 ```r
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 slow_fcn <- function(x) {
@@ -48,7 +47,6 @@ but we can easily add progress reporting, by using:
 
 ```r
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 ys <- lapply(xs, slow_fcn) |> progressify()
@@ -85,7 +83,6 @@ single pipeline:
 library(futurize)
 plan(multisession)
 library(progressify)
-library(progressr)
 handlers(global = TRUE)
 
 xs <- 1:100
