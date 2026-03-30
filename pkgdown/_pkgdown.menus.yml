@@ -3,9 +3,9 @@ articles-mapreduce:
   menu:
   - text: "Map-reduce packages supporting progressify()"
   - text: Progress updates for base-R apply functions
-    href: articles/progressify-11-apply.html
+    href: articles/progressify-11-base.html
   - text: Progress updates for 'stats' functions
-    href: articles/progressify-13-stats.html
+    href: articles/progressify-11-stats.html
   - text: Progress updates for 'future.apply' functions
     href: articles/progressify-12-future.apply.html
   - text: Progress updates for 'purrr' functions
@@ -15,9 +15,9 @@ articles-mapreduce:
   - text: Progress updates for 'crossmap' functions
     href: articles/progressify-23-crossmap.html
   - text: Progress updates for 'foreach' functions
-    href: articles/progressify-51-foreach.html
+    href: articles/progressify-41-foreach.html
   - text: Progress updates for 'plyr' functions
-    href: articles/progressify-31-plyr.html
+    href: articles/progressify-51-plyr.html
   - text: Progress updates for 'BiocParallel' functions
     href: articles/progressify-41-BiocParallel.html
 
@@ -26,4 +26,4 @@ cran-focus:
   menu:
   - text: "CRAN packages supporting progressify()"
   - text: Progress updates for 'partykit' functions
-    href: articles/progressify-42-partykit.html
+    href: articles/progressify-81-partykit.html
