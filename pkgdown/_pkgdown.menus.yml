@@ -12,6 +12,8 @@ articles-mapreduce:
     href: articles/progressify-21-purrr.html
   - text: Progress updates for 'furrr' functions
     href: articles/progressify-22-furrr.html
+  - text: Progress updates for 'crossmap' functions
+    href: articles/progressify-23-crossmap.html
   - text: Progress updates for 'foreach' functions
     href: articles/progressify-51-foreach.html
   - text: Progress updates for 'plyr' functions

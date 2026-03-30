@@ -9,6 +9,9 @@ which implements closely related "parallelization" transpilers.
  * Add support for map-reduce CRAN package **future.apply**, e.g. `y
    <- future.apply::future_lapply(xs, fcn) |> progressify()`.
 
+ * Add support for CRAN package **crossmap**, e.g. `y <-
+   crossmap::xmap(xs, fcn) |> progressify()`.
+
  * Add support for **purrr**, e.g. `y <- purrr::map(xs, fcn) |>
    progressify()`.
  
