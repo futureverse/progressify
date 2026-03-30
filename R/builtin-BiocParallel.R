@@ -21,17 +21,6 @@
 # })
 #
 progressify_BiocParallel <- local({
-  ## Pre-compiled bquote templates
-  template_along <- bquote_compile({
-    .progressr_progressor <- progressr::progressor(along = .(ALONG))
-    .(ALONG)
-  })
-
-  template_FUN <- bquote_compile(function(..., .progressr_progressor) {
-    on.exit(.progressr_progressor())
-    .(FUN)(...)
-  })
-
   ## bpmapply():
   ## Argument 'FUN' wrapper that captures '.progressr_progressor' from the
   ## enclosing environment (i.e. not via arguments), because argument '...'
@@ -40,11 +29,6 @@ progressify_BiocParallel <- local({
     on.exit(.progressr_progressor())
     .(FUN)(...)
   })
-
-  template_outer <- bquote_compile(local({
-    .progressr_progressor <- progressr::progressor(along = .(ALONG))
-    .(EXPR)
-  }))
 
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     names <- names(expr)

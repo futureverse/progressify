@@ -19,11 +19,6 @@ progressify_stats <- local({
     .(DATA)
   })
 
-  template_FUN <- bquote_compile(function(..., .progressr_progressor) {
-    on.exit(.progressr_progressor())
-    .(FUN)(...)
-  })
-
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))

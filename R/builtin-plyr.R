@@ -12,32 +12,6 @@
 # )
 #
 progressify_plyr <- local({
-  ## Pre-compiled bquote templates
-  template_along <- bquote_compile({
-    .progressr_progressor <- progressr::progressor(along = .(ALONG))
-    .(ALONG)
-  })
-
-  template_steps_nrow <- bquote_compile({
-    .progressr_progressor <- progressr::progressor(steps = nrow(.(DATA)))
-    .(DATA)
-  })
-
-  template_steps <- bquote_compile({
-    .progressr_progressor <- progressr::progressor(steps = .(STEPS))
-    .(STEPS)
-  })
-
-  template_FUN <- bquote_compile(function(..., .progressr_progressor) {
-    on.exit(.progressr_progressor())
-    .(FUN)(...)
-  })
-
-  template_expr <- bquote_compile(local({
-    on.exit(.progressr_progressor())
-    .(EXPR)
-  }))
-
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))

@@ -12,25 +12,6 @@
 # )
 #
 progressify_furrr <- local({
-  ## Pre-compiled bquote templates
-  template_along <- bquote_compile({
-    .progressr_progressor <- progressr::progressor(along = .(ALONG))
-    .(ALONG)
-  })
-
-  template_along_first <- bquote_compile({
-    .progressr_progressor <- progressr::progressor(along = .(ALONG)[[1]])
-    .(ALONG)
-  })
-
-  template_f <- bquote_compile(local({
-    .progressr_f <- purrr::as_mapper(.(FUN))
-    function(..., .progressr_progressor) {
-      on.exit(.progressr_progressor())
-      .progressr_f(...)
-    }
-  }))
-
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))

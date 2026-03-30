@@ -15,11 +15,6 @@ progressify_foreach <- local({
     .(BODY)
   }))
 
-  template_outer <- bquote_compile(local({
-    .progressr_progressor <- progressr::progressor(along = .(ITER))
-    .(EXPR)
-  }))
-
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     ## expr is:  %do%(foreach(...), { body })
     ## expr[[1]] = `%do%`
@@ -43,7 +38,7 @@ progressify_foreach <- local({
     parts[[3]] <- bquote_apply(template_body, BODY = expr[[3]])
 
     ## Wrap everything in local() with progressor initialization
-    bquote_apply(template_outer, ITER = iter_expr, EXPR = as.call(parts))
+    bquote_apply(template_outer, ALONG = iter_expr, EXPR = as.call(parts))
   } ## progressify_foreach()
 })
 
