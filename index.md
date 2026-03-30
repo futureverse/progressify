@@ -98,6 +98,30 @@ xs <- 1:10
 ys <- BiocParallel::bplapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 ```
 
+## Supported domain-specific packages
+
+You can also progressify calls from a growing set of domain-specific
+CRAN and Bioconductor packages that have optional built-in support for
+parallelization.
+
+### CRAN packages with support for progressify
+
+| Package                                                     | Functions   |
+|-------------------------------------------------------------|-------------|
+| **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()` |
+
+*Table 2: CRAN packages with domain-specific functions currently
+supported by
+[`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+for progress reporting.*
+
+Here are some examples:
+
+``` r
+
+forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
+```
+
 ## Compatible with futurize
 
 The **progressify** package is compatible with the
@@ -123,4 +147,6 @@ ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
 
 ys <- BiocParallel::bplapply(xs, slow_fcn) |> progressify() |> futurize()
+
+forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressify() |> futurize()
 ```

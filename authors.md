@@ -7,11 +7,11 @@
 ## Citation
 
 Bengtsson H (2026). *progressify: Progress Updates Everywhere*. R
-package version 0.0.0-9017.
+package version 0.0.0-9019.
 
     @Manual{,
       title = {progressify: Progress Updates Everywhere},
       author = {Henrik Bengtsson},
       year = {2026},
-      note = {R package version 0.0.0-9017},
+      note = {R package version 0.0.0-9019},
     }

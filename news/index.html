@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9017</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9019</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,6 +34,11 @@
     <li><a class="dropdown-item" href="../articles/progressify-51-foreach.html">Progress updates for 'foreach' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-31-plyr.html">Progress updates for 'plyr' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-41-BiocParallel.html">Progress updates for 'BiocParallel' functions</a></li>
+  </ul></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-cran-focus" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">CRAN Focus</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-cran-focus"><li><h6 class="dropdown-header" data-toc-skip>CRAN packages supporting progressify()</h6></li>
+    <li><a class="dropdown-item" href="../articles/progressify-42-partykit.html">Progress updates for 'partykit' functions</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -93,6 +98,7 @@
 <li><p>Add support for Bioconductor package <strong>BiocParallel</strong>, e.g. <code>y &lt;- BiocParallel::bplapply(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate()</a></code>, e.g. <code>y &lt;- replicate(n, rnorm(10)) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for base-R package <strong>stats</strong>, e.g. <code>d2 &lt;- dendrapply(d, fcn) |&gt; progressify()</code>.</p></li>
+<li><p>Add support for domain-specific CRAN package <strong>partykit</strong>, e.g. <code>y &lt;- partykit::cforest(formula, data, ntree = 50L) |&gt; progressify()</code>.</p></li>
 <li><p>Add <code><a href="../reference/progressify_supported_packages.html">progressify_supported_packages()</a></code> and <code><a href="../reference/progressify_supported_packages.html">progressify_supported_functions()</a></code> for programmatically querying which packages and functions are supported by <code><a href="../reference/progressify.html">progressify()</a></code>.</p></li>
 </ul></div>
 </div>

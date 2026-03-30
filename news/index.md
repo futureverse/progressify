@@ -38,6 +38,9 @@ which implements closely related “parallelization” transpilers.
 - Add support for base-R package **stats**,
   e.g. `d2 <- dendrapply(d, fcn) |> progressify()`.
 
+- Add support for domain-specific CRAN package **partykit**,
+  e.g. `y <- partykit::cforest(formula, data, ntree = 50L) |> progressify()`.
+
 - Add
   [`progressify_supported_packages()`](https://progressify.futureverse.org/reference/progressify_supported_packages.md)
   and
