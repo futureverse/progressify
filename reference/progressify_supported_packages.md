@@ -26,7 +26,7 @@ A character vector of package or function names.
 pkgs <- progressify_supported_packages()
 pkgs
 #> [1] "BiocParallel" "base"         "doFuture"     "foreach"      "furrr"       
-#> [6] "future.apply" "plyr"         "purrr"       
+#> [6] "future.apply" "plyr"         "purrr"        "stats"       
 
 fcns <- progressify_supported_functions("base")
 print(fcns)

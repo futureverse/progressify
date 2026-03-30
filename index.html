@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-map-reduce">
 <li><h6 class="dropdown-header" data-toc-skip>Map-reduce packages supporting progressify()</h6></li>
     <li><a class="dropdown-item" href="articles/progressify-11-apply.html">Progress updates for base-R apply functions</a></li>
+    <li><a class="dropdown-item" href="articles/progressify-13-stats.html">Progress updates for 'stats' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-12-future.apply.html">Progress updates for 'future.apply' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-21-purrr.html">Progress updates for 'purrr' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-22-furrr.html">Progress updates for 'furrr' functions</a></li>
@@ -144,6 +145,10 @@
 </td>
 </tr>
 <tr>
+<td><strong>stats</strong></td>
+<td><code><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply()</a></code></td>
+</tr>
+<tr>
 <td><strong><a href="https://future.apply.futureverse.org" class="external-link">future.apply</a></strong></td>
 <td>
 <code>future_apply()</code>, <code>future_by()</code>, <code>future_eapply()</code>, <code>future_lapply()</code>, <code>future_.mapply()</code>, <code>future_mapply()</code>, <code>future_Map()</code>, <code>future_replicate()</code>, <code>future_sapply()</code>, <code>future_tapply()</code>, <code>future_vapply()</code>
@@ -192,6 +197,9 @@
 <span></span>
 <span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrogram.html" class="external-link">as.dendrogram</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">USArrests</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/dendrapply.html" class="external-link">dendrapply</a></span><span class="op">(</span><span class="va">d</span>, <span class="kw">function</span><span class="op">(</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span>; <span class="va">n</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">xs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>

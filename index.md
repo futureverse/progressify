@@ -54,6 +54,7 @@ progressify_supported_functions("purrr")
 | Package | Functions |
 |----|----|
 | **base** | [`apply()`](https://rdrr.io/r/base/apply.html), [`by()`](https://rdrr.io/r/base/by.html), [`eapply()`](https://rdrr.io/r/base/eapply.html), [`lapply()`](https://rdrr.io/r/base/lapply.html), [`.mapply()`](https://rdrr.io/r/base/mapply.html), [`mapply()`](https://rdrr.io/r/base/mapply.html), [`Map()`](https://rdrr.io/r/base/funprog.html), [`replicate()`](https://rdrr.io/r/base/lapply.html), [`sapply()`](https://rdrr.io/r/base/lapply.html), [`tapply()`](https://rdrr.io/r/base/tapply.html), [`vapply()`](https://rdrr.io/r/base/lapply.html) |
+| **stats** | [`dendrapply()`](https://rdrr.io/r/stats/dendrapply.html) |
 | **[future.apply](https://future.apply.futureverse.org)** | `future_apply()`, `future_by()`, `future_eapply()`, `future_lapply()`, `future_.mapply()`, `future_mapply()`, `future_Map()`, `future_replicate()`, `future_sapply()`, `future_tapply()`, `future_vapply()` |
 | **[purrr](https://purrr.futureverse.org)** | `map()` and variants, `walk()` and variants, `map2()` and variants, `walk2()` and variants, `pmap()` and variants, `pwalk()`, `imap()` and variants, `modify()`, `modify2()`, `imodify()` |
 | **[furrr](https://furrr.futureverse.org)** | `future_map()` and variants, `future_walk()` and variants, `future_map2()` and variants, `future_walk2()` and variants, `future_pmap()` and variants, `future_pwalk()`, `future_imap()` and variants |
@@ -75,6 +76,9 @@ handlers("txtprogressbar")
 
 xs <- 1:10
 ys <- lapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
+
+d <- as.dendrogram(hclust(dist(USArrests)))
+d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n }) |> progressify()
 
 xs <- 1:10
 ys <- purrr::map(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()

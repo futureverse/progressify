@@ -32,6 +32,9 @@ which implements closely related “parallelization” transpilers.
 - Add support for [`replicate()`](https://rdrr.io/r/base/lapply.html),
   e.g. `y <- replicate(n, rnorm(10)) |> progressify()`.
 
+- Add support for base-R package **stats**,
+  e.g. `d2 <- dendrapply(d, fcn) |> progressify()`.
+
 - Add
   [`progressify_supported_packages()`](https://progressify.futureverse.org/reference/progressify_supported_packages.md)
   and

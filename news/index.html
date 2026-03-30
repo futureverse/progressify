@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9015</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-map-reduce" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Map Reduce</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-map-reduce"><li><h6 class="dropdown-header" data-toc-skip>Map-reduce packages supporting progressify()</h6></li>
     <li><a class="dropdown-item" href="../articles/progressify-11-apply.html">Progress updates for base-R apply functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-13-stats.html">Progress updates for 'stats' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-12-future.apply.html">Progress updates for 'future.apply' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-21-purrr.html">Progress updates for 'purrr' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-22-furrr.html">Progress updates for 'furrr' functions</a></li>
@@ -89,6 +90,7 @@
 <li><p>Add support for <strong>plyr</strong>, e.g. <code>y &lt;- plyr::llply(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for Bioconductor package <strong>BiocParallel</strong>, e.g. <code>y &lt;- BiocParallel::bplapply(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate()</a></code>, e.g. <code>y &lt;- replicate(n, rnorm(10)) |&gt; progressify()</code>.</p></li>
+<li><p>Add support for base-R package <strong>stats</strong>, e.g. <code>d2 &lt;- dendrapply(d, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add <code><a href="../reference/progressify_supported_packages.html">progressify_supported_packages()</a></code> and <code><a href="../reference/progressify_supported_packages.html">progressify_supported_functions()</a></code> for programmatically querying which packages and functions are supported by <code><a href="../reference/progressify.html">progressify()</a></code>.</p></li>
 </ul></div>
 </div>
