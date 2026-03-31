@@ -45,7 +45,7 @@ ys <- bplapply(xs, slow_fcn)
 
 Here [`bplapply()`](https://rdrr.io/pkg/BiocParallel/man/bplapply.html)
 provides no feedback on how far it has progressed, but we can easily add
-progress reporting, by using:
+progress reporting by using:
 
 ``` r
 

@@ -42,7 +42,7 @@ ys <- lapply(xs, slow_fcn)
 
 Here [`lapply()`](https://rdrr.io/r/base/lapply.html) provides no
 feedback on how far it has progressed, but we can easily add progress
-reporting, by using:
+reporting by using:
 
 ``` r
 

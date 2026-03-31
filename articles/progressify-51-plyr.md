@@ -43,7 +43,7 @@ ys <- llply(xs, slow_fcn)
 
 Here [`llply()`](https://rdrr.io/pkg/plyr/man/llply.html) provides no
 feedback on how far it has progressed, but we can easily add progress
-reporting, by using:
+reporting by using:
 
 ``` r
 

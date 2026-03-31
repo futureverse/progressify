@@ -52,7 +52,7 @@ ys <- future_lapply(xs, slow_fcn)
 Here
 [`future_lapply()`](https://future.apply.futureverse.org/reference/future_lapply.html)
 provides no feedback on how far it has progressed, but we can easily add
-progress reporting, by using:
+progress reporting by using:
 
 ``` r
 

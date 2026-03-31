@@ -55,8 +55,8 @@ which implements closely related “parallelization” transpilers.
 
 - The
   [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
-  function makes common map-reduce functions to report on progress.ons
-  are relayed, among other things.
+  function makes common map-reduce functions report on progress.
+  Progress notifications are relayed, among other things.
 
 - Add support for base R, e.g. `y <- lapply(xs, fcn) |> progressify()`.
 

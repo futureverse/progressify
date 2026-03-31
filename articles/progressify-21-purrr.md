@@ -52,7 +52,7 @@ ys <- xs |> map(slow_fcn)
 
 Here [`map()`](https://purrr.tidyverse.org/reference/map.html) provides
 no feedback on how far it has progressed, but we can easily add progress
-reporting, by using:
+reporting by using:
 
 ``` r
 

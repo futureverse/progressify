@@ -28,7 +28,7 @@ package.
 
 In addition to getting progress updates via **progressr**, by using
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
-you also get access to all the benefits that comes with **progressr**.
+you also get access to all the benefits that come with **progressr**.
 Notably, you have full control over when and how progress is reported,
 and it works seamlessly across different environments and frontends.
 

@@ -45,7 +45,7 @@ ys <- xmap(xs, slow_fcn)
 Here
 [`xmap()`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html)
 provides no feedback on how far it has progressed, but we can easily add
-progress reporting, by using:
+progress reporting by using:
 
 ``` r
 

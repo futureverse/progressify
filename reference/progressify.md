@@ -1,6 +1,6 @@
-# Evaluate a regular map-reduce call in parallel
+# Evaluate a regular map-reduce call with progress updates
 
-Evaluate a regular map-reduce call in parallel
+Evaluate a regular map-reduce call with progress updates
 
 ## Usage
 
@@ -31,8 +31,8 @@ progressify(
 
 - eval:
 
-  If TRUE (default), the progressified expression is evaluated, other it
-  is returned.
+  If TRUE (default), the progressified expression is evaluated,
+  otherwise it is returned.
 
 - envir:
 

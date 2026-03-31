@@ -40,7 +40,7 @@ forest <- cforest(Survived ~ ., data = tt, ntree = 50L)
 
 Here [`cforest()`](https://rdrr.io/pkg/partykit/man/cforest.html)
 provides no feedback on how far it has progressed, but we can easily add
-progress reporting, by using:
+progress reporting by using:
 
 ``` r
 

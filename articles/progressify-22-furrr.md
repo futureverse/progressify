@@ -50,7 +50,7 @@ ys <- xs |> future_map(slow_fcn)
 Here
 [`future_map()`](https://furrr.futureverse.org/reference/future_map.html)
 provides no feedback on how far it has progressed, but we can easily add
-progress reporting, by using:
+progress reporting by using:
 
 ``` r
 
