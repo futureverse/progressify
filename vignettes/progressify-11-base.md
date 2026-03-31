@@ -43,7 +43,7 @@ ys <- lapply(xs, slow_fcn)
 ```
 
 Here `lapply()` provides no feedback on how far it has progressed,
-but we can easily add progress reporting, by using:
+but we can easily add progress reporting by using:
 
 ```r
 library(progressify)

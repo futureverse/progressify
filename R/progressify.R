@@ -1,15 +1,15 @@
-#' Evaluate a regular map-reduce call in parallel
+#' Evaluate a regular map-reduce call with progress updates
 #'
 #' @param expr An R expression.
 #'
 #' @param substitute If TRUE, `expr` is quoted.
 #'
 #' @param \ldots Not used.
-#' 
+#'
 #' @param when If TRUE (default), the expression is progressified, otherwise not.
 #'
 #' @param eval If TRUE (default), the progressified expression is evaluated,
-#' other it is returned.
+#' otherwise it is returned.
 #'
 #' @param envir The environment in which `expr` is evaluated.
 #' 

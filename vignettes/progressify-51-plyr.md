@@ -47,7 +47,7 @@ ys <- llply(xs, slow_fcn)
 ```
 
 Here `llply()` provides no feedback on how far it has progressed,
-but we can easily add progress reporting, by using:
+but we can easily add progress reporting by using:
 
 ```r
 library(plyr)

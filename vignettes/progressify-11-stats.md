@@ -38,7 +38,7 @@ d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n })
 ```
 
 Here `dendrapply()` provides no feedback on how far it has
-progressed, but we can easily add progress reporting, by using:
+progressed, but we can easily add progress reporting by using:
 
 ```r
 library(progressify)

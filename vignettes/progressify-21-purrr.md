@@ -54,7 +54,7 @@ ys <- xs |> map(slow_fcn)
 ```
 
 Here `map()` provides no feedback on how far it has progressed,
-but we can easily add progress reporting, by using:
+but we can easily add progress reporting by using:
 
 ```r
 library(purrr)

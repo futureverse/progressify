@@ -3,7 +3,7 @@
 \name{progressify}
 \alias{progressify}
 \alias{pz}
-\title{Evaluate a regular map-reduce call in parallel}
+\title{Evaluate a regular map-reduce call with progress updates}
 \usage{
 progressify(
   expr,
@@ -22,7 +22,7 @@ progressify(
 \item{when}{If TRUE (default), the expression is progressified, otherwise not.}
 
 \item{eval}{If TRUE (default), the progressified expression is evaluated,
-other it is returned.}
+otherwise it is returned.}
 
 \item{envir}{The environment in which \code{expr} is evaluated.}
 
@@ -32,7 +32,7 @@ other it is returned.}
 Returns the value of the evaluated expression \code{expr}.
 }
 \description{
-Evaluate a regular map-reduce call in parallel
+Evaluate a regular map-reduce call with progress updates
 }
 \examples{
 xs <- list(1, 1:2, 1:2, 1:5)

@@ -49,8 +49,8 @@ which implements closely related "parallelization" transpilers.
 ## New Features
 
  * The `progressify()` function makes common map-reduce functions
-   to report on progress.ons are relayed, among other things.
-
+   report on progress. Progress notifications are relayed, among
+   other things.
  * Add support for base R, e.g. `y <- lapply(xs, fcn) |> progressify()`.
 
  * Add support for **purrr**, e.g. `y <- map(xs, fcn) |> progressify()`.
