@@ -19,6 +19,7 @@ reporting to sequential and parallel map-reduce code by piping to the
 ```r
 library(progressify)
 handlers(global = TRUE)
+library(stats)
 
 d <- as.dendrogram(hclust(dist(USArrests)))
 d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n }) |> progressify()

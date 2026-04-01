@@ -17,10 +17,10 @@ reporting to sequential and parallel map-reduce code by piping to the
 # TL;DR
 
 ```r
-library(furrr)
-plan(multisession)
 library(progressify)
 handlers(global = TRUE)
+library(furrr)
+plan(multisession)
 
 slow_fcn <- function(x) {
   Sys.sleep(0.1)  # emulate work

@@ -17,9 +17,9 @@ reporting to sequential and parallel map-reduce code by piping to the
 # TL;DR
 
 ```r
-library(BiocParallel)
 library(progressify)
 handlers(global = TRUE)
+library(BiocParallel)
 
 slow_fcn <- function(x) {
   Sys.sleep(0.1)  # emulate work

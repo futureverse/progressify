@@ -17,9 +17,9 @@ reporting to sequential and parallel map-reduce code by piping to the
 # TL;DR
 
 ```r
-library(plyr)
 library(progressify)
 handlers(global = TRUE)
+library(plyr)
 
 slow_fcn <- function(x) {
   Sys.sleep(0.1)  # emulate work

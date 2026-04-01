@@ -17,9 +17,9 @@ reporting to sequential and parallel map-reduce code by piping to the
 # TL;DR
 
 ```r
-library(partykit)
 library(progressify)
 handlers(global = TRUE)
+library(partykit)
 
 data("Titanic", package = "datasets")
 tt <- as.data.frame(Titanic)

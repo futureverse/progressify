@@ -17,9 +17,9 @@ reporting to sequential and parallel map-reduce code by piping to the
 # TL;DR
 
 ```r
-library(crossmap)
 library(progressify)
 handlers(global = TRUE)
+library(crossmap)
 
 slow_fcn <- function(x, y) {
   Sys.sleep(0.1)  # emulate work
