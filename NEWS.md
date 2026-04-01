@@ -1,4 +1,4 @@
-# Version (development version)
+# Version 0.1.0 (2026-04-01)
 
 This is a retake of the previous, proof-of-concept version. Starting
 with this version, we are now borrowing from the **futurize** package,
