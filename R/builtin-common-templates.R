@@ -25,9 +25,9 @@ template_steps_nrow <- bquote_compile({
 })
 
 ## Pass progressor via '...' arguments
-template_FUN <- bquote_compile(function(..., .progressr_progressor) {
+template_FUN <- bquote_compile(function(..., ...FUN, .progressr_progressor) {
   on.exit(.progressr_progressor())
-  .(FUN)(...)
+  ...FUN(...)
 })
 
 ## purrr-style .f wrapper: uses as_mapper() for formula/string/integer support
