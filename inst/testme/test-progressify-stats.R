@@ -1,3 +1,4 @@
+#' @tags pkg-stats
 if (requireNamespace("stats")) {
 
 library(progressify)

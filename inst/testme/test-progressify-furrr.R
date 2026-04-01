@@ -1,3 +1,4 @@
+#' @tags pkg-furrr
 if (requireNamespace("furrr")) {
 
 library(progressify)

@@ -1,3 +1,5 @@
+#' @tags pkg-plyr
+#' @tags pkg-futurize
 if (requireNamespace("plyr") && requireNamespace("doFuture") && requireNamespace("futurize")) {
 
 library(progressify)

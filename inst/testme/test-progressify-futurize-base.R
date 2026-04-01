@@ -1,3 +1,5 @@
+#' @tags pkg-future.apply
+#' @tags pkg-futurize
 if (requireNamespace("future.apply") && requireNamespace("futurize")) {
 
 library(progressify)
