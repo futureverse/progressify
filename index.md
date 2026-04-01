@@ -1,4 +1,4 @@
-# progressify: Progress Updates Everywhere
+# progressify: Progress Updates Everywhere ![The 'progressify' hexlogo](reference/figures/progressify-logo.png)
 
 ## TL;DR
 
