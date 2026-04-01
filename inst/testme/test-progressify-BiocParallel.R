@@ -3,6 +3,11 @@ if (requireNamespace("BiocParallel")) {
 library(progressify)
 library(BiocParallel)
 
+## Default on Linux and macOS is MulticoreParam(), which avoids
+## issues with non-exported globals, etc. By using SnowParam()
+## we will detect such problems.
+register(SnowParam())
+
 options(progressify.debug = TRUE)
 
 xs <- list(aa = 1, bb = 1:2, cc = 1:10, dd = 1:5, .ee = -6:6)
