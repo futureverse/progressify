@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9026</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,6 @@
     <li><a class="dropdown-item" href="../articles/progressify-23-crossmap.html">Progress updates for 'crossmap' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-41-foreach.html">Progress updates for 'foreach' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-51-plyr.html">Progress updates for 'plyr' functions</a></li>
-    <li><a class="dropdown-item" href="../articles/progressify-41-BiocParallel.html">Progress updates for 'BiocParallel' functions</a></li>
   </ul></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-cran-focus" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">CRAN Focus</button>
@@ -95,7 +94,6 @@
 <li><p>Add support for map-reduce CRAN package <strong>foreach</strong>, e.g. <code>y &lt;- foreach(x = xs) %do% { fcn(x) } |&gt; progressify()</code>.</p></li>
 <li><p>Add support for map-reduce CRAN package <strong>doFuture</strong>, e.g. <code>y &lt;- foreach(x = xs) %dofuture% { fcn(x) } |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <strong>plyr</strong>, e.g. <code>y &lt;- plyr::llply(xs, fcn) |&gt; progressify()</code>.</p></li>
-<li><p>Add support for Bioconductor package <strong>BiocParallel</strong>, e.g. <code>y &lt;- BiocParallel::bplapply(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate()</a></code>, e.g. <code>y &lt;- replicate(n, rnorm(10)) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for base-R package <strong>stats</strong>, e.g. <code>d2 &lt;- dendrapply(d, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for domain-specific CRAN package <strong>partykit</strong>, e.g. <code>y &lt;- partykit::cforest(formula, data, ntree = 50L) |&gt; progressify()</code>.</p></li>

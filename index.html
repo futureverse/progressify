@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9026</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,6 @@
     <li><a class="dropdown-item" href="articles/progressify-23-crossmap.html">Progress updates for 'crossmap' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-41-foreach.html">Progress updates for 'foreach' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-51-plyr.html">Progress updates for 'plyr' functions</a></li>
-    <li><a class="dropdown-item" href="articles/progressify-41-BiocParallel.html">Progress updates for 'BiocParallel' functions</a></li>
   </ul>
 </li>
 <li class="nav-item dropdown">
@@ -197,12 +196,6 @@
 <code>llply()</code> and variants, <code>mlply()</code> and variants, <code>rdply()</code>, <code>rlply()</code>, <code>raply()</code>, <code>r_ply()</code>
 </td>
 </tr>
-<tr>
-<td><strong><a href="https://bioconductor.org/packages/BiocParallel" class="external-link">BiocParallel</a></strong></td>
-<td>
-<code>bplapply()</code>, <code>bpmapply()</code>
-</td>
-</tr>
 </tbody>
 </table>
 <p><em>Table 1: Map-reduce functions currently supported by <code><a href="reference/progressify.html">progressify()</a></code> for progress reporting.</em></p>
@@ -228,15 +221,12 @@
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">foreach</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">xs</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">%do%</a></span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">BiocParallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="supported-domain-specific-packages">Supported domain-specific packages<a class="anchor" aria-label="anchor" href="#supported-domain-specific-packages"></a>
 </h2>
-<p>You can also progressify calls from a growing set of domain-specific CRAN and Bioconductor packages that have optional built-in support for parallelization.</p>
+<p>You can also progressify calls from a growing set of domain-specific CRAN packages that have optional built-in support for parallelization.</p>
 <div class="section level3">
 <h3 id="cran-packages-with-support-for-progressify">CRAN packages with support for progressify<a class="anchor" aria-label="anchor" href="#cran-packages-with-support-for-progressify"></a>
 </h3>
@@ -281,8 +271,6 @@
 <span></span>
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">slow_fcn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">BiocParallel</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocParallel/man/bplapply.html" class="external-link">bplapply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">slow_fcn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
 <span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">dist</span> <span class="op">~</span> <span class="va">speed</span>, data <span class="op">=</span> <span class="va">cars</span>, ntree <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
@@ -290,7 +278,7 @@
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/HenrikBengtsson/progressify/milestones" class="external-link">Roadmap/Milestones</a></li>
+<li><a href="https://github.com/futureverse/progressify/milestones" class="external-link">Roadmap/Milestones</a></li>
 <li><a href="https://www.futureverse.org/" class="external-link">The Futureverse Project</a></li>
 <li><a href="https://github.com/futureverse/future/discussions" class="external-link">Futureverse User Forum</a></li>
 </ul>

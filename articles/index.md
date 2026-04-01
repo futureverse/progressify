@@ -14,8 +14,6 @@
   functions](https://progressify.futureverse.org/articles/progressify-22-furrr.md):
 - [Progress updates for 'crossmap'
   functions](https://progressify.futureverse.org/articles/progressify-23-crossmap.md):
-- [Progress updates for 'BiocParallel'
-  functions](https://progressify.futureverse.org/articles/progressify-41-BiocParallel.md):
 - [Progress updates for 'foreach'
   functions](https://progressify.futureverse.org/articles/progressify-41-foreach.md):
 - [Progress updates for 'plyr'

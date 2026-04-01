@@ -29,9 +29,6 @@ which implements closely related “parallelization” transpilers.
 - Add support for **plyr**,
   e.g. `y <- plyr::llply(xs, fcn) |> progressify()`.
 
-- Add support for Bioconductor package **BiocParallel**,
-  e.g. `y <- BiocParallel::bplapply(xs, fcn) |> progressify()`.
-
 - Add support for [`replicate()`](https://rdrr.io/r/base/lapply.html),
   e.g. `y <- replicate(n, rnorm(10)) |> progressify()`.
 

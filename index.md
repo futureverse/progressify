@@ -65,7 +65,6 @@ progressify_supported_functions("purrr")
 | **[foreach](https://foreach.futureverse.org)** | `%do%`, `%dopar%` |
 | **[doFuture](https://doFuture.futureverse.org)** | `%dofuture%` |
 | **[plyr](https://cran.r-project.org/package=plyr)** | `llply()` and variants, `mlply()` and variants, `rdply()`, `rlply()`, `raply()`, `r_ply()` |
-| **[BiocParallel](https://bioconductor.org/packages/BiocParallel)** | `bplapply()`, `bpmapply()` |
 
 *Table 1: Map-reduce functions currently supported by
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
@@ -96,16 +95,12 @@ ys <- foreach(x = xs) %do% { Sys.sleep(0.1); sqrt(x) } |> progressify()
 
 xs <- 1:10
 ys <- plyr::llply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
-
-xs <- 1:10
-ys <- BiocParallel::bplapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 ```
 
 ## Supported domain-specific packages
 
 You can also progressify calls from a growing set of domain-specific
-CRAN and Bioconductor packages that have optional built-in support for
-parallelization.
+CRAN packages that have optional built-in support for parallelization.
 
 ### CRAN packages with support for progressify
 
@@ -150,8 +145,6 @@ library(foreach)
 ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
-
-ys <- BiocParallel::bplapply(xs, slow_fcn) |> progressify() |> futurize()
 
 forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressify() |> futurize()
 ```
