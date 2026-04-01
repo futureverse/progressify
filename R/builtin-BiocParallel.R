@@ -21,15 +21,6 @@
 # })
 #
 progressify_BiocParallel <- local({
-  ## bpmapply():
-  ## Argument 'FUN' wrapper that captures '.progressr_progressor' from the
-  ## enclosing environment (i.e. not via arguments), because argument '...'
-  ## of bpmapply() is used for data, not for passing extra arguments to FUN()
-  template_FUN_closure <- bquote_compile(function(...) {
-    on.exit(.progressr_progressor())
-    .(FUN)(...)
-  })
-
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))
@@ -60,6 +51,7 @@ progressify_BiocParallel <- local({
       parts[[idx_FUN]] <- bquote_apply(template_FUN, FUN = FUN)
 
       progressr_args <- list(
+        ...FUN = FUN,
         .progressr_progressor = quote(.progressr_progressor)
       )
       parts <- c(parts, progressr_args)
@@ -75,12 +67,19 @@ progressify_BiocParallel <- local({
       idx_dots_first <- unnamed_idxs[1L]
 
       parts <- as.list(expr)
+      along_expr <- parts[[idx_dots_first]]
 
       stopifnot(length(idx_FUN) == 1L)
       FUN <- expr[[idx_FUN]]
-      parts[[idx_FUN]] <- bquote_apply(template_FUN_closure, FUN = FUN)
+      parts[[idx_FUN]] <- bquote_apply(template_FUN, FUN = FUN)
 
-      along_expr <- parts[[idx_dots_first]]
+      progressr_args <- list(
+        MoreArgs = bquote(list(
+          ...FUN = .(FUN),
+          .progressr_progressor = .progressr_progressor
+        ))
+      )
+      parts <- c(parts, progressr_args)
 
       bquote_apply(template_outer, ALONG = along_expr, EXPR = as.call(parts))
     }
