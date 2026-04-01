@@ -64,8 +64,6 @@ progressify_supported_functions("purrr")
 | **[foreach]**      | `%do%`, `%dopar%`                                                                                                  |
 | **[doFuture]**     | `%dofuture%`                                                                                                       |
 | **[plyr]**         | `llply()` and variants, `mlply()` and variants, `rdply()`, `rlply()`, `raply()`, `r_ply()` |
-| **[BiocParallel]** | `bplapply()`, `bpmapply()`                                                                                     |
-
 _Table 1: Map-reduce functions currently supported by `progressify()` for progress reporting._
 
 Here are some examples:
@@ -93,15 +91,13 @@ ys <- foreach(x = xs) %do% { Sys.sleep(0.1); sqrt(x) } |> progressify()
 xs <- 1:10
 ys <- plyr::llply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 
-xs <- 1:10
-ys <- BiocParallel::bplapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 ```
 
 
 ## Supported domain-specific packages
 
 You can also progressify calls from a growing set of domain-specific
-CRAN and Bioconductor packages that have optional built-in support for
+CRAN packages that have optional built-in support for
 parallelization.
 
 ### CRAN packages with support for progressify
@@ -143,8 +139,6 @@ ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
 
-ys <- BiocParallel::bplapply(xs, slow_fcn) |> progressify() |> futurize()
-
 forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressify() |> futurize()
 ```
 
@@ -159,6 +153,5 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 [partykit]: https://cran.r-project.org/package=partykit
 [doFuture]: https://doFuture.futureverse.org
 [foreach]: https://foreach.futureverse.org
-[BiocParallel]: https://bioconductor.org/packages/BiocParallel
 [plyr]: https://cran.r-project.org/package=plyr
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html

@@ -34,8 +34,6 @@ navbar:
         href: articles/progressify-41-foreach.html
       - text: Progress updates for 'plyr' functions
         href: articles/progressify-51-plyr.html
-      - text: Progress updates for 'BiocParallel' functions
-        href: articles/progressify-41-BiocParallel.html
     cran-focus:
       text: CRAN Focus
       menu:
