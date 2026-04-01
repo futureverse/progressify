@@ -9,9 +9,9 @@ function. Easy!
 
 ``` r
 
-library(BiocParallel)
 library(progressify)
 handlers(global = TRUE)
+library(BiocParallel)
 
 slow_fcn <- function(x) {
   Sys.sleep(0.1)  # emulate work

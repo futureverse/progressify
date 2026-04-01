@@ -9,9 +9,9 @@ function. Easy!
 
 ``` r
 
-library(crossmap)
 library(progressify)
 handlers(global = TRUE)
+library(crossmap)
 
 slow_fcn <- function(x, y) {
   Sys.sleep(0.1)  # emulate work

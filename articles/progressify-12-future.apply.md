@@ -9,10 +9,10 @@ function. Easy!
 
 ``` r
 
-library(future.apply)
-plan(multisession)
 library(progressify)
 handlers(global = TRUE)
+library(future.apply)
+plan(multisession)
 
 slow_fcn <- function(x) {
   Sys.sleep(0.1)  # emulate work

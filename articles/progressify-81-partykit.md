@@ -9,9 +9,9 @@ function. Easy!
 
 ``` r
 
-library(partykit)
 library(progressify)
 handlers(global = TRUE)
+library(partykit)
 
 data("Titanic", package = "datasets")
 tt <- as.data.frame(Titanic)

@@ -73,7 +73,7 @@ Here are some examples:
 ``` r
 
 library(progressify)
-handlers("txtprogressbar")
+handlers(globals = TRUE)
 
 xs <- 1:10
 ys <- lapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
@@ -133,6 +133,8 @@ and parallelization:
 ``` r
 
 library(progressify)
+handlers(globals = TRUE)
+
 library(futurize)
 plan(multisession)
 
