@@ -20,7 +20,8 @@ jobs:
           - {os: windows-latest, r: 'oldrel'   }
           - {os: macOS-latest,   r: 'release'  }
           - {os: ubuntu-latest,  r: 'devel'    }
-          - {os: ubuntu-latest,  r: 'release'  }
+          - {os: ubuntu-latest,  r: 'release', label: '' }
+          - {os: ubuntu-latest,  r: 'release', futurize: develop, label: 'futurize develop' }
           - {os: ubuntu-latest,  r: 'oldrel'   }
           - {os: ubuntu-latest,  r: '4.1'      }
  
@@ -28,8 +29,6 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      ## Test in other locale (optional)
-      LANGUAGE: ${{ matrix.config.language }}
       ## R (>= 4.4.0) Note, no trailing underscore (sic!)
       _R_COMPARE_LANG_OBJECTS: eqonly
       ## R CMD check
@@ -48,7 +47,6 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
-          http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
           
       - uses: r-lib/actions/setup-r-dependencies@v2
@@ -57,6 +55,13 @@ jobs:
             any::rcmdcheck
             any::remotes
           needs: check
+
+      - name: Install custom dependency versions
+        run: |
+          if ( "${{ matrix.config.futurize }}" == "develop") {
+            pak::pak("futureverse/futurize@develop")
+          }
+        shell: Rscript {0}
 
       - name: Install package itself (special case)
         run: |
