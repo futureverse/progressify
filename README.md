@@ -1,10 +1,3 @@
-<div id="badges"><!-- pkgdown markup -->
-<a href="https://github.com/HenrikBengtsson/progressify/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/progressify/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main" alt="R CMD check status"/></a>
-<!--
-<a href="https://app.codecov.io/gh/HenrikBengtsson/progressify"><img border="0" src="https://codecov.io/gh/HenrikBengtsson/progressify/branch/main/graph/badge.svg" alt="Coverage Status"/></a> 
--->
-</div>
-
 # progressify: Progress Updates Everywhere 
 
 <img src="man/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
@@ -143,15 +136,15 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 ```
 
 
-[futurize]: https://futurize.futureverse.org
 [futureverse]: https://www.futureverse.org
-[progressr]: https://progressr.futureverse.org
-[future.apply]: https://future.apply.futureverse.org
 [crossmap]: https://cran.r-project.org/package=crossmap
-[purrr]: https://purrr.futureverse.org
+[doFuture]: https://doFuture.futureverse.org
+[foreach]: https://cran.r-project.org/package=foreach
+[future.apply]: https://future.apply.futureverse.org
+[futurize]: https://futurize.futureverse.org
 [furrr]: https://furrr.futureverse.org
 [partykit]: https://cran.r-project.org/package=partykit
-[doFuture]: https://doFuture.futureverse.org
-[foreach]: https://foreach.futureverse.org
 [plyr]: https://cran.r-project.org/package=plyr
+[progressr]: https://progressr.futureverse.org
+[purrr]: https://cran.r-project.org/package=purrr
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html
