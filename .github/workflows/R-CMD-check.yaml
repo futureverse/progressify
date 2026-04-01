@@ -59,7 +59,7 @@ jobs:
       - name: Install custom dependency versions
         run: |
           if ( "${{ matrix.config.futurize }}" == "develop") {
-            pak::pak("futureverse/futurize@develop")
+            remotes::install_github("futureverse/futurize@develop")
           }
         shell: Rscript {0}
 
