@@ -5,7 +5,10 @@
 -->
 </div>
 
-# progressify: Progress Updates Everywhere
+# progressify: Progress Updates Everywhere 
+
+<img src="man/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
+;"/>
 
 ## TL;DR 
 
