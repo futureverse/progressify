@@ -1,4 +1,7 @@
-# progressify: Progress Updates Everywhere ![The 'progressify' hexlogo](reference/figures/progressify-logo.png)
+# progressify: Progress Updates Everywhere
+
+![The hexlogo for the 'progressify'
+package](reference/figures/progressify-logo.png)
 
 ## TL;DR
 
