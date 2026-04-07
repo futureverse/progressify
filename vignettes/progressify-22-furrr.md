@@ -76,10 +76,10 @@ appear as:
 
 The `progressify()` function supports the following **furrr** functions:
 
- * `future_map()`, `future_map_chr()`, `future_map_dbl()`, `future_map_int()`, `future_map_lgl()`, `future_map_raw()`, `future_map_dfr()`, `future_map_dfc()`, `future_map_at()`, `future_map_if()`, `future_walk()`
- * `future_map2()`, `future_map2_chr()`, `future_map2_dbl()`, `future_map2_int()`, `future_map2_lgl()`, `future_map2_raw()`, `future_map2_dfr()`, `future_map2_dfc()`, `future_walk2()`
- * `future_pmap()`, `future_pmap_chr()`, `future_pmap_dbl()`, `future_pmap_int()`, `future_pmap_lgl()`, `future_pmap_raw()`, `future_pmap_dfr()`, `future_pmap_dfc()`, `future_pwalk()`
- * `future_imap()`, `future_imap_chr()`, `future_imap_dbl()`, `future_imap_int()`, `future_imap_lgl()`, `future_imap_raw()`, `future_imap_dfr()`, `future_imap_dfc()`, `future_iwalk()`
+ * `future_map()`, `future_map_chr()`, `future_map_dbl()`, `future_map_int()`, `future_map_lgl()`, `future_map_raw()`, `future_map_vec()`, `future_map_dfr()`, `future_map_dfc()`, `future_map_at()`, `future_map_if()`, `future_walk()`
+ * `future_map2()`, `future_map2_chr()`, `future_map2_dbl()`, `future_map2_int()`, `future_map2_lgl()`, `future_map2_raw()`, `future_map2_vec()`, `future_map2_dfr()`, `future_map2_dfc()`, `future_walk2()`
+ * `future_pmap()`, `future_pmap_chr()`, `future_pmap_dbl()`, `future_pmap_int()`, `future_pmap_lgl()`, `future_pmap_raw()`, `future_pmap_vec()`, `future_pmap_dfr()`, `future_pmap_dfc()`, `future_pwalk()`
+ * `future_imap()`, `future_imap_chr()`, `future_imap_dbl()`, `future_imap_int()`, `future_imap_lgl()`, `future_imap_raw()`, `future_imap_vec()`, `future_imap_dfr()`, `future_imap_dfc()`, `future_iwalk()`
  * `future_modify()`, `future_modify_at()`, `future_modify_if()`
 
 

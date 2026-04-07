@@ -81,7 +81,7 @@ The `progressify()` function supports the following **purrr** functions:
  * `map()`, `map_chr()`, `map_dbl()`, `map_int()`, `map_lgl()`, `map_vec()`, `walk()`
  * `map2()`, `map2_chr()`, `map2_dbl()`, `map2_int()`, `map2_lgl()`, `map2_vec()`, `walk2()`
  * `pmap()`, `pmap_chr()`, `pmap_dbl()`, `pmap_int()`, `pmap_lgl()`, `pmap_vec()`, `pwalk()`
- * `imap()`, `imap_chr()`, `imap_dbl()`, `imap_int()`, `imap_lgl()`
+ * `imap()`, `imap_chr()`, `imap_dbl()`, `imap_int()`, `imap_lgl()`, `imap_vec()`
  * `modify()`, `modify2()`, `imodify()`
 
 

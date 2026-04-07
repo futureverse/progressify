@@ -77,6 +77,13 @@ functions:
    `xmap_mat()`, `xmap_arr()`)
  * `xwalk()`
  * `map_vec()`, `map2_vec()`, `pmap_vec()`, `imap_vec()`
+ * `future_xmap()` and variants (`future_xmap_chr()`,
+   `future_xmap_dbl()`, `future_xmap_int()`, `future_xmap_lgl()`,
+   `future_xmap_vec()`, `future_xmap_dfc()`, `future_xmap_dfr()`,
+   `future_xmap_mat()`, `future_xmap_arr()`, `future_xmap_raw()`)
+ * `future_xwalk()`
+ * `future_map_vec()`, `future_map2_vec()`, `future_pmap_vec()`,
+   `future_imap_vec()`
 
 
 [crossmap]: https://cran.r-project.org/package=crossmap
