@@ -1,3 +1,11 @@
+# Version 0.1.0-9002 (2026-04-07)
+
+## New Features
+
+ * Add support for **crossmap** `future_*()` variants, e.g. `y <-
+   crossmap::future_xmap(xs, fcn) |> progressify()`.
+
+
 # Version 0.1.0 (2026-04-01)
 
 This is a retake of the previous, proof-of-concept version. Starting
