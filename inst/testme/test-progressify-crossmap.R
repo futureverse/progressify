@@ -66,7 +66,7 @@ for (kk in seq_along(exprs)) {
 res_walk <- list()
 truth_walk <- list()
 
-expr <- quote(xwalk(xs, function(x, y) { res_walk[[length(res_walk) + 1L]] <<- x * y }))
+expr <- quote(xwalk(xs, function(x, y) { list(x = x, y = y) }))
 truth <- eval(expr)
 res_walk_truth <- res_walk
 

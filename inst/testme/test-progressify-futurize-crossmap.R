@@ -81,26 +81,23 @@ for (kk in seq_along(exprs)) {
 ## -------------------------------------------------------
 ## xwalk
 ## -------------------------------------------------------
-## FIXME
-if (FALSE) {
-  for (pipe in c("progressify_futurize", "futurize_progressify")) {
-    res_walk <- list()
-  
-    expr <- quote(xwalk(xs, function(x, y) { res_walk[[length(res_walk) + 1L]] <<- x * y }))
-    truth <- eval(expr)
-    res_walk_truth <- res_walk
-  
-    res_walk <- list()
-    if (pipe == "progressify_futurize") {
-      expr_f <- bquote(.(expr) |> progressify() |> futurize())
-    } else {
-      expr_f <- bquote(.(expr) |> futurize() |> progressify())
-    }
-    message(sprintf("--- xwalk %s ---", pipe))
-    print(expr_f)
-    stopifnot(all.equal(res_walk, res_walk_truth))
-    stopifnot(identical(res_walk, res_walk_truth))
+for (pipe in c("progressify_futurize", "futurize_progressify")) {
+  res_walk <- list()
+
+  expr <- quote(xwalk(xs, function(x, y) { invisible(list(x = x, y = y)) }))
+  truth <- eval(expr)
+  res_walk_truth <- res_walk
+
+  res_walk <- list()
+  if (pipe == "progressify_futurize") {
+    expr_f <- bquote(.(expr) |> progressify() |> futurize())
+  } else {
+    expr_f <- bquote(.(expr) |> futurize() |> progressify())
   }
+  message(sprintf("--- xwalk %s ---", pipe))
+  print(expr_f)
+  stopifnot(all.equal(res_walk, res_walk_truth))
+  stopifnot(identical(res_walk, res_walk_truth))
 }
 
 
