@@ -57,8 +57,8 @@ progressify_supported_functions("purrr")
 | **stats** | [`dendrapply()`](https://rdrr.io/r/stats/dendrapply.html) |
 | **[future.apply](https://future.apply.futureverse.org)** | `future_apply()`, `future_by()`, `future_eapply()`, `future_lapply()`, `future_.mapply()`, `future_mapply()`, `future_Map()`, `future_replicate()`, `future_sapply()`, `future_tapply()`, `future_vapply()` |
 | **[purrr](https://cran.r-project.org/package=purrr)** | `map()` and variants, `walk()` and variants, `map2()` and variants, `walk2()` and variants, `pmap()` and variants, `pwalk()`, `imap()` and variants, `modify()`, `modify2()`, `imodify()` |
-| **[crossmap](https://cran.r-project.org/package=crossmap)** | `xmap()` and variants, `xwalk()`, `map_vec()`, `map2_vec()`, `pmap_vec()`, `imap_vec()` |
-| **[furrr](https://furrr.futureverse.org)** | `future_map()` and variants, `future_walk()` and variants, `future_map2()` and variants, `future_walk2()` and variants, `future_pmap()` and variants, `future_pwalk()`, `future_imap()` and variants |
+| **[crossmap](https://cran.r-project.org/package=crossmap)** | `xmap()` and variants, `xwalk()`, `map_vec()`, `map2_vec()`, `pmap_vec()`, `imap_vec()`, plus `future_*()` variants |
+| **[furrr](https://furrr.futureverse.org)** | `future_map()` and variants, `future_walk()` and variants, `future_map2()` and variants, `future_walk2()` and variants, `future_pmap()` and variants, `future_pwalk()`, `future_imap()` and variants, `future_modify()`, `future_modify2()`, `future_imodify()` and variants |
 | **[foreach](https://cran.r-project.org/package=foreach)** | `%do%`, `%dopar%` |
 | **[doFuture](https://doFuture.futureverse.org)** | `%dofuture%` |
 | **[plyr](https://cran.r-project.org/package=plyr)** | `llply()` and variants, `mlply()` and variants, `rdply()`, `rlply()`, `raply()`, `r_ply()` |

@@ -1,5 +1,22 @@
 # Changelog
 
+## Version 0.1.0-9002
+
+### New Features
+
+- Add support for **crossmap** `future_*()` variants,
+  e.g. `y <- crossmap::future_xmap(xs, fcn) |> progressify()`.
+
+- Add support for **furrr** 0.4.0 `*_vec()` variants:
+  [`future_map_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html),
+  [`future_map2_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html),
+  [`future_pmap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html),
+  and
+  [`future_imap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html).
+
+- Add support for
+  [`purrr::imap_vec()`](https://purrr.tidyverse.org/reference/imap.html).
+
 ## Version 0.1.0
 
 CRAN release: 2026-04-07

@@ -87,3 +87,20 @@ function supports the following **crossmap** functions:
   [`map2_vec()`](https://pkg.rossellhayes.com/crossmap/reference/map_vec.html),
   [`pmap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/map_vec.html),
   [`imap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/map_vec.html)
+- [`future_xmap()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html)
+  and variants
+  ([`future_xmap_chr()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html),
+  [`future_xmap_dbl()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html),
+  [`future_xmap_int()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html),
+  [`future_xmap_lgl()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html),
+  [`future_xmap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html),
+  [`future_xmap_dfc()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html),
+  [`future_xmap_dfr()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html),
+  [`future_xmap_mat()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap_mat.html),
+  [`future_xmap_arr()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap_mat.html),
+  [`future_xmap_raw()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html))
+- [`future_xwalk()`](https://pkg.rossellhayes.com/crossmap/reference/future_xmap.html)
+- [`future_map_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html),
+  [`future_map2_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html),
+  [`future_pmap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html),
+  [`future_imap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html)

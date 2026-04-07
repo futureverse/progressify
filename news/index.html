@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0-9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0-9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,6 +83,15 @@
       <small>Source: <a href="https://github.com/futureverse/progressify/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.0-9002" id="version-010-9002">Version 0.1.0-9002<a class="anchor" aria-label="anchor" href="#version-010-9002"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-1-0-9002">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-1-0-9002"></a></h3>
+<ul><li><p>Add support for <strong>crossmap</strong> <code>future_*()</code> variants, e.g. <code>y &lt;- crossmap::future_xmap(xs, fcn) |&gt; progressify()</code>.</p></li>
+<li><p>Add support for <strong>furrr</strong> 0.4.0 <code>*_vec()</code> variants: <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_map_vec()</a></code>, <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_map2_vec()</a></code>, <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_pmap_vec()</a></code>, and <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_imap_vec()</a></code>.</p></li>
+<li><p>Add support for <code><a href="https://purrr.tidyverse.org/reference/imap.html" class="external-link">purrr::imap_vec()</a></code>.</p></li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="version-010">Version 0.1.0<a class="anchor" aria-label="anchor" href="#version-010"></a></h2><p class="text-muted">CRAN release: 2026-04-07</p>
 <p>This is a retake of the previous, proof-of-concept version. Starting with this version, we are now borrowing from the <strong>futurize</strong> package, which implements closely related “parallelization” transpilers.</p>

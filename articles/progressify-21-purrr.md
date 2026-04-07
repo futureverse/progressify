@@ -103,7 +103,8 @@ function supports the following **purrr** functions:
   [`imap_chr()`](https://purrr.tidyverse.org/reference/imap.html),
   [`imap_dbl()`](https://purrr.tidyverse.org/reference/imap.html),
   [`imap_int()`](https://purrr.tidyverse.org/reference/imap.html),
-  [`imap_lgl()`](https://purrr.tidyverse.org/reference/imap.html)
+  [`imap_lgl()`](https://purrr.tidyverse.org/reference/imap.html),
+  [`imap_vec()`](https://purrr.tidyverse.org/reference/imap.html)
 - [`modify()`](https://purrr.tidyverse.org/reference/modify.html),
   [`modify2()`](https://purrr.tidyverse.org/reference/modify.html),
   [`imodify()`](https://purrr.tidyverse.org/reference/modify.html)

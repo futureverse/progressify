@@ -83,6 +83,7 @@ function supports the following **furrr** functions:
   [`future_map_int()`](https://furrr.futureverse.org/reference/future_map.html),
   [`future_map_lgl()`](https://furrr.futureverse.org/reference/future_map.html),
   `future_map_raw()`,
+  [`future_map_vec()`](https://furrr.futureverse.org/reference/future_map.html),
   [`future_map_dfr()`](https://furrr.futureverse.org/reference/future_map.html),
   [`future_map_dfc()`](https://furrr.futureverse.org/reference/future_map.html),
   [`future_map_at()`](https://furrr.futureverse.org/reference/future_map_if.html),
@@ -94,6 +95,7 @@ function supports the following **furrr** functions:
   [`future_map2_int()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_map2_lgl()`](https://furrr.futureverse.org/reference/future_map2.html),
   `future_map2_raw()`,
+  [`future_map2_vec()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_map2_dfr()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_map2_dfc()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_walk2()`](https://furrr.futureverse.org/reference/future_map2.html)
@@ -103,6 +105,7 @@ function supports the following **furrr** functions:
   [`future_pmap_int()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_pmap_lgl()`](https://furrr.futureverse.org/reference/future_map2.html),
   `future_pmap_raw()`,
+  [`future_pmap_vec()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_pmap_dfr()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_pmap_dfc()`](https://furrr.futureverse.org/reference/future_map2.html),
   [`future_pwalk()`](https://furrr.futureverse.org/reference/future_map2.html)
@@ -112,6 +115,7 @@ function supports the following **furrr** functions:
   [`future_imap_int()`](https://furrr.futureverse.org/reference/future_imap.html),
   [`future_imap_lgl()`](https://furrr.futureverse.org/reference/future_imap.html),
   `future_imap_raw()`,
+  [`future_imap_vec()`](https://furrr.futureverse.org/reference/future_imap.html),
   [`future_imap_dfr()`](https://furrr.futureverse.org/reference/future_imap.html),
   [`future_imap_dfc()`](https://furrr.futureverse.org/reference/future_imap.html),
   [`future_iwalk()`](https://furrr.futureverse.org/reference/future_imap.html)

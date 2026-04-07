@@ -37,9 +37,9 @@ if (requireNamespace("purrr")) {
   fcns <- progressify_supported_functions("purrr")
   print(fcns)
 }
-#>  [1] "imap"     "imap_chr" "imap_dbl" "imap_int" "imap_lgl" "imodify" 
-#>  [7] "map"      "map2"     "map2_chr" "map2_dbl" "map2_int" "map2_lgl"
-#> [13] "map2_vec" "map_chr"  "map_dbl"  "map_int"  "map_lgl"  "map_vec" 
-#> [19] "modify"   "modify2"  "pmap"     "pmap_chr" "pmap_dbl" "pmap_int"
-#> [25] "pmap_lgl" "pmap_vec" "pwalk"    "walk"     "walk2"   
+#>  [1] "imap"     "imap_chr" "imap_dbl" "imap_int" "imap_lgl" "imap_vec"
+#>  [7] "imodify"  "map"      "map2"     "map2_chr" "map2_dbl" "map2_int"
+#> [13] "map2_lgl" "map2_vec" "map_chr"  "map_dbl"  "map_int"  "map_lgl" 
+#> [19] "map_vec"  "modify"   "modify2"  "pmap"     "pmap_chr" "pmap_dbl"
+#> [25] "pmap_int" "pmap_lgl" "pmap_vec" "pwalk"    "walk"     "walk2"   
 ```
