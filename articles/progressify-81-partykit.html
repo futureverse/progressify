@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0-9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@
     <li><a class="external-link dropdown-item" href="https://globals.futureverse.org">globals</a></li>
     <li><a class="external-link dropdown-item" href="https://listenv.futureverse.org">listenv</a></li>
     <li><a class="external-link dropdown-item" href="https://parallelly.futureverse.org">parallelly</a></li>
-    <li><a class="dropdown-item" href="https://progressify.futureverse.org">progressify (map-reduce)</a></li>
+    <li><a class="dropdown-item" href="https://progressify.futureverse.org">progressify</a></li>
     <li><a class="external-link dropdown-item" href="https://progressr.futureverse.org">progressr</a></li>
     <li><a class="external-link dropdown-item" href="https://future.p2p.futureverse.org">future.p2p (experimental)</a></li>
     <li><a class="external-link dropdown-item" href="https://future.tools.futureverse.org">future.tools (experimental)</a></li>
@@ -94,6 +94,7 @@
   </ul>
 </li>
 <li class="nav-item"><a class="external-link nav-link" href="https://cloud.r-project.org/package=progressify"><span class="fa fab fa-r-project"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/futureverse/progressify/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
   <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
@@ -120,7 +121,7 @@
 Bengtsson</h4>
             
       
-
+      <small class="dont-index">Source: <a href="https://github.com/futureverse/progressify/blob/HEAD/vignettes/progressify-81-partykit.md" class="external-link"><code>vignettes/progressify-81-partykit.md</code></a></small>
       <div class="d-none name"><code>progressify-81-partykit.Rmd</code></div>
     </div>
 
@@ -143,7 +144,7 @@ to the <code><a href="../reference/progressify.html">progressify()</a></code> fu
 <h2 id="tldr">TL;DR<a class="anchor" aria-label="anchor" href="#tldr"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressify.futureverse.org">progressify</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/" class="external-link">partykit</a></span><span class="op">)</span></span>
 <span></span>
@@ -170,7 +171,7 @@ progressed, but we can easily add progress reporting by using:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://partykit.r-forge.r-project.org/partykit/" class="external-link">partykit</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">progressify</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressify.futureverse.org">progressify</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Titanic"</span>, package <span class="op">=</span> <span class="st">"datasets"</span><span class="op">)</span></span>
