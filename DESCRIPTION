@@ -1,6 +1,6 @@
 Package: progressify
-Version: 0.0.0-9022
-Title: Progress Updates Everywhere
+Version: 0.1.0
+Title: Progress Reporting of Common Functions via One Magic Function
 Description: The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with R's native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. 'lapply(x, fcn) |> progressify()' and 'purrr::map(x, fcn) |> progressify()'. It is compatible with the 'futurize' package for parallelization, e.g. 'lapply(x, fcn) |> progressify() |> futurize()' and 'purrr::map(x, fcn) |> futurize() |> progressify()'.
 Authors@R: c(
    person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
@@ -13,7 +13,6 @@ Imports:
     methods
 Suggests:
     base64enc,
-    BiocParallel,
     commonmark,
     crossmap,
     doFuture,

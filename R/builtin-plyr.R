@@ -56,6 +56,7 @@ progressify_plyr <- local({
       parts[[idx_fun]] <- bquote_apply(template_FUN, FUN = FUN)
 
       progressr_args <- list(
+        ...FUN = FUN,
         .progressr_progressor = quote(.progressr_progressor)
       )
       parts <- c(parts, progressr_args)

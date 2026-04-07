@@ -1,3 +1,4 @@
+#' @tags pkg-base
 library(progressify)
 
 options(progressify.debug = TRUE)

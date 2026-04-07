@@ -1,4 +1,4 @@
-# Version (development version)
+# Version 0.1.0 (2026-04-01)
 
 This is a retake of the previous, proof-of-concept version. Starting
 with this version, we are now borrowing from the **futurize** package,
@@ -27,9 +27,6 @@ which implements closely related "parallelization" transpilers.
  * Add support for **plyr**, e.g. `y <- plyr::llply(xs, fcn) |>
    progressify()`.
  
- * Add support for Bioconductor package **BiocParallel**, e.g. `y <-
-   BiocParallel::bplapply(xs, fcn) |> progressify()`.
-
  * Add support for `replicate()`, e.g. `y <- replicate(n, rnorm(10))
    |> progressify()`.
 

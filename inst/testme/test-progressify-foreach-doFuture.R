@@ -1,3 +1,4 @@
+#' @tags pkg-doFuture
 if (requireNamespace("foreach") && requireNamespace("doFuture")) {
 
 library(progressify)

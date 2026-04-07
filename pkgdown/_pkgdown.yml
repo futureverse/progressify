@@ -3,7 +3,7 @@ url: https://progressify.futureverse.org
 home:
   links:
   - text: Roadmap/Milestones
-    href: https://github.com/HenrikBengtsson/progressify/milestones
+    href: https://github.com/futureverse/progressify/milestones
   - text: The Futureverse Project
     href: https://www.futureverse.org/
   - text: Futureverse User Forum
@@ -34,8 +34,6 @@ navbar:
         href: articles/progressify-41-foreach.html
       - text: Progress updates for 'plyr' functions
         href: articles/progressify-51-plyr.html
-      - text: Progress updates for 'BiocParallel' functions
-        href: articles/progressify-41-BiocParallel.html
     cran-focus:
       text: CRAN Focus
       menu:

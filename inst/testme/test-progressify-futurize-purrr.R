@@ -1,3 +1,5 @@
+#' @tags pkg-purrr
+#' @tags pkg-futurize
 if (requireNamespace("purrr") && requireNamespace("furrr") && requireNamespace("futurize")) {
 
 library(progressify)

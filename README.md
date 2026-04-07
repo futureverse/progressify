@@ -1,13 +1,4 @@
-<div id="badges"><!-- pkgdown markup -->
-<a href="https://github.com/HenrikBengtsson/progressify/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/progressify/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main" alt="R CMD check status"/></a>
-<!--
-<a href="https://app.codecov.io/gh/HenrikBengtsson/progressify"><img border="0" src="https://codecov.io/gh/HenrikBengtsson/progressify/branch/main/graph/badge.svg" alt="Coverage Status"/></a> 
--->
-</div>
-
-# progressify: Progress Updates Everywhere 
-
-<img src="man/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
+# progressify: Progress Reporting of Common Functions via One Magic Function <img src="man/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
 ;"/>
 
 ## TL;DR 
@@ -64,8 +55,6 @@ progressify_supported_functions("purrr")
 | **[foreach]**      | `%do%`, `%dopar%`                                                                                                  |
 | **[doFuture]**     | `%dofuture%`                                                                                                       |
 | **[plyr]**         | `llply()` and variants, `mlply()` and variants, `rdply()`, `rlply()`, `raply()`, `r_ply()` |
-| **[BiocParallel]** | `bplapply()`, `bpmapply()`                                                                                     |
-
 _Table 1: Map-reduce functions currently supported by `progressify()` for progress reporting._
 
 Here are some examples:
@@ -93,15 +82,13 @@ ys <- foreach(x = xs) %do% { Sys.sleep(0.1); sqrt(x) } |> progressify()
 xs <- 1:10
 ys <- plyr::llply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 
-xs <- 1:10
-ys <- BiocParallel::bplapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
 ```
 
 
 ## Supported domain-specific packages
 
 You can also progressify calls from a growing set of domain-specific
-CRAN and Bioconductor packages that have optional built-in support for
+CRAN packages that have optional built-in support for
 parallelization.
 
 ### CRAN packages with support for progressify
@@ -143,22 +130,19 @@ ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
 
-ys <- BiocParallel::bplapply(xs, slow_fcn) |> progressify() |> futurize()
-
 forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressify() |> futurize()
 ```
 
 
-[futurize]: https://futurize.futureverse.org
 [futureverse]: https://www.futureverse.org
-[progressr]: https://progressr.futureverse.org
-[future.apply]: https://future.apply.futureverse.org
 [crossmap]: https://cran.r-project.org/package=crossmap
-[purrr]: https://purrr.futureverse.org
+[doFuture]: https://doFuture.futureverse.org
+[foreach]: https://cran.r-project.org/package=foreach
+[future.apply]: https://future.apply.futureverse.org
+[futurize]: https://futurize.futureverse.org
 [furrr]: https://furrr.futureverse.org
 [partykit]: https://cran.r-project.org/package=partykit
-[doFuture]: https://doFuture.futureverse.org
-[foreach]: https://foreach.futureverse.org
-[BiocParallel]: https://bioconductor.org/packages/BiocParallel
 [plyr]: https://cran.r-project.org/package=plyr
+[progressr]: https://progressr.futureverse.org
+[purrr]: https://cran.r-project.org/package=purrr
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html

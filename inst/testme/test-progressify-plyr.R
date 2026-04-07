@@ -1,3 +1,4 @@
+#' @tags pkg-plyr
 if (requireNamespace("plyr")) {
 
 library(progressify)
