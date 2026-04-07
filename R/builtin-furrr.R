@@ -31,6 +31,7 @@ progressify_furrr <- local({
     if (fcn_name %in% c("future_pmap", "future_pmap_lgl", "future_pmap_int",
                          "future_pmap_dbl", "future_pmap_chr", "future_pmap_raw",
                          "future_pmap_dfr", "future_pmap_dfc",
+                         "future_pmap_vec",
                          "future_pwalk")) {
       idx_l <- which(names == ".l")
       idx_f <- which(names == ".f")
@@ -38,6 +39,7 @@ progressify_furrr <- local({
                                 "future_map2_int", "future_map2_dbl",
                                 "future_map2_chr", "future_map2_raw",
                                 "future_map2_dfr", "future_map2_dfc",
+                                "future_map2_vec",
                                 "future_walk2")) {
       idx_x <- which(names == ".x")
       idx_f <- which(names == ".f")
@@ -86,6 +88,7 @@ append_builtin_transpilers_for_furrr <- local({
     future_map_raw = c,
     future_map_dfr = c,
     future_map_dfc = c,
+    future_map_vec = c,
     future_map_at = c,
     future_map_if = c,
     future_walk = c,
@@ -97,6 +100,7 @@ append_builtin_transpilers_for_furrr <- local({
     future_map2_raw = c,
     future_map2_dfr = c,
     future_map2_dfc = c,
+    future_map2_vec = c,
     future_walk2 = c,
     future_pmap = c,
     future_pmap_lgl = c,
@@ -106,6 +110,7 @@ append_builtin_transpilers_for_furrr <- local({
     future_pmap_raw = c,
     future_pmap_dfr = c,
     future_pmap_dfc = c,
+    future_pmap_vec = c,
     future_pwalk = c,
     future_imap = c,
     future_imap_lgl = c,
@@ -115,6 +120,7 @@ append_builtin_transpilers_for_furrr <- local({
     future_imap_raw = c,
     future_imap_dfr = c,
     future_imap_dfc = c,
+    future_imap_vec = c,
     future_iwalk = c,
     future_modify = c,
     future_modify_at = c,
