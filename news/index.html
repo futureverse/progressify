@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9026</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,10 +83,10 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.0" id="version-010">Version 0.1.0<a class="anchor" aria-label="anchor" href="#version-010"></a></h2><p class="text-muted">CRAN release: 2026-04-07</p>
 <p>This is a retake of the previous, proof-of-concept version. Starting with this version, we are now borrowing from the <strong>futurize</strong> package, which implements closely related “parallelization” transpilers.</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-1-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-1-0"></a></h3>
 <ul><li><p>Add support for map-reduce CRAN package <strong>future.apply</strong>, e.g. <code>y &lt;- future.apply::future_lapply(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for CRAN package <strong>crossmap</strong>, e.g. <code>y &lt;- crossmap::xmap(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <strong>purrr</strong>, e.g. <code>y &lt;- purrr::map(xs, fcn) |&gt; progressify()</code>.</p></li>

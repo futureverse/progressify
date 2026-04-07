@@ -1,7 +1,4 @@
-# progressify: Progress Updates Everywhere
-
-![The hexlogo for the 'progressify'
-package](reference/figures/progressify-logo.png)
+# progressify: Progress Reporting of Common Functions via One Magic Function ![The hexlogo for the 'progressify' package](reference/figures/progressify-logo.png)
 
 ## TL;DR
 
@@ -59,10 +56,10 @@ progressify_supported_functions("purrr")
 | **base** | [`apply()`](https://rdrr.io/r/base/apply.html), [`by()`](https://rdrr.io/r/base/by.html), [`eapply()`](https://rdrr.io/r/base/eapply.html), [`lapply()`](https://rdrr.io/r/base/lapply.html), [`.mapply()`](https://rdrr.io/r/base/mapply.html), [`mapply()`](https://rdrr.io/r/base/mapply.html), [`Map()`](https://rdrr.io/r/base/funprog.html), [`replicate()`](https://rdrr.io/r/base/lapply.html), [`sapply()`](https://rdrr.io/r/base/lapply.html), [`tapply()`](https://rdrr.io/r/base/tapply.html), [`vapply()`](https://rdrr.io/r/base/lapply.html) |
 | **stats** | [`dendrapply()`](https://rdrr.io/r/stats/dendrapply.html) |
 | **[future.apply](https://future.apply.futureverse.org)** | `future_apply()`, `future_by()`, `future_eapply()`, `future_lapply()`, `future_.mapply()`, `future_mapply()`, `future_Map()`, `future_replicate()`, `future_sapply()`, `future_tapply()`, `future_vapply()` |
-| **[purrr](https://purrr.futureverse.org)** | `map()` and variants, `walk()` and variants, `map2()` and variants, `walk2()` and variants, `pmap()` and variants, `pwalk()`, `imap()` and variants, `modify()`, `modify2()`, `imodify()` |
+| **[purrr](https://cran.r-project.org/package=purrr)** | `map()` and variants, `walk()` and variants, `map2()` and variants, `walk2()` and variants, `pmap()` and variants, `pwalk()`, `imap()` and variants, `modify()`, `modify2()`, `imodify()` |
 | **[crossmap](https://cran.r-project.org/package=crossmap)** | `xmap()` and variants, `xwalk()`, `map_vec()`, `map2_vec()`, `pmap_vec()`, `imap_vec()` |
 | **[furrr](https://furrr.futureverse.org)** | `future_map()` and variants, `future_walk()` and variants, `future_map2()` and variants, `future_walk2()` and variants, `future_pmap()` and variants, `future_pwalk()`, `future_imap()` and variants |
-| **[foreach](https://foreach.futureverse.org)** | `%do%`, `%dopar%` |
+| **[foreach](https://cran.r-project.org/package=foreach)** | `%do%`, `%dopar%` |
 | **[doFuture](https://doFuture.futureverse.org)** | `%dofuture%` |
 | **[plyr](https://cran.r-project.org/package=plyr)** | `llply()` and variants, `mlply()` and variants, `rdply()`, `rlply()`, `raply()`, `r_ply()` |
 

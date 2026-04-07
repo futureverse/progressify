@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Progress Updates Everywhere • progressify</title>
+<title>Progress Reporting of Common Functions via One Magic Function • progressify</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="Progress Updates Everywhere">
+<meta property="og:title" content="Progress Reporting of Common Functions via One Magic Function">
 <meta name="description" content="The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with Rs native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. lapply(x, fcn) |&gt; progressify() and purrr::map(x, fcn) |&gt; progressify(). It is compatible with the futurize package for parallelization, e.g. lapply(x, fcn) |&gt; progressify() |&gt; futurize() and purrr::map(x, fcn) |&gt; futurize() |&gt; progressify()'.">
 <meta property="og:description" content="The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with Rs native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. lapply(x, fcn) |&gt; progressify() and purrr::map(x, fcn) |&gt; progressify(). It is compatible with the futurize package for parallelization, e.g. lapply(x, fcn) |&gt; progressify() |&gt; futurize() and purrr::map(x, fcn) |&gt; futurize() |&gt; progressify()'.">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-SB3EQSD9FR"></script><script>
@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0-9026</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,12 +111,10 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-<div class="section level1">
-<div class="page-header"><h1 id="progressify-progress-updates-everywhere">progressify: Progress Updates Everywhere<a class="anchor" aria-label="anchor" href="#progressify-progress-updates-everywhere"></a>
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="progressify-progress-reporting-of-common-functions-via-one-magic-function-">progressify: Progress Reporting of Common Functions via One Magic Function <img src="reference/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
+;"><a class="anchor" aria-label="anchor" href="#progressify-progress-reporting-of-common-functions-via-one-magic-function-"></a>
 </h1></div>
-<p><img src="reference/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
-;"></p>
 <div class="section level2">
 <h2 id="tldr">TL;DR<a class="anchor" aria-label="anchor" href="#tldr"></a>
 </h2>
@@ -164,7 +162,7 @@
 </td>
 </tr>
 <tr>
-<td><strong><a href="https://purrr.futureverse.org" class="external-link">purrr</a></strong></td>
+<td><strong><a href="https://cran.r-project.org/package=purrr" class="external-link">purrr</a></strong></td>
 <td>
 <code>map()</code> and variants, <code>walk()</code> and variants, <code>map2()</code> and variants, <code>walk2()</code> and variants, <code>pmap()</code> and variants, <code>pwalk()</code>, <code>imap()</code> and variants, <code>modify()</code>, <code>modify2()</code>, <code>imodify()</code>
 </td>
@@ -181,7 +179,7 @@
 <code>future_map()</code> and variants, <code>future_walk()</code> and variants, <code>future_map2()</code> and variants, <code>future_walk2()</code> and variants, <code>future_pmap()</code> and variants, <code>future_pwalk()</code>, <code>future_imap()</code> and variants</td>
 </tr>
 <tr>
-<td><strong><a href="https://foreach.futureverse.org" class="external-link">foreach</a></strong></td>
+<td><strong><a href="https://cran.r-project.org/package=foreach" class="external-link">foreach</a></strong></td>
 <td>
 <code>%do%</code>, <code>%dopar%</code>
 </td>
@@ -274,10 +272,10 @@
 <span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">dist</span> <span class="op">~</span> <span class="va">speed</span>, data <span class="op">=</span> <span class="va">cars</span>, ntree <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=progressify" class="external-link">View on CRAN</a></li>
 <li><a href="https://github.com/futureverse/progressify/milestones" class="external-link">Roadmap/Milestones</a></li>
 <li><a href="https://www.futureverse.org/" class="external-link">The Futureverse Project</a></li>
 <li><a href="https://github.com/futureverse/future/discussions" class="external-link">Futureverse User Forum</a></li>
@@ -306,12 +304,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/HenrikBengtsson/progressify/actions?query=workflow%3AR-CMD-check" class="external-link"><img border="0" src="https://github.com/HenrikBengtsson/progressify/actions/workflows/R-CMD-check.yaml/badge.svg?branch=main" alt="R CMD check status"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>

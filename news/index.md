@@ -1,6 +1,8 @@
 # Changelog
 
-## Version (development version)
+## Version 0.1.0
+
+CRAN release: 2026-04-07
 
 This is a retake of the previous, proof-of-concept version. Starting
 with this version, we are now borrowing from the **futurize** package,
