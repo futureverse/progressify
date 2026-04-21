@@ -49,6 +49,9 @@ Returns the value of the evaluated expression `expr`.
 ## Examples
 
 ``` r
+handlers(global = TRUE) # listen to progress updates
+#> Error in globalCallingHandlers(condition = global_progression_handler): should not be called with handlers on the stack
+
 xs <- list(1, 1:2, 1:2, 1:5)
 y <- lapply(X = xs, FUN = sum) |> progressify()
 str(y)
