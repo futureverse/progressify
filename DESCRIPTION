@@ -25,6 +25,7 @@ Suggests:
     partykit,
     plyr,
     purrr,
+    stars,
     tools
 VignetteBuilder: progressify
 Encoding: UTF-8
