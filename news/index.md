@@ -1,5 +1,12 @@
 # Changelog
 
+## Version 0.1.0-9005
+
+### New Features
+
+- Add support for **sandwich**,
+  e.g. `v <- sandwich::vcovBS(fit) |> progressify()`.
+
 ## Version 0.1.0-9002
 
 ### New Features

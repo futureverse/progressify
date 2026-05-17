@@ -20,3 +20,5 @@
   functions](https://progressify.futureverse.org/articles/progressify-51-plyr.md):
 - [Progress updates for 'partykit'
   functions](https://progressify.futureverse.org/articles/progressify-81-partykit.md):
+- [Progress updates for 'sandwich'
+  functions](https://progressify.futureverse.org/articles/progressify-82-sandwich.md):

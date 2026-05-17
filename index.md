@@ -101,9 +101,10 @@ CRAN packages that have optional built-in support for parallelization.
 
 ### CRAN packages with support for progressify
 
-| Package                                                     | Functions   |
-|-------------------------------------------------------------|-------------|
+| Package | Functions |
+|----|----|
 | **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()` |
+| **[sandwich](https://cran.r-project.org/package=sandwich)** | `vcovBS()`, `vcovJK()` |
 
 *Table 2: CRAN packages with domain-specific functions currently
 supported by
@@ -115,6 +116,8 @@ Here are some examples:
 ``` r
 
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
+
+v <- sandwich::vcovBS(fit) |> progressify()
 ```
 
 ## Compatible with futurize
