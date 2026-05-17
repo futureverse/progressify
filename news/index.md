@@ -1,13 +1,6 @@
 # Changelog
 
-## Version 0.1.0-9005
-
-### New Features
-
-- Add support for **sandwich**,
-  e.g. `v <- sandwich::vcovBS(fit) |> progressify()`.
-
-## Version 0.1.0-9002
+## Version (development version)
 
 ### New Features
 
@@ -23,6 +16,9 @@
 
 - Add support for
   [`purrr::imap_vec()`](https://purrr.tidyverse.org/reference/imap.html).
+
+- Add support for domain-specific package **sandwich**,
+  e.g. `v <- sandwich::vcovBS(fit) |> progressify()`.
 
 ## Version 0.1.0
 
