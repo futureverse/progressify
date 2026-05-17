@@ -1,12 +1,4 @@
-# Version 0.1.0-9005 (2026-05-16)
-
-## New Features
-
- * Add support for **sandwich**, e.g. `v <- sandwich::vcovBS(fit) |>
-   progressify()`.
-
-
-# Version 0.1.0-9002 (2026-04-07)
+# Version (development version)
 
 ## New Features
 
@@ -18,6 +10,9 @@
    `future_imap_vec()`.
 
  * Add support for `purrr::imap_vec()`.
+
+ * Add support for domain-specific package **sandwich**, e.g. `v <-
+   sandwich::vcovBS(fit) |> progressify()`.
 
 
 # Version 0.1.0 (2026-04-01)
