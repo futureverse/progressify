@@ -96,6 +96,7 @@ parallelization.
 | Package                    | Functions                                                                    |
 |----------------------------|------------------------------------------------------------------------------|
 | **[partykit]**             | `cforest()`                                                                  |
+| **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 
 _Table 2: CRAN packages with domain-specific functions currently supported by `progressify()` for progress reporting._
 
@@ -103,6 +104,8 @@ Here are some examples:
 
 ```r
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
+
+v <- sandwich::vcovBS(fit) |> progressify()
 ```
 
 
@@ -145,4 +148,5 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 [plyr]: https://cran.r-project.org/package=plyr
 [progressr]: https://progressr.futureverse.org
 [purrr]: https://cran.r-project.org/package=purrr
+[sandwich]: https://cran.r-project.org/package=sandwich
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html

@@ -25,3 +25,5 @@ cran-focus:
   - text: "CRAN packages supporting progressify()"
   - text: Progress updates for 'partykit' functions
     href: articles/progressify-81-partykit.html
+  - text: Progress updates for 'sandwich' functions
+    href: articles/progressify-82-sandwich.html
