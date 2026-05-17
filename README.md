@@ -1,3 +1,7 @@
+<div id="badges"><!-- pkgdown markup -->
+<a href="https://CRAN.R-project.org/web/checks/check_results_progressify.html"><img border="0" src="https://www.r-pkg.org/badges/version/progressify" alt="CRAN check status"/></a> <a href="https://github.com/futureverse/progressify/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/futureverse/progressify/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"/></a>     <a href="https://app.codecov.io/gh/futureverse/progressify"><img border="0" src="https://codecov.io/gh/futureverse/progressify/branch/develop/graph/badge.svg" alt="Coverage Status"/></a> 
+</div>
+
 # progressify: Progress Reporting of Common Functions via One Magic Function <img src="man/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
 ;"/>
 
