@@ -3,6 +3,7 @@
 register_all_transpilers <- function() {
   ## Map-reduce packages (base-R)
   append_builtin_transpilers_for_base()
+  append_builtin_transpilers_for_boot()
   append_builtin_transpilers_for_crossmap()
   append_builtin_transpilers_for_future.apply()
   append_builtin_transpilers_for_purrr()

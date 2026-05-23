@@ -99,6 +99,7 @@ parallelization.
 
 | Package                    | Functions                                                                    |
 |----------------------------|------------------------------------------------------------------------------|
+| **[boot]**                 | `boot()`, `censboot()`, `tsboot()`                                           |
 | **[partykit]**             | `cforest()`                                                                  |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 
@@ -107,6 +108,8 @@ _Table 2: CRAN packages with domain-specific functions currently supported by `p
 Here are some examples:
 
 ```r
+res <- boot::boot(data, statistic, R = 100) |> progressify()
+
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
 
 v <- sandwich::vcovBS(fit) |> progressify()
@@ -142,6 +145,7 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 
 
 [futureverse]: https://www.futureverse.org
+[boot]: https://cran.r-project.org/package=boot
 [crossmap]: https://cran.r-project.org/package=crossmap
 [doFuture]: https://doFuture.futureverse.org
 [foreach]: https://cran.r-project.org/package=foreach
