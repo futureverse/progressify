@@ -4,6 +4,9 @@
 
 ### New Features
 
+- Add support for domain-specific CRAN package **boot**,
+  e.g. `res <- boot::boot(data, statistic, R = 100) |> progressify()`.
+
 - Add support for **crossmap** `future_*()` variants,
   e.g. `y <- crossmap::future_xmap(xs, fcn) |> progressify()`.
 
@@ -17,7 +20,7 @@
 - Add support for
   [`purrr::imap_vec()`](https://purrr.tidyverse.org/reference/imap.html).
 
-- Add support for domain-specific package **sandwich**,
+- Add support for domain-specific CRAN package **sandwich**,
   e.g. `v <- sandwich::vcovBS(fit) |> progressify()`.
 
 ## Version 0.1.0

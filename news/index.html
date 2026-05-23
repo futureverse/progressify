@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0-9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0-9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +37,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-cran-focus" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">CRAN Focus</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-cran-focus"><li><h6 class="dropdown-header" data-toc-skip>CRAN packages supporting progressify()</h6></li>
+    <li><a class="dropdown-item" href="../articles/progressify-83-boot.html">Progress updates for 'boot' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-81-partykit.html">Progress updates for 'partykit' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-82-sandwich.html">Progress updates for 'sandwich' functions</a></li>
   </ul></li>
@@ -88,10 +89,11 @@
 <h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li><p>Add support for <strong>crossmap</strong> <code>future_*()</code> variants, e.g. <code>y &lt;- crossmap::future_xmap(xs, fcn) |&gt; progressify()</code>.</p></li>
+<ul><li><p>Add support for domain-specific CRAN package <strong>boot</strong>, e.g. <code>res &lt;- boot::boot(data, statistic, R = 100) |&gt; progressify()</code>.</p></li>
+<li><p>Add support for <strong>crossmap</strong> <code>future_*()</code> variants, e.g. <code>y &lt;- crossmap::future_xmap(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <strong>furrr</strong> 0.4.0 <code>*_vec()</code> variants: <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_map_vec()</a></code>, <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_map2_vec()</a></code>, <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_pmap_vec()</a></code>, and <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_imap_vec()</a></code>.</p></li>
 <li><p>Add support for <code><a href="https://purrr.tidyverse.org/reference/imap.html" class="external-link">purrr::imap_vec()</a></code>.</p></li>
-<li><p>Add support for domain-specific package <strong>sandwich</strong>, e.g. <code>v &lt;- sandwich::vcovBS(fit) |&gt; progressify()</code>.</p></li>
+<li><p>Add support for domain-specific CRAN package <strong>sandwich</strong>, e.g. <code>v &lt;- sandwich::vcovBS(fit) |&gt; progressify()</code>.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
