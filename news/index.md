@@ -17,6 +17,9 @@
   and
   [`future_imap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html).
 
+- Add support for domain-specific CRAN package **fwb**,
+  e.g. `res <- fwb::fwb(data, statistic, R = 100) |> progressify()`.
+
 - Add support for
   [`purrr::imap_vec()`](https://purrr.tidyverse.org/reference/imap.html).
 

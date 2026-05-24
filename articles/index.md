@@ -20,6 +20,8 @@
   functions](https://progressify.futureverse.org/articles/progressify-51-plyr.md):
 - [Progress updates for 'boot'
   functions](https://progressify.futureverse.org/articles/progressify-81-boot.md):
+- [Progress updates for 'fwb'
+  functions](https://progressify.futureverse.org/articles/progressify-81-fwb.md):
 - [Progress updates for 'partykit'
   functions](https://progressify.futureverse.org/articles/progressify-81-partykit.md):
 - [Progress updates for 'sandwich'

@@ -104,6 +104,7 @@ CRAN packages that have optional built-in support for parallelization.
 | Package | Functions |
 |----|----|
 | **[boot](https://cran.r-project.org/package=boot)** | `boot()`, `censboot()`, `tsboot()` |
+| **[fwb](https://cran.r-project.org/package=fwb)** | `fwb()` |
 | **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()` |
 | **[sandwich](https://cran.r-project.org/package=sandwich)** | `vcovBS()`, `vcovJK()` |
 
@@ -117,6 +118,8 @@ Here are some examples:
 ``` r
 
 res <- boot::boot(data, statistic, R = 100) |> progressify()
+
+res <- fwb::fwb(data, statistic, R = 100) |> progressify()
 
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
 

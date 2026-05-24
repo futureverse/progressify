@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0-9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0-9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,6 +64,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-cran-focus">
 <li><h6 class="dropdown-header" data-toc-skip>CRAN packages supporting progressify()</h6></li>
     <li><a class="dropdown-item" href="articles/progressify-81-boot.html">Progress updates for 'boot' functions</a></li>
+    <li><a class="dropdown-item" href="articles/progressify-81-fwb.html">Progress updates for 'fwb' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-81-partykit.html">Progress updates for 'partykit' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-81-sandwich.html">Progress updates for 'sandwich' functions</a></li>
   </ul>
@@ -248,6 +249,10 @@
 </td>
 </tr>
 <tr>
+<td><strong><a href="https://cran.r-project.org/package=fwb" class="external-link">fwb</a></strong></td>
+<td><code>fwb()</code></td>
+</tr>
+<tr>
 <td><strong><a href="https://cran.r-project.org/package=partykit" class="external-link">partykit</a></strong></td>
 <td><code>cforest()</code></td>
 </tr>
@@ -263,6 +268,8 @@
 <p>Here are some examples:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">boot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">statistic</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">fwb</span><span class="fu">::</span><span class="fu"><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">statistic</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>, ntree <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>

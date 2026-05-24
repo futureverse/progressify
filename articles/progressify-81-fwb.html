@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Progress updates for 'furrr' functions • progressify</title>
+<title>Progress updates for 'fwb' functions • progressify</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Progress updates for 'furrr' functions">
+<meta property="og:title" content="Progress updates for 'fwb' functions">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-SB3EQSD9FR"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -43,7 +43,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="active nav-item dropdown">
+<li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-map-reduce" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Map Reduce</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-map-reduce">
 <li><h6 class="dropdown-header" data-toc-skip>Map-reduce packages supporting progressify()</h6></li>
@@ -57,7 +57,7 @@
     <li><a class="dropdown-item" href="../articles/progressify-51-plyr.html">Progress updates for 'plyr' functions</a></li>
   </ul>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-cran-focus" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">CRAN Focus</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-cran-focus">
 <li><h6 class="dropdown-header" data-toc-skip>CRAN packages supporting progressify()</h6></li>
@@ -119,23 +119,23 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Progress updates for 'furrr' functions</h1>
+      <h1>Progress updates for 'fwb' functions</h1>
                         <h4 data-toc-skip class="author">Henrik
 Bengtsson</h4>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/futureverse/progressify/blob/HEAD/vignettes/progressify-22-furrr.md" class="external-link"><code>vignettes/progressify-22-furrr.md</code></a></small>
-      <div class="d-none name"><code>progressify-22-furrr.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/futureverse/progressify/blob/HEAD/vignettes/progressify-81-fwb.md" class="external-link"><code>vignettes/progressify-81-fwb.md</code></a></small>
+      <div class="d-none name"><code>progressify-81-fwb.Rmd</code></div>
     </div>
 
     
     
 <!--
-%\VignetteIndexEntry{Progress updates for 'furrr' functions}
+%\VignetteIndexEntry{Progress updates for 'fwb' functions}
 %\VignetteAuthor{Henrik Bengtsson}
 %\VignetteKeyword{R}
 %\VignetteKeyword{package}
-%\VignetteKeyword{furrr}
+%\VignetteKeyword{fwb}
 %\VignetteKeyword{vignette}
 %\VignetteKeyword{progressify}
 %\VignetteEngine{progressify::selfonly}
@@ -149,87 +149,47 @@ to the <code><a href="../reference/progressify.html">progressify()</a></code> fu
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressify.futureverse.org">progressify</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/futureverse/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ngreifer.github.io/fwb/" class="external-link">fwb</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">slow_fcn</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span>  <span class="co"># emulate work</span></span>
-<span>  <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="va">xs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map</a></span><span class="op">(</span><span class="va">slow_fcn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Run fractional weighted bootstrap with progress signaling</span></span>
+<span><span class="va">my_stat</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">w</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">data</span>, weights <span class="op">=</span> <span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, statistic <span class="op">=</span> <span class="va">my_stat</span>, R <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
 <p>This vignette demonstrates how to use this approach to add progress
-reporting to <strong><a href="https://cran.r-project.org/package=furrr" class="external-link">furrr</a></strong>
-functions such as <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_dbl()</a></code>, and <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_walk()</a></code>.</p>
-<p>The <strong>furrr</strong> <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map()</a></code> function is
-commonly used to apply a function to the elements of a vector or a list
-in parallel. For example,</p>
+reporting to the <strong><a href="https://cran.r-project.org/package=fwb" class="external-link">fwb</a></strong> package’s
+main function <code><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb()</a></code>.</p>
+<p>The <strong>fwb</strong> package provides functions for generating
+fractional weighted bootstrap replicates. Because these computations are
+iterative and computationally intensive, they can benefit significantly
+from progress reporting.</p>
+<p>For example, <code><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb()</a></code> runs a statistic function
+<code>R</code> times:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/futureverse/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="va">xs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map</a></span><span class="op">(</span><span class="va">slow_fcn</span><span class="op">)</span></span></code></pre></div>
-<p>Here <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map()</a></code> provides no feedback on how far it has
-progressed, but we can easily add progress reporting by using:</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ngreifer.github.io/fwb/" class="external-link">fwb</a></span><span class="op">)</span></span>
+<span><span class="va">my_stat</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">w</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">data</span>, weights <span class="op">=</span> <span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, statistic <span class="op">=</span> <span class="va">my_stat</span>, R <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
+<p>By default, <code><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb()</a></code> provides no feedback on how far it has
+progressed. However, we can easily add progress reporting using the
+<code><a href="../reference/progressify.html">progressify()</a></code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/futureverse/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ngreifer.github.io/fwb/" class="external-link">fwb</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressify.futureverse.org">progressify</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span></span>
-<span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="va">xs</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map</a></span><span class="op">(</span><span class="va">slow_fcn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Using the default progress handler, the progress reporting will
-appear as:</p>
-<pre class="plain"><code>  |=====                    |  20%</code></pre>
+<span><span class="va">my_stat</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>, <span class="va">w</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">data</span>, weights <span class="op">=</span> <span class="va">w</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, statistic <span class="op">=</span> <span class="va">my_stat</span>, R <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="supported-functions">Supported Functions<a class="anchor" aria-label="anchor" href="#supported-functions"></a>
 </h2>
 <p>The <code><a href="../reference/progressify.html">progressify()</a></code> function supports the following
-<strong>furrr</strong> functions:</p>
+<strong>fwb</strong> functions:</p>
 <ul>
-<li>
-<code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_chr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_dbl()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_int()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_lgl()</a></code>, <code>future_map_raw()</code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_vec()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_dfr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map_dfc()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map_if.html" class="external-link">future_map_at()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map_if.html" class="external-link">future_map_if()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_walk()</a></code>
-</li>
-<li>
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2_chr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2_dbl()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2_int()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2_lgl()</a></code>, <code>future_map2_raw()</code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2_vec()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2_dfr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_map2_dfc()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_walk2()</a></code>
-</li>
-<li>
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap_chr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap_dbl()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap_int()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap_lgl()</a></code>, <code>future_pmap_raw()</code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap_vec()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap_dfr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pmap_dfc()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_map2.html" class="external-link">future_pwalk()</a></code>
-</li>
-<li>
-<code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap_chr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap_dbl()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap_int()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap_lgl()</a></code>, <code>future_imap_raw()</code>,
-<code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap_vec()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap_dfr()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_imap_dfc()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_imap.html" class="external-link">future_iwalk()</a></code>
-</li>
-<li>
-<code><a href="https://furrr.futureverse.org/reference/future_modify.html" class="external-link">future_modify()</a></code>, <code><a href="https://furrr.futureverse.org/reference/future_modify.html" class="external-link">future_modify_at()</a></code>,
-<code><a href="https://furrr.futureverse.org/reference/future_modify.html" class="external-link">future_modify_if()</a></code>
-</li>
+<li><code><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb()</a></code></li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
