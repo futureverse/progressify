@@ -20,6 +20,9 @@
 - Add support for domain-specific CRAN package **fwb**,
   e.g. `res <- fwb::fwb(data, statistic, R = 100) |> progressify()`.
 
+- Add support for domain-specific CRAN package **lme4**,
+  e.g. `res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()`.
+
 - Add support for
   [`purrr::imap_vec()`](https://purrr.tidyverse.org/reference/imap.html).
 

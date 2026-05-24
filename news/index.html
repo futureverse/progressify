@@ -39,6 +39,7 @@
   <ul class="dropdown-menu" aria-labelledby="dropdown-cran-focus"><li><h6 class="dropdown-header" data-toc-skip>CRAN packages supporting progressify()</h6></li>
     <li><a class="dropdown-item" href="../articles/progressify-81-boot.html">Progress updates for 'boot' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-81-fwb.html">Progress updates for 'fwb' functions</a></li>
+    <li><a class="dropdown-item" href="../articles/progressify-81-lme4.html">Progress updates for 'lme4' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-81-partykit.html">Progress updates for 'partykit' functions</a></li>
     <li><a class="dropdown-item" href="../articles/progressify-81-sandwich.html">Progress updates for 'sandwich' functions</a></li>
   </ul></li>
@@ -94,6 +95,7 @@
 <li><p>Add support for <strong>crossmap</strong> <code>future_*()</code> variants, e.g. <code>y &lt;- crossmap::future_xmap(xs, fcn) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <strong>furrr</strong> 0.4.0 <code>*_vec()</code> variants: <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_map_vec()</a></code>, <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_map2_vec()</a></code>, <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_pmap_vec()</a></code>, and <code><a href="https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html" class="external-link">future_imap_vec()</a></code>.</p></li>
 <li><p>Add support for domain-specific CRAN package <strong>fwb</strong>, e.g. <code>res &lt;- fwb::fwb(data, statistic, R = 100) |&gt; progressify()</code>.</p></li>
+<li><p>Add support for domain-specific CRAN package <strong>lme4</strong>, e.g. <code>res &lt;- lme4::bootMer(fit, statistic, nsim = 100) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <code><a href="https://purrr.tidyverse.org/reference/imap.html" class="external-link">purrr::imap_vec()</a></code>.</p></li>
 <li><p>Add support for domain-specific CRAN package <strong>sandwich</strong>, e.g. <code>v &lt;- sandwich::vcovBS(fit) |&gt; progressify()</code>.</p></li>
 </ul></div>

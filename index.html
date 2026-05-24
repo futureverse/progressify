@@ -65,6 +65,7 @@
 <li><h6 class="dropdown-header" data-toc-skip>CRAN packages supporting progressify()</h6></li>
     <li><a class="dropdown-item" href="articles/progressify-81-boot.html">Progress updates for 'boot' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-81-fwb.html">Progress updates for 'fwb' functions</a></li>
+    <li><a class="dropdown-item" href="articles/progressify-81-lme4.html">Progress updates for 'lme4' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-81-partykit.html">Progress updates for 'partykit' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-81-sandwich.html">Progress updates for 'sandwich' functions</a></li>
   </ul>
@@ -253,6 +254,10 @@
 <td><code>fwb()</code></td>
 </tr>
 <tr>
+<td><strong><a href="https://cran.r-project.org/package=lme4" class="external-link">lme4</a></strong></td>
+<td><code>bootMer()</code></td>
+</tr>
+<tr>
 <td><strong><a href="https://cran.r-project.org/package=partykit" class="external-link">partykit</a></strong></td>
 <td><code>cforest()</code></td>
 </tr>
@@ -270,6 +275,8 @@
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">boot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">statistic</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">fwb</span><span class="fu">::</span><span class="fu"><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">statistic</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/bootMer.html" class="external-link">bootMer</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">statistic</span>, nsim <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>, ntree <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
