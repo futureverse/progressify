@@ -27,6 +27,8 @@ cran-focus:
     href: articles/progressify-81-boot.html
   - text: Progress updates for 'fwb' functions
     href: articles/progressify-81-fwb.html
+  - text: Progress updates for 'lme4' functions
+    href: articles/progressify-81-lme4.html
   - text: Progress updates for 'partykit' functions
     href: articles/progressify-81-partykit.html
   - text: Progress updates for 'sandwich' functions

@@ -15,4 +15,5 @@ register_all_transpilers <- function() {
   append_builtin_transpilers_for_stats()
   append_builtin_transpilers_for_foreach()
   append_builtin_transpilers_for_doFuture()
+  append_builtin_transpilers_for_lme4()
 } ## register_all_transpilers()

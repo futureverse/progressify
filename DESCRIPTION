@@ -25,6 +25,7 @@ Suggests:
     future.apply,
     fwb,
     futurize,
+    lme4,
     partykit,
     plyr,
     purrr,

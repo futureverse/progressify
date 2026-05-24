@@ -101,6 +101,7 @@ parallelization.
 |----------------------------|------------------------------------------------------------------------------|
 | **[boot]**                 | `boot()`, `censboot()`, `tsboot()`                                           |
 | **[fwb]**                  | `fwb()`                                                                      |
+| **[lme4]**                 | `bootMer()`                                                                  |
 | **[partykit]**             | `cforest()`                                                                  |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 
@@ -112,6 +113,8 @@ Here are some examples:
 res <- boot::boot(data, statistic, R = 100) |> progressify()
 
 res <- fwb::fwb(data, statistic, R = 100) |> progressify()
+
+res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()
 
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
 
@@ -156,6 +159,7 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 [futurize]: https://futurize.futureverse.org
 [furrr]: https://furrr.futureverse.org
 [fwb]: https://cran.r-project.org/package=fwb
+[lme4]: https://cran.r-project.org/package=lme4
 [partykit]: https://cran.r-project.org/package=partykit
 [plyr]: https://cran.r-project.org/package=plyr
 [progressr]: https://progressr.futureverse.org
