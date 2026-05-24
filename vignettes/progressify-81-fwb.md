@@ -33,9 +33,6 @@ This vignette demonstrates how to use this approach to add progress
 reporting to the **[fwb]** package's main function `fwb()`.
 
 The **fwb** package provides functions for generating fractional weighted bootstrap replicates.
-Because these computations are iterative and computationally intensive, they can
-benefit significantly from progress reporting.
-
 For example, `fwb()` runs a statistic function `R` times:
 
 ```r
@@ -44,8 +41,13 @@ my_stat <- function(data, w) coef(lm(mpg ~ cyl, data = data, weights = w))
 res <- fwb(data = mtcars, statistic = my_stat, R = 1000)
 ```
 
-By default, `fwb()` provides no feedback on how far it has progressed.
-However, we can easily add progress reporting using the `progressify()` function:
+By default, `fwb()` uses `verbose = TRUE`, which provides progress
+feedback via the **[pbapply]** package, where the style can be
+controlled via `pbapply::pboptions()`.
+
+As an alternative, we can use the `progressify()` function to report
+on progress via any combination of **progressr** reporters. To do
+this, use:
 
 ```r
 library(fwb)
@@ -57,6 +59,9 @@ my_stat <- function(data, w) coef(lm(mpg ~ cyl, data = data, weights = w))
 res <- fwb(data = mtcars, statistic = my_stat, R = 1000) |> progressify()
 ```
 
+Comment: This will disable the built-in progress feedback by setting
+`verbose = FALSE` in order to avoid dual reporting.
+
 
 # Supported Functions
 
@@ -67,3 +72,4 @@ functions:
 
 
 [fwb]: https://cran.r-project.org/package=fwb
+[pbapply]: https://cran.r-project.org/package=pbapply
