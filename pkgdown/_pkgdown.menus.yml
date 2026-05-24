@@ -24,8 +24,10 @@ cran-focus:
   menu:
   - text: "CRAN packages supporting progressify()"
   - text: Progress updates for 'boot' functions
-    href: articles/progressify-83-boot.html
+    href: articles/progressify-81-boot.html
+  - text: Progress updates for 'fwb' functions
+    href: articles/progressify-81-fwb.html
   - text: Progress updates for 'partykit' functions
     href: articles/progressify-81-partykit.html
   - text: Progress updates for 'sandwich' functions
-    href: articles/progressify-82-sandwich.html
+    href: articles/progressify-81-sandwich.html

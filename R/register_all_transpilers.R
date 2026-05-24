@@ -6,6 +6,7 @@ register_all_transpilers <- function() {
   append_builtin_transpilers_for_boot()
   append_builtin_transpilers_for_crossmap()
   append_builtin_transpilers_for_future.apply()
+  append_builtin_transpilers_for_fwb()
   append_builtin_transpilers_for_purrr()
   append_builtin_transpilers_for_furrr()
   append_builtin_transpilers_for_partykit()

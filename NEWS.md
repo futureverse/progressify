@@ -12,6 +12,9 @@
    `future_map_vec()`, `future_map2_vec()`, `future_pmap_vec()`, and
    `future_imap_vec()`.
 
+ * Add support for domain-specific CRAN package **fwb**, e.g. `res <-
+   fwb::fwb(data, statistic, R = 100) |> progressify()`.
+
  * Add support for `purrr::imap_vec()`.
 
  * Add support for domain-specific CRAN package **sandwich**, e.g. `v <-

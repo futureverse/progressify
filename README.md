@@ -100,6 +100,7 @@ parallelization.
 | Package                    | Functions                                                                    |
 |----------------------------|------------------------------------------------------------------------------|
 | **[boot]**                 | `boot()`, `censboot()`, `tsboot()`                                           |
+| **[fwb]**                  | `fwb()`                                                                      |
 | **[partykit]**             | `cforest()`                                                                  |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 
@@ -109,6 +110,8 @@ Here are some examples:
 
 ```r
 res <- boot::boot(data, statistic, R = 100) |> progressify()
+
+res <- fwb::fwb(data, statistic, R = 100) |> progressify()
 
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
 
@@ -152,6 +155,7 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 [future.apply]: https://future.apply.futureverse.org
 [futurize]: https://futurize.futureverse.org
 [furrr]: https://furrr.futureverse.org
+[fwb]: https://cran.r-project.org/package=fwb
 [partykit]: https://cran.r-project.org/package=partykit
 [plyr]: https://cran.r-project.org/package=plyr
 [progressr]: https://progressr.futureverse.org
