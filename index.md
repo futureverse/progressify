@@ -13,6 +13,7 @@ that will take care of everything, e.g.
 y <- lapply(x, fcn) |> progressify()
 y <- map(x, fcn) |> progressify()
 y <- foreach(x = xs) %do% { fcn(x) } |> progressify()
+res <- boot::boot(data, statistic, R = 100) |> progressify()
 ```
 
 The
