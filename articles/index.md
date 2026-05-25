@@ -28,3 +28,5 @@
   functions](https://progressify.futureverse.org/articles/progressify-81-partykit.md):
 - [Progress updates for 'sandwich'
   functions](https://progressify.futureverse.org/articles/progressify-81-sandwich.md):
+- [Progress updates for 'SimDesign'
+  functions](https://progressify.futureverse.org/articles/progressify-81-SimDesign.md):

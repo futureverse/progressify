@@ -29,6 +29,9 @@
 - Add support for domain-specific CRAN package **sandwich**,
   e.g. `v <- sandwich::vcovBS(fit) |> progressify()`.
 
+- Add support for domain-specific CRAN package **SimDesign**,
+  e.g. `res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()`.
+
 ## Version 0.1.0
 
 CRAN release: 2026-04-07

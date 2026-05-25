@@ -108,6 +108,7 @@ CRAN packages that have optional built-in support for parallelization.
 | **[lme4](https://cran.r-project.org/package=lme4)** | `bootMer()` |
 | **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()` |
 | **[sandwich](https://cran.r-project.org/package=sandwich)** | `vcovBS()`, `vcovJK()` |
+| **[SimDesign](https://cran.r-project.org/package=SimDesign)** | `runSimulation()` |
 
 *Table 2: CRAN packages with domain-specific functions currently
 supported by
@@ -127,6 +128,8 @@ res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
 
 v <- sandwich::vcovBS(fit) |> progressify()
+
+res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()
 ```
 
 ## Compatible with futurize

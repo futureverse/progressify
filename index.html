@@ -68,6 +68,7 @@
     <li><a class="dropdown-item" href="articles/progressify-81-lme4.html">Progress updates for 'lme4' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-81-partykit.html">Progress updates for 'partykit' functions</a></li>
     <li><a class="dropdown-item" href="articles/progressify-81-sandwich.html">Progress updates for 'sandwich' functions</a></li>
+    <li><a class="dropdown-item" href="articles/progressify-81-SimDesign.html">Progress updates for 'SimDesign' functions</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">News</a></li>
@@ -267,6 +268,10 @@
 <code>vcovBS()</code>, <code>vcovJK()</code>
 </td>
 </tr>
+<tr>
+<td><strong><a href="https://cran.r-project.org/package=SimDesign" class="external-link">SimDesign</a></strong></td>
+<td><code>runSimulation()</code></td>
+</tr>
 </tbody>
 </table>
 <p><em>Table 2: CRAN packages with domain-specific functions currently supported by <code><a href="reference/progressify.html">progressify()</a></code> for progress reporting.</em></p>
@@ -280,7 +285,9 @@
 <span></span>
 <span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>, ntree <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/vcovBS.html" class="external-link">vcovBS</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://sandwich.R-Forge.R-project.org/reference/vcovBS.html" class="external-link">vcovBS</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">SimDesign</span><span class="fu">::</span><span class="fu"><a href="http://philchalmers.github.io/SimDesign/reference/runSimulation.html" class="external-link">runSimulation</a></span><span class="op">(</span><span class="va">design</span>, <span class="va">replications</span>, <span class="va">generate</span>, <span class="va">analyse</span>, <span class="va">summarise</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
