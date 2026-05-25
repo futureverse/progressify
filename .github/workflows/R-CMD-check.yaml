@@ -23,7 +23,7 @@ jobs:
           - {os: ubuntu-latest,  r: 'release', label: '' }
           - {os: ubuntu-latest,  r: 'release', futurize: develop, label: 'futurize develop' }
           - {os: ubuntu-latest,  r: 'oldrel'   }
-          - {os: ubuntu-latest,  r: '4.1'      }
+          - {os: ubuntu-latest,  r: '4.4'      }
  
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
