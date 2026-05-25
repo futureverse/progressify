@@ -104,6 +104,7 @@ parallelization.
 | **[lme4]**                 | `bootMer()`                                                                  |
 | **[partykit]**             | `cforest()`                                                                  |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
+| **[SimDesign]**            | `runSimulation()`                                                            |
 
 _Table 2: CRAN packages with domain-specific functions currently supported by `progressify()` for progress reporting._
 
@@ -119,6 +120,8 @@ res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
 
 v <- sandwich::vcovBS(fit) |> progressify()
+
+res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()
 ```
 
 
@@ -165,4 +168,5 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 [progressr]: https://progressr.futureverse.org
 [purrr]: https://cran.r-project.org/package=purrr
 [sandwich]: https://cran.r-project.org/package=sandwich
+[SimDesign]: https://cran.r-project.org/package=SimDesign
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html

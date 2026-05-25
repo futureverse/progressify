@@ -48,6 +48,8 @@ navbar:
         href: articles/progressify-81-partykit.html
       - text: Progress updates for 'sandwich' functions
         href: articles/progressify-81-sandwich.html
+      - text: Progress updates for 'SimDesign' functions
+        href: articles/progressify-81-SimDesign.html
 
     news:
       text: News

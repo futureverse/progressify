@@ -30,6 +30,7 @@ Suggests:
     plyr,
     purrr,
     sandwich,
+    SimDesign,
     tools
 VignetteBuilder: progressify
 Encoding: UTF-8
