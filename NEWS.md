@@ -2,7 +2,7 @@
 
 ## Significant Changes
 
- * Changed the package license from GPL (>= 3) to MIT.
+ * Changed the package license to Apache (>= 2.0).
 
 ## New Features
 
