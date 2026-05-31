@@ -2,7 +2,7 @@
 
 ## Significant Changes
 
- * Changed the package license to Apache (>= 2.0).
+ * Changed the package license to Apache License (>= 2).
 
 ## New Features
 
