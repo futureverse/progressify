@@ -2,9 +2,13 @@
 
 ## Version (development version)
 
+- …
+
+## Version 0.2.0
+
 ### Significant Changes
 
-- Changed the package license to Apache (\>= 2.0).
+- Changed the package license to Apache License (\>= 2).
 
 ### New Features
 
