@@ -2,6 +2,10 @@
 
 ## Version (development version)
 
+### Significant Changes
+
+- Changed the package license from GPL (\>= 3) to MIT.
+
 ### New Features
 
 - Add support for domain-specific CRAN package **boot**,
