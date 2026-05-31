@@ -1,11 +1,14 @@
 Package: progressify
-Version: 0.1.0
+Version: 0.2.0
 Title: Progress Reporting of Common Functions via One Magic Function
-Description: The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with R's native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. 'lapply(x, fcn) |> progressify()' and 'purrr::map(x, fcn) |> progressify()'. It is compatible with the 'futurize' package for parallelization, e.g. 'lapply(x, fcn) |> progressify() |> futurize()' and 'purrr::map(x, fcn) |> futurize() |> progressify()'.
+Description: The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with R's native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. 'lapply(x, fcn) |> progressify()' and 'purrr::map(x, fcn) |> progressify()'. It is compatible with the parallel-processing map-reduce packages 'future.apply', 'furrr', 'crossmap', 'foreach', 'doFuture', and 'futurize'. It also supports domain-specific packages including 'boot', 'fwb', 'lme4', 'partykit', 'sandwich', and 'SimDesign', e.g. 'boot::boot(data, stat, R) |> progressify()'.
 Authors@R: c(
    person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
-          email = "henrikb@braju.com"))
-License: GPL (>= 3)
+          email = "henrikb@braju.com",
+          comment = c(ORCID = "0000-0002-7579-5165")))
+License: Apache License (>= 2)
+URL: https://progressify.futureverse.org, https://github.com/futureverse/progressify
+BugReports: https://github.com/futureverse/progressify/issues
 Depends:
     R (>= 4.1.0),
     progressr
@@ -13,18 +16,23 @@ Imports:
     methods
 Suggests:
     base64enc,
+    boot,
     commonmark,
     crossmap,
     doFuture,
     foreach,
     furrr,
     future.apply,
+    fwb,
     futurize,
+    lme4,
     partykit,
     plyr,
     purrr,
+    sandwich,
+    SimDesign,
     tools
 VignetteBuilder: progressify
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.0.0

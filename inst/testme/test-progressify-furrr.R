@@ -56,7 +56,13 @@ exprs <- list(
   future_pmap = quote(future_pmap(list(xs, ys), FUN2)),
   future_pmap_dbl = quote(furrr::future_pmap_dbl(.l = list(xs, ys), .f = FUN2)),
 
-  future_pwalk = quote(furrr::future_pwalk(.l = list(xs, ys), .f = function(x, y) invisible(NULL)))
+  future_pwalk = quote(furrr::future_pwalk(.l = list(xs, ys), .f = function(x, y) invisible(NULL))),
+
+  ## _vec variants (furrr >= 0.4.0)
+  future_map_vec  = quote(furrr::future_map_vec(.x = xs, .f = function(x) median(c(1:5, x)))),
+  future_map2_vec = quote(furrr::future_map2_vec(.x = xs, .y = ys, .f = FUN2)),
+  future_pmap_vec = quote(furrr::future_pmap_vec(.l = list(xs, ys), .f = FUN2)),
+  future_imap_vec = quote(furrr::future_imap_vec(xs, function(x, idx) nchar(idx)))
 )
 
 for (kk in seq_along(exprs)) {

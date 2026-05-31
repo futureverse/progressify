@@ -45,15 +45,22 @@ progressify_crossmap <- local({
                           "xmap_lgl", "xmap_vec",
                           "xmap_dfc", "xmap_dfr",
                           "xmap_mat", "xmap_arr",
-                          "xwalk")) {
+                          "xwalk",
+                          "future_xmap", "future_xmap_chr",
+                          "future_xmap_dbl", "future_xmap_int",
+                          "future_xmap_lgl", "future_xmap_vec",
+                          "future_xmap_dfc", "future_xmap_dfr",
+                          "future_xmap_mat", "future_xmap_arr",
+                          "future_xmap_raw",
+                          "future_xwalk")) {
       ## xmap-style: .l + .f, cross-product iteration
       idx_l <- which(names == ".l")
       idx_f <- which(names == ".f")
-    } else if (fcn_name %in% c("pmap_vec")) {
+    } else if (fcn_name %in% c("pmap_vec", "future_pmap_vec")) {
       ## pmap-style: .l + .f, parallel iteration
       idx_l <- which(names == ".l")
       idx_f <- which(names == ".f")
-    } else if (fcn_name %in% c("map2_vec")) {
+    } else if (fcn_name %in% c("map2_vec", "future_map2_vec")) {
       ## map2-style: .x + .f
       idx_x <- which(names == ".x")
       idx_f <- which(names == ".f")
@@ -76,7 +83,14 @@ progressify_crossmap <- local({
                             "xmap_lgl", "xmap_vec",
                             "xmap_dfc", "xmap_dfr",
                             "xmap_mat", "xmap_arr",
-                            "xwalk")) {
+                            "xwalk",
+                            "future_xmap", "future_xmap_chr",
+                            "future_xmap_dbl", "future_xmap_int",
+                            "future_xmap_lgl", "future_xmap_vec",
+                            "future_xmap_dfc", "future_xmap_dfr",
+                            "future_xmap_mat", "future_xmap_arr",
+                            "future_xmap_raw",
+                            "future_xwalk")) {
         ## xmap: cross-product, so steps = prod(lengths(.l))
         parts[[idx_l]] <- bquote_apply(template_steps_prod_lengths,
                                         DATA = parts[[idx_l]])
@@ -121,7 +135,25 @@ append_builtin_transpilers_for_crossmap <- local({
     xmap_dfr = c,
     xmap_mat = c,
     xmap_arr = c,
-    xwalk = c
+    xwalk = c,
+    ## future purrr-extensions
+    future_imap_vec = c,
+    future_map_vec = c,
+    future_map2_vec = c,
+    future_pmap_vec = c,
+    ## future xmap family
+    future_xmap = c,
+    future_xmap_chr = c,
+    future_xmap_dbl = c,
+    future_xmap_int = c,
+    future_xmap_lgl = c,
+    future_xmap_vec = c,
+    future_xmap_dfc = c,
+    future_xmap_dfr = c,
+    future_xmap_mat = c,
+    future_xmap_arr = c,
+    future_xmap_raw = c,
+    future_xwalk = c
   )
 
   template <- bquote_compile(function(expr, options) {

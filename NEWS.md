@@ -1,3 +1,36 @@
+# Version 0.2.0 [2026-05-31]
+
+## Significant Changes
+
+ * Changed the package license to Apache License (>= 2).
+
+## New Features
+
+ * Add support for domain-specific CRAN package **boot**, e.g. `res <-
+   boot::boot(data, statistic, R = 100) |> progressify()`.
+
+ * Add support for **crossmap** `future_*()` variants, e.g. `y <-
+   crossmap::future_xmap(xs, fcn) |> progressify()`.
+
+ * Add support for **furrr** 0.4.0 `*_vec()` variants:
+   `future_map_vec()`, `future_map2_vec()`, `future_pmap_vec()`, and
+   `future_imap_vec()`.
+
+ * Add support for domain-specific CRAN package **fwb**, e.g. `res <-
+   fwb::fwb(data, statistic, R = 100) |> progressify()`.
+
+ * Add support for domain-specific CRAN package **lme4**, e.g. `res <-
+   lme4::bootMer(fit, statistic, nsim = 100) |> progressify()`.
+
+ * Add support for `purrr::imap_vec()`.
+
+ * Add support for domain-specific CRAN package **sandwich**, e.g. `v <-
+   sandwich::vcovBS(fit) |> progressify()`.
+
+ * Add support for domain-specific CRAN package **SimDesign**, e.g. `res <-
+   SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()`.
+
+
 # Version 0.1.0 (2026-04-01)
 
 This is a retake of the previous, proof-of-concept version. Starting

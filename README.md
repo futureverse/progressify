@@ -1,5 +1,8 @@
-# progressify: Progress Reporting of Common Functions via One Magic Function <img src="man/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex
-;"/>
+<div id="badges"><!-- pkgdown markup -->
+<a href="https://CRAN.R-project.org/web/checks/check_results_progressify.html"><img border="0" src="https://www.r-pkg.org/badges/version/progressify" alt="CRAN check status"/></a> <a href="https://github.com/futureverse/progressify/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/futureverse/progressify/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"/></a>     <a href="https://app.codecov.io/gh/futureverse/progressify"><img border="0" src="https://codecov.io/gh/futureverse/progressify/branch/develop/graph/badge.svg" alt="Coverage Status"/></a> 
+</div>
+
+# progressify: Progress Reporting of Common Functions via One Magic Function <img src="man/figures/progressify-logo.png" alt="The hexlogo for the 'progressify' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex;"/>
 
 ## TL;DR 
 
@@ -12,6 +15,7 @@ will take care of everything, e.g.
 y <- lapply(x, fcn) |> progressify()
 y <- map(x, fcn) |> progressify()
 y <- foreach(x = xs) %do% { fcn(x) } |> progressify()
+res <- boot::boot(data, statistic, R = 100) |> progressify()
 ```
 
 The `progressify()` function signals progress updates via the
@@ -50,8 +54,8 @@ progressify_supported_functions("purrr")
 | **stats**          | `dendrapply()`                                                                                             |
 | **[future.apply]** | `future_apply()`, `future_by()`, `future_eapply()`, `future_lapply()`, `future_.mapply()`, `future_mapply()`, `future_Map()`, `future_replicate()`, `future_sapply()`, `future_tapply()`, `future_vapply()` |
 | **[purrr]**        | `map()` and variants, `walk()` and variants, `map2()` and variants, `walk2()` and variants, `pmap()` and variants, `pwalk()`, `imap()` and variants, `modify()`, `modify2()`, `imodify()` |
-| **[crossmap]**     | `xmap()` and variants, `xwalk()`, `map_vec()`, `map2_vec()`, `pmap_vec()`, `imap_vec()`                   |
-| **[furrr]**        | `future_map()` and variants, `future_walk()` and variants, `future_map2()` and variants, `future_walk2()` and variants, `future_pmap()` and variants, `future_pwalk()`, `future_imap()` and variants |
+| **[crossmap]**     | `xmap()` and variants, `xwalk()`, `map_vec()`, `map2_vec()`, `pmap_vec()`, `imap_vec()`, plus `future_*()` variants |
+| **[furrr]**        | `future_map()` and variants, `future_walk()` and variants, `future_map2()` and variants, `future_walk2()` and variants, `future_pmap()` and variants, `future_pwalk()`, `future_imap()` and variants, `future_modify()`, `future_modify2()`, `future_imodify()` and variants |
 | **[foreach]**      | `%do%`, `%dopar%`                                                                                                  |
 | **[doFuture]**     | `%dofuture%`                                                                                                       |
 | **[plyr]**         | `llply()` and variants, `mlply()` and variants, `rdply()`, `rlply()`, `raply()`, `r_ply()` |
@@ -95,14 +99,29 @@ parallelization.
 
 | Package                    | Functions                                                                    |
 |----------------------------|------------------------------------------------------------------------------|
+| **[boot]**                 | `boot()`, `censboot()`, `tsboot()`                                           |
+| **[fwb]**                  | `fwb()`                                                                      |
+| **[lme4]**                 | `bootMer()`                                                                  |
 | **[partykit]**             | `cforest()`                                                                  |
+| **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
+| **[SimDesign]**            | `runSimulation()`                                                            |
 
 _Table 2: CRAN packages with domain-specific functions currently supported by `progressify()` for progress reporting._
 
 Here are some examples:
 
 ```r
+res <- boot::boot(data, statistic, R = 100) |> progressify()
+
+res <- fwb::fwb(data, statistic, R = 100) |> progressify()
+
+res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()
+
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
+
+v <- sandwich::vcovBS(fit) |> progressify()
+
+res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()
 ```
 
 
@@ -135,14 +154,19 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 
 
 [futureverse]: https://www.futureverse.org
+[boot]: https://cran.r-project.org/package=boot
 [crossmap]: https://cran.r-project.org/package=crossmap
 [doFuture]: https://doFuture.futureverse.org
 [foreach]: https://cran.r-project.org/package=foreach
 [future.apply]: https://future.apply.futureverse.org
 [futurize]: https://futurize.futureverse.org
 [furrr]: https://furrr.futureverse.org
+[fwb]: https://cran.r-project.org/package=fwb
+[lme4]: https://cran.r-project.org/package=lme4
 [partykit]: https://cran.r-project.org/package=partykit
 [plyr]: https://cran.r-project.org/package=plyr
 [progressr]: https://progressr.futureverse.org
 [purrr]: https://cran.r-project.org/package=purrr
+[sandwich]: https://cran.r-project.org/package=sandwich
+[SimDesign]: https://cran.r-project.org/package=SimDesign
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html

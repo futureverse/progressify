@@ -35,6 +35,8 @@ Returns the value of the evaluated expression \code{expr}.
 Evaluate a regular map-reduce call with progress updates
 }
 \examples{
+handlers(global = TRUE) # listen to progress updates
+
 xs <- list(1, 1:2, 1:2, 1:5)
 y <- lapply(X = xs, FUN = sum) |> progressify()
 str(y)

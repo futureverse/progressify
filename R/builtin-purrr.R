@@ -100,6 +100,7 @@ append_builtin_transpilers_for_purrr <- local({
     imap_int = c,
     imap_dbl = c,
     imap_chr = c,
+    imap_vec = c,
     modify = c,
     modify2 = c,
     imodify = c

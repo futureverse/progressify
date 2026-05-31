@@ -1,26 +1,16 @@
-#----------------------------
-# Git and SVN related
-#----------------------------
-^.git
-^.make
-^CONDUCT[.]md$
-^CONTRIBUTING[.]md$
-^docs
-^pkgdown
-
-#----------------------------
-# devtools
-#----------------------------
-revdep
-
-#----------------------------
-# R related
-#----------------------------
-Rplots.pdf$
-^cran-comments[.].*$
+^.git/
+^.make/
+^[.][^.]*/
+^docs/
+^incl/
+^pkgdown/
+^revdep/
 ^vignettes/.*[.](pdf|PDF)$
 ^vignettes/.*[.](r|R)$
+^CONDUCT[.]md$
+^CONTRIBUTING[.]md$
+^LICENSE\.md$
+^cran-comments[.].*$
 ^Makefile$
-^incl
-^[.]local
+Rplots.pdf$
 ^.*[.]tar[.]gz$
