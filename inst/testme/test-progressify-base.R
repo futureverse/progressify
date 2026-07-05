@@ -45,7 +45,19 @@ exprs <- list(
   
   replicate = quote(replicate(10, { 42 })),
   replicate = quote(replicate(n = 10, { 1 + 2 })),
-  replicate = quote(base::replicate(n = 10, 3 + 4))
+  replicate = quote(base::replicate(n = 10, 3 + 4)),
+
+  mapply = quote(mapply(FUN, xs)),
+  mapply = quote(mapply(FUN = FUN, xs)),
+  mapply = quote(base::mapply(FUN, xs, SIMPLIFY = FALSE)),
+  mapply = quote(base::mapply(FUN, xs, USE.NAMES = FALSE)),
+  mapply = quote(mapply(FUN, 1:3, MoreArgs = list(na.rm = FALSE))),
+
+  Map = quote(Map(FUN, xs)),
+  Map = quote(base::Map(FUN, xs)),
+
+  .mapply = quote(.mapply(FUN, list(xs), NULL)),
+  .mapply = quote(base::.mapply(FUN, dots = list(xs), MoreArgs = NULL))
 )
 
 for (kk in seq_along(exprs)) {

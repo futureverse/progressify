@@ -1,6 +1,9 @@
 # Version (development version)
 
- * ...
+## Bug Fixes
+
+ * `progressify()` for `mapply()`, `Map()`, and `.mapply()` would
+   produce an error on `object '.progressr_progressor' not found`.
 
 
 # Version 0.2.0 [2026-05-31]

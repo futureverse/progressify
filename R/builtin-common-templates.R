@@ -30,6 +30,15 @@ template_FUN <- bquote_compile(function(..., ...FUN, .progressr_progressor) {
   ...FUN(...)
 })
 
+## Wrap FUN as a closure that captures '...FUN' and '.progressr_progressor'
+## from the enclosing local() environment.  Used for functions such as
+## mapply(), Map(), and .mapply(), whose '...' are the elements to iterate
+## over and therefore cannot be used to pass the progressor through to FUN.
+template_FUN_closure <- bquote_compile(function(...) {
+  on.exit(.progressr_progressor())
+  ...FUN(...)
+})
+
 ## purrr-style .f wrapper: uses as_mapper() for formula/string/integer support
 template_f <- bquote_compile(local({
   .progressr_f <- purrr::as_mapper(.(FUN))

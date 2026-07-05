@@ -9,6 +9,13 @@
 #
 progressify_base <- local({
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
+    ## mapply(), Map(), and .mapply() iterate over '...'. We need to wrap
+    ## FUN() as a closure capturing the progressor from the enclosing
+    ## local() environment.
+    if (fcn_name %in% c("mapply", "Map", ".mapply")) {
+      return(progressify_base_mapply(expr, fcn_name = fcn_name, fcn = fcn))
+    }
+
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))
     names <- names[-1]
@@ -71,6 +78,70 @@ progressify_base <- local({
 
     bquote(local(.(as.call(parts))))
   } ## progressify_base()
+})
+
+
+# mapply(FUN = FUN, ..., MoreArgs, SIMPLIFY, USE.NAMES) =>
+#
+# local({
+#   ...FUN <- FUN
+#   mapply(FUN = function(...) {
+#     on.exit(.progressr_progressor())
+#     ...FUN(...)
+#   }, {
+#     .progressr_progressor <- progressr::progressor(along = ..1)
+#     ..1
+#   }, ..2, MoreArgs = MoreArgs, ...)
+# })
+#
+progressify_base_mapply <- local({
+  function(expr, fcn_name, fcn) {
+    mc <- match.call(fcn, call = expr)
+    parts <- as.list(mc)
+    names <- names(parts)
+    if (is.null(names)) names <- rep("", length.out = length(parts))
+
+    fun_arg <- if (fcn_name == "Map") "f" else "FUN"
+    idx_FUN <- which(names == fun_arg)
+    ## FUN may be passed positionally as the first argument
+    if (length(idx_FUN) == 0L) idx_FUN <- 2L
+    stopifnot(length(idx_FUN) == 1L)
+
+    orig_FUN <- parts[[idx_FUN]]
+
+    ## Wrap FUN as a closure that captures '...FUN' and '.progressr_progressor'
+    ## from the enclosing local() environment.
+    parts[[idx_FUN]] <- bquote_apply(template_FUN_closure)
+    names[idx_FUN] <- fun_arg
+
+    if (fcn_name == ".mapply") {
+      ## .mapply(FUN, dots, MoreArgs): 'dots' is the list of vectors to map
+      idx_dots <- which(names == "dots")
+      if (length(idx_dots) == 0L) {
+        idx_dots <- setdiff(seq_along(parts)[-1L], idx_FUN)[1L]
+      }
+      stopifnot(length(idx_dots) == 1L, !is.na(idx_dots))
+      parts[[idx_dots]] <- bquote_apply(template_along_first,
+                                        ALONG = parts[[idx_dots]])
+    } else {
+      ## mapply()/Map(): the '...' elements are the vectors to map over
+      reserved <- c(fun_arg, "MoreArgs", "SIMPLIFY", "USE.NAMES")
+      idx_dots <- setdiff(seq_along(parts)[-1L], idx_FUN)
+      idx_dots <- idx_dots[!(names[idx_dots] %in% reserved)]
+      stopifnot(length(idx_dots) >= 1L)
+      idx_first <- idx_dots[1L]
+      parts[[idx_first]] <- bquote_apply(template_along,
+                                         ALONG = parts[[idx_first]])
+    }
+
+    names(parts) <- names
+    call <- as.call(parts)
+
+    bquote(local({
+      ...FUN <- .(orig_FUN)
+      .(call)
+    }))
+  } ## progressify_base_mapply()
 })
 
 
