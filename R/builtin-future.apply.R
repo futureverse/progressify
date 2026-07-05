@@ -9,6 +9,13 @@
 #
 progressify_future.apply <- local({
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
+    ## future_mapply(), future_Map(), and future_.mapply() iterate over their
+    ## '...' / 'dots' elements, so the progressor cannot be threaded through
+    ## '...' to FUN.  Handle them via the shared mapply-family transpiler.
+    if (fcn_name %in% c("future_mapply", "future_Map", "future_.mapply")) {
+      return(progressify_mapply_family(expr, fcn_name = fcn_name, fcn = fcn))
+    }
+
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))
     names <- names[-1]

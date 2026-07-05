@@ -48,7 +48,19 @@ exprs <- list(
   
   future_replicate = quote(future_replicate(10, { 42 })),
   future_replicate = quote(future_replicate(n = 10, { 1 + 2 })),
-  future_replicate = quote(future.apply::future_replicate(n = 10, 3 + 4))
+  future_replicate = quote(future.apply::future_replicate(n = 10, 3 + 4)),
+
+  future_mapply = quote(future_mapply(FUN, xs)),
+  future_mapply = quote(future_mapply(FUN = FUN, xs)),
+  future_mapply = quote(future.apply::future_mapply(FUN, xs, SIMPLIFY = FALSE)),
+  future_mapply = quote(future.apply::future_mapply(FUN, xs, USE.NAMES = FALSE)),
+  future_mapply = quote(future_mapply(FUN, 1:3, MoreArgs = list(na.rm = FALSE))),
+
+  future_Map = quote(future_Map(FUN, xs)),
+  future_Map = quote(future.apply::future_Map(FUN, xs)),
+
+  future_.mapply = quote(future_.mapply(FUN, list(xs), NULL)),
+  future_.mapply = quote(future.apply::future_.mapply(FUN, dots = list(xs), MoreArgs = NULL))
 )
 
 for (kk in seq_along(exprs)) {

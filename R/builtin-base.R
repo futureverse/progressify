@@ -13,7 +13,7 @@ progressify_base <- local({
     ## FUN() as a closure capturing the progressor from the enclosing
     ## local() environment.
     if (fcn_name %in% c("mapply", "Map", ".mapply")) {
-      return(progressify_base_mapply(expr, fcn_name = fcn_name, fcn = fcn))
+      return(progressify_mapply_family(expr, fcn_name = fcn_name, fcn = fcn))
     }
 
     names <- names(expr)
@@ -94,14 +94,25 @@ progressify_base <- local({
 #   }, ..2, MoreArgs = MoreArgs, ...)
 # })
 #
-progressify_base_mapply <- local({
+# Shared by base's mapply()/Map()/.mapply() and future.apply's
+# future_mapply()/future_Map()/future_.mapply(), which all iterate over their
+# '...' (or 'dots') elements and therefore cannot thread the progressor to FUN
+# via '...'.  Instead, FUN is wrapped as a closure that captures '...FUN' and
+# '.progressr_progressor' from the enclosing local() environment.
+progressify_mapply_family <- local({
   function(expr, fcn_name, fcn) {
+    ## match.call() resolves named formals (FUN/f, MoreArgs, dots, and any
+    ## future.* arguments) while leaving the elements to iterate over in place.
     mc <- match.call(fcn, call = expr)
     parts <- as.list(mc)
     names <- names(parts)
     if (is.null(names)) names <- rep("", length.out = length(parts))
 
-    fun_arg <- if (fcn_name == "Map") "f" else "FUN"
+    ## Map()/future_Map() name their function 'f'; the rest use 'FUN'
+    is_Map <- grepl("(^|_)Map$", fcn_name)
+    is_dotmapply <- grepl("[.]mapply$", fcn_name)
+    fun_arg <- if (is_Map) "f" else "FUN"
+
     idx_FUN <- which(names == fun_arg)
     ## FUN may be passed positionally as the first argument
     if (length(idx_FUN) == 0L) idx_FUN <- 2L
@@ -114,7 +125,7 @@ progressify_base_mapply <- local({
     parts[[idx_FUN]] <- bquote_apply(template_FUN_closure)
     names[idx_FUN] <- fun_arg
 
-    if (fcn_name == ".mapply") {
+    if (is_dotmapply) {
       ## .mapply(FUN, dots, MoreArgs): 'dots' is the list of vectors to map
       idx_dots <- which(names == "dots")
       if (length(idx_dots) == 0L) {
@@ -124,8 +135,11 @@ progressify_base_mapply <- local({
       parts[[idx_dots]] <- bquote_apply(template_along_first,
                                         ALONG = parts[[idx_dots]])
     } else {
-      ## mapply()/Map(): the '...' elements are the vectors to map over
-      reserved <- c(fun_arg, "MoreArgs", "SIMPLIFY", "USE.NAMES")
+      ## mapply()/Map(): the '...' elements are the vectors to map over.
+      ## Everything matched to a named formal (FUN/f, MoreArgs, SIMPLIFY,
+      ## USE.NAMES, future.*, ...) is reserved; the first remaining argument
+      ## is the first vector to iterate over.
+      reserved <- setdiff(names(formals(fcn)), "...")
       idx_dots <- setdiff(seq_along(parts)[-1L], idx_FUN)
       idx_dots <- idx_dots[!(names[idx_dots] %in% reserved)]
       stopifnot(length(idx_dots) >= 1L)
@@ -141,7 +155,7 @@ progressify_base_mapply <- local({
       ...FUN <- .(orig_FUN)
       .(call)
     }))
-  } ## progressify_base_mapply()
+  } ## progressify_mapply_family()
 })
 
 

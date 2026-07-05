@@ -5,6 +5,10 @@
  * `progressify()` for `mapply()`, `Map()`, and `.mapply()` would
    produce an error on `object '.progressr_progressor' not found`.
 
+ * `progressify()` for `future_mapply()`, `future_Map()`, and
+   `future_.mapply()` of **future.apply** would produce an error on
+   `length(idx_FUN) == 1L is not TRUE`.
+
 
 # Version 0.2.0 [2026-05-31]
 
