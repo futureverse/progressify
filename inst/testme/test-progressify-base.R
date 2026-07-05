@@ -21,6 +21,10 @@ FUN <- function(x, na.rm = TRUE) {
 
 es <- as.environment(xs)
 
+m <- matrix(1:6, nrow = 2, dimnames = list(rows = c("r1", "r2"),
+                                           cols = c("c1", "c2", "c3")))
+df <- data.frame(a = 1:3, b = 4:6)
+
 
 exprs <- list(
   lapply = quote(lapply(X = xs, FUN = FUN)),
@@ -57,7 +61,16 @@ exprs <- list(
   Map = quote(base::Map(FUN, xs)),
 
   .mapply = quote(.mapply(FUN, list(xs), NULL)),
-  .mapply = quote(base::.mapply(FUN, dots = list(xs), MoreArgs = NULL))
+  .mapply = quote(base::.mapply(FUN, dots = list(xs), MoreArgs = NULL)),
+
+  apply = quote(apply(m, 1, FUN)),
+  apply = quote(apply(m, 2, FUN)),
+  apply = quote(apply(X = m, MARGIN = 2, FUN = FUN)),
+  apply = quote(base::apply(m, c(1, 2), FUN)),
+  apply = quote(apply(m, "cols", FUN)),
+  apply = quote(apply(m, 1, FUN, na.rm = FALSE)),
+  apply = quote(apply(m, 2, quantile, probs = 0.5)),
+  apply = quote(apply(df, 2, FUN))
 )
 
 for (kk in seq_along(exprs)) {

@@ -16,6 +16,12 @@ progressify_base <- local({
       return(progressify_mapply_family(expr, fcn_name = fcn_name, fcn = fcn))
     }
 
+    ## apply() iterates over the margins of 'X'; the number of iterations
+    ## depends on both 'X' and 'MARGIN' rather than on a single argument.
+    if (fcn_name == "apply") {
+      return(progressify_base_apply(expr, fcn_name = fcn_name, fcn = fcn))
+    }
+
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))
     names <- names[-1]
@@ -156,6 +162,69 @@ progressify_mapply_family <- local({
       .(call)
     }))
   } ## progressify_mapply_family()
+})
+
+
+# apply(X = X, MARGIN = MARGIN, FUN = FUN, ..., simplify) =>
+#
+# local({
+#   ...FUN <- FUN
+#   .progressr_X <- X
+#   .progressr_MARGIN <- MARGIN
+#   .progressr_progressor <- progressr::progressor(
+#     steps = prod(dim(.progressr_X)[.progressr_MARGIN])
+#   )
+#   apply(X = .progressr_X, MARGIN = .progressr_MARGIN, FUN = function(...) {
+#     on.exit(.progressr_progressor())
+#     ...FUN(...)
+#   }, ...)
+# })
+#
+# apply() calls FUN exactly prod(dim(X)[MARGIN]) times and forwards its '...'
+# to FUN.  'X' and 'MARGIN' are captured once to avoid double evaluation and so
+# that the step count can be computed from both.  FUN is wrapped as a closure
+# that captures '...FUN' and '.progressr_progressor' from the enclosing local()
+# environment.
+progressify_base_apply <- local({
+  function(expr, fcn_name, fcn) {
+    mc <- match.call(fcn, call = expr)
+    parts <- as.list(mc)
+    names <- names(parts)
+    if (is.null(names)) names <- rep("", length.out = length(parts))
+
+    idx_X      <- which(names == "X")
+    idx_MARGIN <- which(names == "MARGIN")
+    idx_FUN    <- which(names == "FUN")
+    stopifnot(length(idx_X) == 1L, length(idx_MARGIN) == 1L,
+              length(idx_FUN) == 1L)
+
+    orig_X      <- parts[[idx_X]]
+    orig_MARGIN <- parts[[idx_MARGIN]]
+    orig_FUN    <- parts[[idx_FUN]]
+
+    ## Refer to the captured copies inside the rebuilt call, and wrap FUN as a
+    ## closure capturing '...FUN' and '.progressr_progressor'.
+    parts[[idx_X]]      <- quote(.progressr_X)
+    parts[[idx_MARGIN]] <- quote(.progressr_MARGIN)
+    parts[[idx_FUN]]    <- bquote_apply(template_FUN_closure)
+
+    call <- as.call(parts)
+
+    bquote(local({
+      ...FUN <- .(orig_FUN)
+      .progressr_X <- .(orig_X)
+      .progressr_MARGIN <- .(orig_MARGIN)
+      .progressr_progressor <- progressr::progressor(steps = {
+        .progressr_m <- .progressr_MARGIN
+        ## MARGIN may be given as dimnames names, cf. apply()
+        if (is.character(.progressr_m)) {
+          .progressr_m <- match(.progressr_m, names(dimnames(.progressr_X)))
+        }
+        prod(dim(.progressr_X)[.progressr_m])
+      })
+      .(call)
+    }))
+  } ## progressify_base_apply()
 })
 
 
