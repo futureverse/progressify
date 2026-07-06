@@ -2,7 +2,29 @@
 
 ## Version (development version)
 
-- …
+### Bug Fixes
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  for [`mapply()`](https://rdrr.io/r/base/mapply.html),
+  [`Map()`](https://rdrr.io/r/base/funprog.html),
+  [`.mapply()`](https://rdrr.io/r/base/mapply.html), and
+  [`apply()`](https://rdrr.io/r/base/apply.html) would produce an error
+  on `object '.progressr_progressor' not found`.
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  for
+  [`future_mapply()`](https://future.apply.futureverse.org/reference/future_mapply.html),
+  [`future_Map()`](https://future.apply.futureverse.org/reference/future_mapply.html),
+  and
+  [`future_.mapply()`](https://future.apply.futureverse.org/reference/future_mapply.html)
+  of **future.apply** would produce an error on
+  `length(idx_FUN) == 1L is not TRUE`.
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  for
+  [`future_apply()`](https://future.apply.futureverse.org/reference/future_apply.html)
+  of **future.apply** would produce an error on
+  `object '.progressr_progressor' not found`.
 
 ## Version 0.2.0
 

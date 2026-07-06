@@ -26,7 +26,7 @@ ys <- lapply(xs, slow_fcn) |> progressify()
 This vignette demonstrates how to use this approach to add progress
 reporting to functions such as
 [`lapply()`](https://rdrr.io/r/base/lapply.html),
-[`tapply()`](https://rdrr.io/r/base/tapply.html),
+~~[`tapply()`](https://rdrr.io/r/base/tapply.html)~~,
 [`apply()`](https://rdrr.io/r/base/apply.html), and
 [`replicate()`](https://rdrr.io/r/base/lapply.html) in the **base**
 package. For example, consider the base R
@@ -68,7 +68,7 @@ function supports the following **base** package functions:
 - [`lapply()`](https://rdrr.io/r/base/lapply.html),
   [`vapply()`](https://rdrr.io/r/base/lapply.html),
   [`sapply()`](https://rdrr.io/r/base/lapply.html),
-  [`tapply()`](https://rdrr.io/r/base/tapply.html)
+  ~~[`tapply()`](https://rdrr.io/r/base/tapply.html)~~
 - [`mapply()`](https://rdrr.io/r/base/mapply.html),
   [`.mapply()`](https://rdrr.io/r/base/mapply.html),
   [`Map()`](https://rdrr.io/r/base/funprog.html)
