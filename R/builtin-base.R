@@ -19,7 +19,13 @@ progressify_base <- local({
     ## apply() iterates over the margins of 'X'; the number of iterations
     ## depends on both 'X' and 'MARGIN' rather than on a single argument.
     if (fcn_name == "apply") {
-      return(progressify_base_apply(expr, fcn_name = fcn_name, fcn = fcn))
+      return(progressify_apply_family(expr, fcn_name = fcn_name, fcn = fcn))
+    }
+
+    ## tapply() applies FUN to each non-empty group of 'X' defined by 'INDEX';
+    ## the number of iterations is the number of non-empty group combinations.
+    if (fcn_name == "tapply") {
+      return(progressify_tapply_family(expr, fcn_name = fcn_name, fcn = fcn))
     }
 
     names <- names(expr)
@@ -185,7 +191,11 @@ progressify_mapply_family <- local({
 # that the step count can be computed from both.  FUN is wrapped as a closure
 # that captures '...FUN' and '.progressr_progressor' from the enclosing local()
 # environment.
-progressify_base_apply <- local({
+#
+# Shared by base's apply() and future.apply's future_apply(), which have the
+# same signature and '...'-forwarding behaviour (future.* arguments stay named
+# via match.call() and are preserved in the rebuilt call).
+progressify_apply_family <- local({
   function(expr, fcn_name, fcn) {
     mc <- match.call(fcn, call = expr)
     parts <- as.list(mc)
@@ -224,7 +234,75 @@ progressify_base_apply <- local({
       })
       .(call)
     }))
-  } ## progressify_base_apply()
+  } ## progressify_apply_family()
+})
+
+
+# tapply(X = X, INDEX = INDEX, FUN = FUN, ..., default, simplify) =>
+#
+# local({
+#   ...FUN <- FUN
+#   .progressr_X <- X
+#   .progressr_INDEX <- INDEX
+#   .progressr_progressor <- progressr::progressor(
+#     steps = nlevels(interaction(as.list(.progressr_INDEX), drop = TRUE))
+#   )
+#   tapply(X = .progressr_X, INDEX = .progressr_INDEX, FUN = function(...) {
+#     on.exit(.progressr_progressor())
+#     ...FUN(...)
+#   }, ...)
+# })
+#
+# tapply() calls FUN once per non-empty group combination of 'INDEX' and
+# forwards its '...' to FUN.  The step count equals the number of non-empty
+# group combinations, i.e. nlevels(interaction(INDEX, drop = TRUE)).  'X' and
+# 'INDEX' are captured once (INDEX is referenced both when computing the step
+# count and in the call).  FUN is wrapped as a closure that captures '...FUN'
+# and '.progressr_progressor' from the enclosing local() environment.
+#
+# Shared by base's tapply() and future.apply's future_tapply().
+progressify_tapply_family <- local({
+  function(expr, fcn_name, fcn) {
+    mc <- match.call(fcn, call = expr)
+    parts <- as.list(mc)
+    names <- names(parts)
+    if (is.null(names)) names <- rep("", length.out = length(parts))
+
+    ## FUN is optional in tapply(); without it (or with FUN = NULL) there is no
+    ## iteration to report progress on, so leave the call untouched.
+    idx_FUN <- which(names == "FUN")
+    if (length(idx_FUN) != 1L || is.null(parts[[idx_FUN]])) {
+      return(expr)
+    }
+
+    idx_X     <- which(names == "X")
+    idx_INDEX <- which(names == "INDEX")
+    stopifnot(length(idx_X) == 1L, length(idx_INDEX) == 1L)
+
+    orig_X     <- parts[[idx_X]]
+    orig_INDEX <- parts[[idx_INDEX]]
+    orig_FUN   <- parts[[idx_FUN]]
+
+    ## Refer to the captured copies inside the rebuilt call, and wrap FUN as a
+    ## closure capturing '...FUN' and '.progressr_progressor'.
+    parts[[idx_X]]     <- quote(.progressr_X)
+    parts[[idx_INDEX]] <- quote(.progressr_INDEX)
+    parts[[idx_FUN]]   <- bquote_apply(template_FUN_closure)
+
+    call <- as.call(parts)
+
+    bquote(local({
+      ...FUN <- .(orig_FUN)
+      .progressr_X <- .(orig_X)
+      .progressr_INDEX <- .(orig_INDEX)
+      .progressr_progressor <- progressr::progressor(steps = {
+        .progressr_idx <- .progressr_INDEX
+        if (!is.list(.progressr_idx)) .progressr_idx <- list(.progressr_idx)
+        nlevels(interaction(.progressr_idx, drop = TRUE))
+      })
+      .(call)
+    }))
+  } ## progressify_tapply_family()
 })
 
 

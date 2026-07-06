@@ -24,6 +24,15 @@ FUN <- function(x, na.rm = TRUE) {
 
 es <- as.environment(xs)
 
+m <- matrix(1:6, nrow = 2, dimnames = list(rows = c("r1", "r2"),
+                                           cols = c("c1", "c2", "c3")))
+df <- data.frame(a = 1:3, b = 4:6)
+
+ints <- 1:6
+grp1 <- c("a", "a", "b", "b", "a", "b")
+grp2 <- c("x", "y", "x", "y", "x", "y")
+gdf <- data.frame(grp1 = grp1, grp2 = grp2)
+
 
 exprs <- list(
   future_lapply = quote(future_lapply(X = xs, FUN = FUN)),
@@ -60,7 +69,23 @@ exprs <- list(
   future_Map = quote(future.apply::future_Map(FUN, xs)),
 
   future_.mapply = quote(future_.mapply(FUN, list(xs), NULL)),
-  future_.mapply = quote(future.apply::future_.mapply(FUN, dots = list(xs), MoreArgs = NULL))
+  future_.mapply = quote(future.apply::future_.mapply(FUN, dots = list(xs), MoreArgs = NULL)),
+
+  future_apply = quote(future_apply(m, 1, FUN)),
+  future_apply = quote(future_apply(m, 2, FUN)),
+  future_apply = quote(future_apply(X = m, MARGIN = 2, FUN = FUN)),
+  future_apply = quote(future.apply::future_apply(m, c(1, 2), FUN)),
+  future_apply = quote(future_apply(m, "cols", FUN)),
+  future_apply = quote(future_apply(m, 1, FUN, na.rm = FALSE)),
+  future_apply = quote(future_apply(m, 2, quantile, probs = 0.5)),
+  future_apply = quote(future_apply(df, 2, FUN)),
+
+  future_tapply = quote(future_tapply(ints, grp1, FUN)),
+  future_tapply = quote(future_tapply(X = ints, INDEX = grp1, FUN = FUN)),
+  future_tapply = quote(future.apply::future_tapply(ints, list(grp1, grp2), FUN)),
+  future_tapply = quote(future_tapply(ints, gdf, FUN)),
+  future_tapply = quote(future_tapply(ints, grp1, FUN, na.rm = FALSE)),
+  future_tapply = quote(future_tapply(ints, grp1, paste, collapse = "-"))
 )
 
 for (kk in seq_along(exprs)) {

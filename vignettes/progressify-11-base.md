@@ -65,12 +65,12 @@ appear as:
 The `progressify()` function supports the following **base** package
 functions:
 
- * `lapply()`, `vapply()`, `sapply()`, `tapply()`
+ * `lapply()`, `vapply()`, `sapply()`
  * `mapply()`, `.mapply()`, `Map()`
  * `eapply()`
  * `apply()`
  * `replicate()`
- * `by()`
+ * `by()`, `tapply()`
 
 
 # Combining with futurize

@@ -25,6 +25,11 @@ m <- matrix(1:6, nrow = 2, dimnames = list(rows = c("r1", "r2"),
                                            cols = c("c1", "c2", "c3")))
 df <- data.frame(a = 1:3, b = 4:6)
 
+ints <- 1:6
+grp1 <- c("a", "a", "b", "b", "a", "b")
+grp2 <- c("x", "y", "x", "y", "x", "y")
+gdf <- data.frame(grp1 = grp1, grp2 = grp2)
+
 
 exprs <- list(
   lapply = quote(lapply(X = xs, FUN = FUN)),
@@ -70,7 +75,17 @@ exprs <- list(
   apply = quote(apply(m, "cols", FUN)),
   apply = quote(apply(m, 1, FUN, na.rm = FALSE)),
   apply = quote(apply(m, 2, quantile, probs = 0.5)),
-  apply = quote(apply(df, 2, FUN))
+  apply = quote(apply(df, 2, FUN)),
+
+  tapply = quote(tapply(ints, grp1, FUN)),
+  tapply = quote(tapply(X = ints, INDEX = grp1, FUN = FUN)),
+  tapply = quote(base::tapply(ints, list(grp1, grp2), FUN)),
+  tapply = quote(tapply(ints, gdf, FUN)),
+  tapply = quote(tapply(ints, grp1, FUN, na.rm = FALSE)),
+  tapply = quote(tapply(ints, grp1, paste, collapse = "-")),
+  tapply = quote(tapply(ints, grp1, sum, default = 0)),
+  tapply = quote(tapply(ints, factor(grp1, levels = c("a", "b", "c")), FUN)),
+  tapply = quote(tapply(ints, grp1, FUN = NULL))
 )
 
 for (kk in seq_along(exprs)) {

@@ -16,6 +16,19 @@ progressify_future.apply <- local({
       return(progressify_mapply_family(expr, fcn_name = fcn_name, fcn = fcn))
     }
 
+    ## future_apply() iterates over the margins of 'X'; the number of
+    ## iterations depends on both 'X' and 'MARGIN' rather than on a single
+    ## argument.
+    if (fcn_name == "future_apply") {
+      return(progressify_apply_family(expr, fcn_name = fcn_name, fcn = fcn))
+    }
+
+    ## future_tapply() applies FUN to each non-empty group of 'X' defined by
+    ## 'INDEX'; handled by the shared tapply-family transpiler.
+    if (fcn_name == "future_tapply") {
+      return(progressify_tapply_family(expr, fcn_name = fcn_name, fcn = fcn))
+    }
+
     names <- names(expr)
     if (is.null(names)) names <- rep("", length.out = length(expr))
     names <- names[-1]
