@@ -7,9 +7,10 @@
 - [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
   for [`mapply()`](https://rdrr.io/r/base/mapply.html),
   [`Map()`](https://rdrr.io/r/base/funprog.html),
-  [`.mapply()`](https://rdrr.io/r/base/mapply.html), and
-  [`apply()`](https://rdrr.io/r/base/apply.html) would produce an error
-  on `object '.progressr_progressor' not found`.
+  [`.mapply()`](https://rdrr.io/r/base/mapply.html),
+  [`apply()`](https://rdrr.io/r/base/apply.html), and
+  [`tapply()`](https://rdrr.io/r/base/tapply.html) would produce an
+  error on `object '.progressr_progressor' not found`.
 
 - [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
   for
@@ -23,6 +24,8 @@
 - [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
   for
   [`future_apply()`](https://future.apply.futureverse.org/reference/future_apply.html)
+  and
+  [`future_tapply()`](https://future.apply.futureverse.org/reference/future_lapply.html)
   of **future.apply** would produce an error on
   `object '.progressr_progressor' not found`.
 
