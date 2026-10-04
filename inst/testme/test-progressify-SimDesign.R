@@ -47,7 +47,9 @@ if (requireNamespace("SimDesign", quietly = TRUE)) {
 
     # Ensure reproducible seed
     set.seed(42)
-    truth <- eval(expr)
+    truth_output <- utils::capture.output({
+      truth <- eval(expr)
+    })
 
     set.seed(42)
     res <- eval(bquote(.(expr) |> progressify()))
@@ -55,12 +57,15 @@ if (requireNamespace("SimDesign", quietly = TRUE)) {
     # Ensure results are equivalent
     stopifnot(all.equal(strip_attributes(res), strip_attributes(truth)))
 
-    # Ensure no stdout leakage
+    # Workaround SimDesign 2.27 ignoring verbose=FALSE on HPC environments,
+    # cf. https://github.com/philchalmers/SimDesign/issues/105
     output <- utils::capture.output({
       set.seed(42)
       res2 <- eval(bquote(.(expr) |> progressify()))
     })
-    stopifnot(length(output) == 0L)
+    if (length(truth_output) == 0L) {
+      stopifnot(length(output) == 0L)
+    }
 
     # Ensure repeated evaluation is identical
     stopifnot(all.equal(strip_attributes(res2), strip_attributes(res)))
