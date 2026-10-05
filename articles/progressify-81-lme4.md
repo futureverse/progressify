@@ -7,21 +7,19 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(lme4)
-
-# Fit random-slope model
-fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
-my_stat <- function(fit) {
-  fixef(fit)
-}
-
-# Run bootstrap with progress signaling
-res <- bootMer(fm1, my_stat, nsim = 1000) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`lme4`](https://github.com/lme4/lme4/)`)`\
+\
+`# Fit random-slope model`\
+`fm1`` ``<-`` `[`lmer`](https://rdrr.io/pkg/lme4/man/lmer.html)`(``Reaction`` ``~`` ``Days`` ``+`` ``(``Days`` ``|`` ``Subject``)``, ``sleepstudy``)`\
+`my_stat`` ``<-`` ``function``(``fit``)`` ``{`\
+`  `[`fixef`](https://rdrr.io/pkg/nlme/man/fixed.effects.html)`(``fit``)`\
+`}`\
+\
+`# Run bootstrap with progress signaling`\
+`res`` ``<-`` `[`bootMer`](https://rdrr.io/pkg/lme4/man/bootMer.html)`(``fm1``, ``my_stat``, nsim ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -34,18 +32,16 @@ nonlinear mixed-effects models. For example,
 [`bootMer()`](https://rdrr.io/pkg/lme4/man/bootMer.html) runs a
 statistic function `nsim` times:
 
-``` r
-
-library(lme4)
-
-# Fit random-slope model
-fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
-my_stat <- function(fit) {
-  fixef(fit)
-}
-
-res <- bootMer(fm1, my_stat, nsim = 1000)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`lme4`](https://github.com/lme4/lme4/)`)`\
+\
+`# Fit random-slope model`\
+`fm1`` ``<-`` `[`lmer`](https://rdrr.io/pkg/lme4/man/lmer.html)`(``Reaction`` ``~`` ``Days`` ``+`` ``(``Days`` ``|`` ``Subject``)``, ``sleepstudy``)`\
+`my_stat`` ``<-`` ``function``(``fit``)`` ``{`\
+`  `[`fixef`](https://rdrr.io/pkg/nlme/man/fixed.effects.html)`(``fit``)`\
+`}`\
+\
+`res`` ``<-`` `[`bootMer`](https://rdrr.io/pkg/lme4/man/bootMer.html)`(``fm1``, ``my_stat``, nsim ``=`` ``1000``)`
 
 By default, [`bootMer()`](https://rdrr.io/pkg/lme4/man/bootMer.html)
 provides no progress feedback. However, we can easily add progress
@@ -53,20 +49,18 @@ reporting using the
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
 function:
 
-``` r
-
-library(lme4)
-library(progressify)
-handlers(global = TRUE)
-
-# Fit random-slope model
-fm1 <- lmer(Reaction ~ Days + (Days | Subject), sleepstudy)
-my_stat <- function(fit) {
-  fixef(fit)
-}
-
-res <- bootMer(fm1, my_stat, nsim = 1000) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`lme4`](https://github.com/lme4/lme4/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`# Fit random-slope model`\
+`fm1`` ``<-`` `[`lmer`](https://rdrr.io/pkg/lme4/man/lmer.html)`(``Reaction`` ``~`` ``Days`` ``+`` ``(``Days`` ``|`` ``Subject``)``, ``sleepstudy``)`\
+`my_stat`` ``<-`` ``function``(``fit``)`` ``{`\
+`  `[`fixef`](https://rdrr.io/pkg/nlme/man/fixed.effects.html)`(``fit``)`\
+`}`\
+\
+`res`` ``<-`` `[`bootMer`](https://rdrr.io/pkg/lme4/man/bootMer.html)`(``fm1``, ``my_stat``, nsim ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Supported Functions
 

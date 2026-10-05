@@ -7,32 +7,30 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(SimDesign)
-
-# Create small design
-Design <- createDesign(factor1 = c(1, 2))
-
-Generate <- function(condition, fixed_objects = NULL) {
-  rnorm(100)
-}
-
-Analyse <- function(condition, dat, fixed_objects = NULL) {
-  mean(dat)
-}
-
-Summarise <- function(condition, results, fixed_objects = NULL) {
-  mean(results)
-}
-
-# Run simulation with progress signaling
-res <- runSimulation(design = Design, replications = 100,
-                     generate = Generate, analyse = Analyse,
-                     summarise = Summarise) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`SimDesign`](http://philchalmers.github.io/SimDesign/)`)`\
+\
+`# Create small design`\
+`Design`` ``<-`` `[`createDesign`](http://philchalmers.github.io/SimDesign/reference/createDesign.md)`(``factor1 ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``1``, ``2``)``)`\
+\
+`Generate`` ``<-`` ``function``(``condition``, ``fixed_objects`` ``=`` ``NULL``)`` ``{`\
+`  `[`rnorm`](https://rdrr.io/r/stats/Normal.html)`(``100``)`\
+`}`\
+\
+`Analyse`` ``<-`` ``function``(``condition``, ``dat``, ``fixed_objects`` ``=`` ``NULL``)`` ``{`\
+`  `[`mean`](https://rdrr.io/r/base/mean.html)`(``dat``)`\
+`}`\
+\
+`Summarise`` ``<-`` ``function``(``condition``, ``results``, ``fixed_objects`` ``=`` ``NULL``)`` ``{`\
+`  `[`mean`](https://rdrr.io/r/base/mean.html)`(``results``)`\
+`}`\
+\
+`# Run simulation with progress signaling`\
+`res`` ``<-`` `[`runSimulation`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)`(``design ``=`` ``Design``, replications ``=`` ``100``,`\
+`                     generate ``=`` ``Generate``, analyse ``=`` ``Analyse``,`\
+`                     summarise ``=`` ``Summarise``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -47,19 +45,17 @@ Carlo simulation studies in R. For example,
 evaluates the `generate` and `analyse` functions `replications` times
 for each condition in the `design`:
 
-``` r
-
-library(SimDesign)
-
-Design <- createDesign(factor1 = c(1, 2))
-Generate <- function(condition, fixed_objects = NULL) rnorm(100)
-Analyse <- function(condition, dat, fixed_objects = NULL) mean(dat)
-Summarise <- function(condition, results, fixed_objects = NULL) mean(results)
-
-res <- runSimulation(design = Design, replications = 100,
-                     generate = Generate, analyse = Analyse,
-                     summarise = Summarise)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`SimDesign`](http://philchalmers.github.io/SimDesign/)`)`\
+\
+`Design`` ``<-`` `[`createDesign`](http://philchalmers.github.io/SimDesign/reference/createDesign.md)`(``factor1 ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``1``, ``2``)``)`\
+`Generate`` ``<-`` ``function``(``condition``, ``fixed_objects`` ``=`` ``NULL``)`` `[`rnorm`](https://rdrr.io/r/stats/Normal.html)`(``100``)`\
+`Analyse`` ``<-`` ``function``(``condition``, ``dat``, ``fixed_objects`` ``=`` ``NULL``)`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``dat``)`\
+`Summarise`` ``<-`` ``function``(``condition``, ``results``, ``fixed_objects`` ``=`` ``NULL``)`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``results``)`\
+\
+`res`` ``<-`` `[`runSimulation`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)`(``design ``=`` ``Design``, replications ``=`` ``100``,`\
+`                     generate ``=`` ``Generate``, analyse ``=`` ``Analyse``,`\
+`                     summarise ``=`` ``Summarise``)`
 
 By default,
 [`runSimulation()`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)
@@ -68,16 +64,14 @@ replace this with **progressr**-based reporting using the
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
 function:
 
-``` r
-
-library(SimDesign)
-library(progressify)
-handlers(global = TRUE)
-
-res <- runSimulation(design = Design, replications = 100,
-                     generate = Generate, analyse = Analyse,
-                     summarise = Summarise) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`SimDesign`](http://philchalmers.github.io/SimDesign/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`res`` ``<-`` `[`runSimulation`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)`(``design ``=`` ``Design``, replications ``=`` ``100``,`\
+`                     generate ``=`` ``Generate``, analyse ``=`` ``Analyse``,`\
+`                     summarise ``=`` ``Summarise``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 When progressified,
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)

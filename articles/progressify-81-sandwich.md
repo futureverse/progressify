@@ -7,15 +7,13 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(sandwich)
-
-fit <- lm(dist ~ speed, data = cars)
-v <- vcovBS(fit, R = 100L) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`sandwich`](https://zeileis.codeberg.page/sandwich/)`)`\
+\
+`fit`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``dist`` ``~`` ``speed``, data ``=`` ``cars``)`\
+`v`` ``<-`` `[`vcovBS`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)`(``fit``, R ``=`` ``100L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -35,43 +33,37 @@ For example,
 [`vcovBS()`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)
 computes bootstrapped covariance matrix estimators.
 
-``` r
-
-library(sandwich)
-fit <- lm(dist ~ speed, data = cars)
-v <- vcovBS(fit, R = 100L)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`sandwich`](https://zeileis.codeberg.page/sandwich/)`)`\
+`fit`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``dist`` ``~`` ``speed``, data ``=`` ``cars``)`\
+`v`` ``<-`` `[`vcovBS`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)`(``fit``, R ``=`` ``100L``)`
 
 Here
 [`vcovBS()`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)
 provides no feedback on how far it has progressed, but we can easily add
 progress reporting by using:
 
-``` r
-
-library(sandwich)
-
-library(progressify)
-handlers(global = TRUE)
-
-fit <- lm(dist ~ speed, data = cars)
-v <- vcovBS(fit, R = 100L) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`sandwich`](https://zeileis.codeberg.page/sandwich/)`)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`fit`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``dist`` ``~`` ``speed``, data ``=`` ``cars``)`\
+`v`` ``<-`` `[`vcovBS`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)`(``fit``, R ``=`` ``100L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Similarly, the jackknife estimator
 [`vcovJK()`](https://zeileis.codeberg.page/sandwich/reference/vcovJK.html)
 can be progressified:
 
-``` r
-
-library(sandwich)
-
-library(progressify)
-handlers(global = TRUE)
-
-fit <- lm(dist ~ speed, data = cars)
-v <- vcovJK(fit) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`sandwich`](https://zeileis.codeberg.page/sandwich/)`)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`fit`` ``<-`` `[`lm`](https://rdrr.io/r/stats/lm.html)`(``dist`` ``~`` ``speed``, data ``=`` ``cars``)`\
+`v`` ``<-`` `[`vcovJK`](https://zeileis.codeberg.page/sandwich/reference/vcovJK.html)`(``fit``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Supported Functions
 

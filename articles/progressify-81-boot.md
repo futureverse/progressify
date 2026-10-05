@@ -7,17 +7,15 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(boot)
-
-# Run bootstrap with progress signaling
-x <- 1:100
-my_stat <- function(data, i) mean(data[i])
-res <- boot(data = x, statistic = my_stat, R = 1000) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(``boot``)`\
+\
+`# Run bootstrap with progress signaling`\
+`x`` ``<-`` ``1``:``100`\
+`my_stat`` ``<-`` ``function``(``data``, ``i``)`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``data``[``i``]``)`\
+`res`` ``<-`` `[`boot`](https://rdrr.io/pkg/boot/man/boot.html)`(``data ``=`` ``x``, statistic ``=`` ``my_stat``, R ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -34,13 +32,11 @@ intensive, they can benefit significantly from progress reporting.
 For example, [`boot()`](https://rdrr.io/pkg/boot/man/boot.html) runs a
 statistic function `R` times:
 
-``` r
-
-library(boot)
-x <- 1:100
-my_stat <- function(data, i) mean(data[i])
-res <- boot(data = x, statistic = my_stat, R = 1000)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(``boot``)`\
+`x`` ``<-`` ``1``:``100`\
+`my_stat`` ``<-`` ``function``(``data``, ``i``)`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``data``[``i``]``)`\
+`res`` ``<-`` `[`boot`](https://rdrr.io/pkg/boot/man/boot.html)`(``data ``=`` ``x``, statistic ``=`` ``my_stat``, R ``=`` ``1000``)`
 
 By default, [`boot()`](https://rdrr.io/pkg/boot/man/boot.html) provides
 no feedback on how far it has progressed. However, we can easily add
@@ -48,17 +44,15 @@ progress reporting using the
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
 function:
 
-``` r
-
-library(boot)
-
-library(progressify)
-handlers(global = TRUE)
-
-x <- 1:100
-my_stat <- function(data, i) mean(data[i])
-res <- boot(data = x, statistic = my_stat, R = 1000) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(``boot``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`x`` ``<-`` ``1``:``100`\
+`my_stat`` ``<-`` ``function``(``data``, ``i``)`` `[`mean`](https://rdrr.io/r/base/mean.html)`(``data``[``i``]``)`\
+`res`` ``<-`` `[`boot`](https://rdrr.io/pkg/boot/man/boot.html)`(``data ``=`` ``x``, statistic ``=`` ``my_stat``, R ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Supported Functions
 

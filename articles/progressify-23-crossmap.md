@@ -7,20 +7,18 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(crossmap)
-
-slow_fcn <- function(x, y) {
-  Sys.sleep(0.1)  # emulate work
-  x * y
-}
-
-xs <- list(1:5, 1:5)
-ys <- xmap(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`crossmap`](https://pkg.rossellhayes.com/crossmap/)`)`\
+\
+`slow_fcn`` ``<-`` ``function``(``x``, ``y``)`` ``{`\
+`  `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``  ``# emulate work`\
+`  ``x`` ``*`` ``y`\
+`}`\
+\
+`xs`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(``1``:``5``, ``1``:``5``)`\
+`ys`` ``<-`` `[`xmap`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -35,33 +33,29 @@ example,
 [`xmap()`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html)
 computes the cross product of its inputs:
 
-``` r
-
-library(crossmap)
-xs <- list(1:5, 1:5)
-ys <- xmap(xs, slow_fcn)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`crossmap`](https://pkg.rossellhayes.com/crossmap/)`)`\
+`xs`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(``1``:``5``, ``1``:``5``)`\
+`ys`` ``<-`` `[`xmap`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html)`(``xs``, ``slow_fcn``)`
 
 Here
 [`xmap()`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html)
 provides no feedback on how far it has progressed, but we can easily add
 progress reporting by using:
 
-``` r
-
-library(crossmap)
-
-library(progressify)
-handlers(global = TRUE)
-
-xs <- list(1:5, 1:5)
-ys <- xmap(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`crossmap`](https://pkg.rossellhayes.com/crossmap/)`)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(``1``:``5``, ``1``:``5``)`\
+`ys`` ``<-`` `[`xmap`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 

@@ -7,21 +7,19 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(furrr)
-plan(multisession)
-
-slow_fcn <- function(x) {
-  Sys.sleep(0.1)  # emulate work
-  x^2
-}
-
-xs <- 1:100
-ys <- xs |> future_map(slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`furrr`](https://github.com/futureverse/furrr)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+\
+`slow_fcn`` ``<-`` ``function``(``x``)`` ``{`\
+`  `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``  ``# emulate work`\
+`  ``x``^``2`\
+`}`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` ``xs`` ``|>`` `[`future_map`](https://furrr.futureverse.org/reference/future_map.html)`(``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -38,36 +36,32 @@ The **furrr**
 function is commonly used to apply a function to the elements of a
 vector or a list in parallel. For example,
 
-``` r
-
-library(furrr)
-plan(multisession)
-
-xs <- 1:100
-ys <- xs |> future_map(slow_fcn)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`furrr`](https://github.com/futureverse/furrr)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` ``xs`` ``|>`` `[`future_map`](https://furrr.futureverse.org/reference/future_map.html)`(``slow_fcn``)`
 
 Here
 [`future_map()`](https://furrr.futureverse.org/reference/future_map.html)
 provides no feedback on how far it has progressed, but we can easily add
 progress reporting by using:
 
-``` r
-
-library(furrr)
-plan(multisession)
-
-library(progressify)
-handlers(global = TRUE)
-
-xs <- 1:100
-ys <- xs |> future_map(slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`furrr`](https://github.com/futureverse/furrr)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` ``xs`` ``|>`` `[`future_map`](https://furrr.futureverse.org/reference/future_map.html)`(``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 

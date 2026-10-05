@@ -7,17 +7,15 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(partykit)
-
-data("Titanic", package = "datasets")
-tt <- as.data.frame(Titanic)
-
-forest <- cforest(Survived ~ ., data = tt, ntree = 50L) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`partykit`](https://codeberg.org/thothorn/partykit)`)`\
+\
+[`data`](https://rdrr.io/r/utils/data.html)`(``"Titanic"``, package ``=`` ``"datasets"``)`\
+`tt`` ``<-`` `[`as.data.frame`](https://rdrr.io/r/base/as.data.frame.html)`(``Titanic``)`\
+\
+`forest`` ``<-`` `[`cforest`](https://rdrr.io/pkg/partykit/man/cforest.html)`(``Survived`` ``~`` ``.``, data ``=`` ``tt``, ntree ``=`` ``50L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -30,35 +28,31 @@ The **partykit**
 [`cforest()`](https://rdrr.io/pkg/partykit/man/cforest.html) function is
 an implementation of random forests. For example,
 
-``` r
-
-library(partykit)
-data("Titanic", package = "datasets")
-tt <- as.data.frame(Titanic)
-forest <- cforest(Survived ~ ., data = tt, ntree = 50L)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`partykit`](https://codeberg.org/thothorn/partykit)`)`\
+[`data`](https://rdrr.io/r/utils/data.html)`(``"Titanic"``, package ``=`` ``"datasets"``)`\
+`tt`` ``<-`` `[`as.data.frame`](https://rdrr.io/r/base/as.data.frame.html)`(``Titanic``)`\
+`forest`` ``<-`` `[`cforest`](https://rdrr.io/pkg/partykit/man/cforest.html)`(``Survived`` ``~`` ``.``, data ``=`` ``tt``, ntree ``=`` ``50L``)`
 
 Here [`cforest()`](https://rdrr.io/pkg/partykit/man/cforest.html)
 provides no feedback on how far it has progressed, but we can easily add
 progress reporting by using:
 
-``` r
-
-library(partykit)
-
-library(progressify)
-handlers(global = TRUE)
-
-data("Titanic", package = "datasets")
-tt <- as.data.frame(Titanic)
-
-forest <- cforest(Survived ~ ., data = tt, ntree = 50L) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`partykit`](https://codeberg.org/thothorn/partykit)`)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+[`data`](https://rdrr.io/r/utils/data.html)`(``"Titanic"``, package ``=`` ``"datasets"``)`\
+`tt`` ``<-`` `[`as.data.frame`](https://rdrr.io/r/base/as.data.frame.html)`(``Titanic``)`\
+\
+`forest`` ``<-`` `[`cforest`](https://rdrr.io/pkg/partykit/man/cforest.html)`(``Survived`` ``~`` ``.``, data ``=`` ``tt``, ntree ``=`` ``50L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 

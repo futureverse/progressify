@@ -7,19 +7,17 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-
-slow_fcn <- function(x) {
-  Sys.sleep(0.1)  # emulate work
-  x^2
-}
-
-xs <- 1:100
-ys <- lapply(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`slow_fcn`` ``<-`` ``function``(``x``)`` ``{`\
+`  `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``  ``# emulate work`\
+`  ``x``^``2`\
+`}`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -34,28 +32,24 @@ package. For example, consider the base R
 commonly used to apply a function to the elements of a vector or a list,
 as in:
 
-``` r
-
-xs <- 1:100
-ys <- lapply(xs, slow_fcn)
-```
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``slow_fcn``)`
 
 Here [`lapply()`](https://rdrr.io/r/base/lapply.html) provides no
 feedback on how far it has progressed, but we can easily add progress
 reporting by using:
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-
-ys <- lapply(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`ys`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 
@@ -83,16 +77,14 @@ The **progressify** package works together with the
 **[futurize](https://cran.r-project.org/package=futurize)** package. You
 can both parallelize and add progress reporting in a single pipeline:
 
-``` r
-
-library(futurize)
-plan(multisession)
-library(progressify)
-handlers(global = TRUE)
-
-xs <- 1:100
-ys <- lapply(xs, slow_fcn) |> futurize() |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Known issues
 
@@ -107,7 +99,5 @@ functions override the non-generic, counterpart functions in the
 **base** package. If **BiocGenerics** is attached, the solution is to
 specify that it is the **base** version we wish to progressify, i.e.
 
-``` r
-
-y <- base::lapply(1:3, sqrt) |> progressify()
-```
+\
+`y`` ``<-`` ``base``::`[`lapply`](https://rdrr.io/r/base/lapply.html)`(``1``:``3``, ``sqrt``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`

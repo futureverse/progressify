@@ -7,21 +7,19 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(future.apply)
-plan(multisession)
-
-slow_fcn <- function(x) {
-  Sys.sleep(0.1)  # emulate work
-  x^2
-}
-
-xs <- 1:100
-ys <- future_lapply(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`future.apply`](https://future.apply.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+\
+`slow_fcn`` ``<-`` ``function``(``x``)`` ``{`\
+`  `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``  ``# emulate work`\
+`  ``x``^``2`\
+`}`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`future_lapply`](https://future.apply.futureverse.org/reference/future_lapply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -40,35 +38,31 @@ The **future.apply**
 function is commonly used to apply a function to the elements of a
 vector or a list in parallel. For example,
 
-``` r
-
-library(future.apply)
-plan(multisession)
-
-xs <- 1:100
-ys <- future_lapply(xs, slow_fcn)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`future.apply`](https://future.apply.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`future_lapply`](https://future.apply.futureverse.org/reference/future_lapply.html)`(``xs``, ``slow_fcn``)`
 
 Here
 [`future_lapply()`](https://future.apply.futureverse.org/reference/future_lapply.html)
 provides no feedback on how far it has progressed, but we can easily add
 progress reporting by using:
 
-``` r
-
-library(future.apply)
-plan(multisession)
-
-library(progressify)
-handlers(global = TRUE)
-
-ys <- future_lapply(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`future.apply`](https://future.apply.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`ys`` ``<-`` `[`future_lapply`](https://future.apply.futureverse.org/reference/future_lapply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 

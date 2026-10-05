@@ -29,6 +29,38 @@
   of **future.apply** would produce an error on
   `object '.progressr_progressor' not found`.
 
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  for [`fwb()`](https://ngreifer.github.io/fwb/reference/fwb.html) of
+  **fwb** would produce an error if
+  [`fwb()`](https://ngreifer.github.io/fwb/reference/fwb.html) argument
+  `R` was not specified.
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  for [`pmap()`](https://purrr.tidyverse.org/reference/pmap.html) and
+  `pmap_*()` of **purrr**, the corresponding
+  [`future_pmap()`](https://furrr.futureverse.org/reference/future_map2.html)
+  and `future_pmap_*()` of **furrr**,
+  [`pmap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/map_vec.html)
+  and
+  [`future_pmap_vec()`](https://pkg.rossellhayes.com/crossmap/reference/future_map_vec.html)
+  of **crossmap**, and [`.mapply()`](https://rdrr.io/r/base/mapply.html)
+  and
+  [`future_.mapply()`](https://future.apply.futureverse.org/reference/future_mapply.html)
+  would produce an error on `subscript out of bounds` if there were zero
+  elements to iterate over.
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  would evaluate the input argument twice, e.g. `X` of
+  [`lapply()`](https://rdrr.io/r/base/lapply.html), `.x` of
+  [`purrr::map()`](https://purrr.tidyverse.org/reference/map.html), `n`
+  of [`replicate()`](https://rdrr.io/r/base/lapply.html), `data` of
+  [`by()`](https://rdrr.io/r/base/by.html), `.l` of
+  [`crossmap::xmap()`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html),
+  `X` of
+  [`stats::dendrapply()`](https://rdrr.io/r/stats/dendrapply.html), and
+  the first iteration argument of
+  [`foreach()`](https://rdrr.io/pkg/foreach/man/foreach.html).
+
 ## Version 0.2.0
 
 CRAN release: 2026-05-31

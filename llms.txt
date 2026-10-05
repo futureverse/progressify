@@ -8,13 +8,11 @@ there is a single function called
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
 that will take care of everything, e.g.
 
-``` r
-
-y <- lapply(x, fcn) |> progressify()
-y <- map(x, fcn) |> progressify()
-y <- foreach(x = xs) %do% { fcn(x) } |> progressify()
-res <- boot::boot(data, statistic, R = 100) |> progressify()
-```
+\
+`y`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``x``, ``fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+`y`` ``<-`` ``map``(``x``, ``fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+`y`` ``<-`` ``foreach``(``x ``=`` ``xs``)`` ``%do%`` ``{`` ``fcn``(``x``)`` ``}`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+`res`` ``<-`` ``boot``::`[`boot`](https://rdrr.io/pkg/boot/man/boot.html)`(``data``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 The
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
@@ -40,17 +38,13 @@ multiple packages. The table below summarizes the supported map-reduce
 functions. To programmatically see which packages are currently
 supported, use:
 
-``` r
-
-progressify_supported_packages()
-```
+\
+[`progressify_supported_packages`](https://progressify.futureverse.org/reference/progressify_supported_packages.md)`(``)`
 
 To see which functions are supported for a specific package, use:
 
-``` r
-
-progressify_supported_functions("purrr")
-```
+\
+[`progressify_supported_functions`](https://progressify.futureverse.org/reference/progressify_supported_packages.md)`(``"purrr"``)`
 
 | Package | Functions |
 |----|----|
@@ -70,30 +64,28 @@ for progress reporting.*
 
 Here are some examples:
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-
-xs <- 1:10
-ys <- lapply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
-
-d <- as.dendrogram(hclust(dist(USArrests)))
-d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n }) |> progressify()
-
-xs <- 1:10
-ys <- purrr::map(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
-
-xs <- list(1:5, 1:5)
-ys <- crossmap::xmap(xs, ~ .y * .x) |> progressify()
-
-library(foreach)
-xs <- 1:10
-ys <- foreach(x = xs) %do% { Sys.sleep(0.1); sqrt(x) } |> progressify()
-
-xs <- 1:10
-ys <- plyr::llply(xs, function(x) { Sys.sleep(0.1); sqrt(x) }) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` ``1``:``10`\
+`ys`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``)`` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``; `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`` ``}``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`d`` ``<-`` `[`as.dendrogram`](https://rdrr.io/r/stats/dendrogram.html)`(`[`hclust`](https://rdrr.io/r/stats/hclust.html)`(`[`dist`](https://rdrr.io/r/stats/dist.html)`(``USArrests``)``)``)`\
+`d2`` ``<-`` `[`dendrapply`](https://rdrr.io/r/stats/dendrapply.html)`(``d``, ``function``(``n``)`` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.01``)``; ``n`` ``}``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`xs`` ``<-`` ``1``:``10`\
+`ys`` ``<-`` ``purrr``::`[`map`](https://purrr.tidyverse.org/reference/map.html)`(``xs``, ``function``(``x``)`` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``; `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`` ``}``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`xs`` ``<-`` `[`list`](https://rdrr.io/r/base/list.html)`(``1``:``5``, ``1``:``5``)`\
+`ys`` ``<-`` ``crossmap``::`[`xmap`](https://pkg.rossellhayes.com/crossmap/reference/xmap.html)`(``xs``, ``~`` ``.y`` ``*`` ``.x``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`foreach`](https://github.com/RevolutionAnalytics/foreach)`)`\
+`xs`` ``<-`` ``1``:``10`\
+`ys`` ``<-`` `[`foreach`](https://rdrr.io/pkg/foreach/man/foreach.html)`(``x ``=`` ``xs``)`` `[`%do%`](https://rdrr.io/pkg/foreach/man/foreach.html)` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``; `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`` ``}`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`xs`` ``<-`` ``1``:``10`\
+`ys`` ``<-`` ``plyr``::`[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``function``(``x``)`` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``; `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`` ``}``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Supported domain-specific packages
 
@@ -118,20 +110,18 @@ for progress reporting.*
 
 Here are some examples:
 
-``` r
-
-res <- boot::boot(data, statistic, R = 100) |> progressify()
-
-res <- fwb::fwb(data, statistic, R = 100) |> progressify()
-
-res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()
-
-forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
-
-v <- sandwich::vcovBS(fit) |> progressify()
-
-res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()
-```
+\
+`res`` ``<-`` ``boot``::`[`boot`](https://rdrr.io/pkg/boot/man/boot.html)`(``data``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`res`` ``<-`` ``fwb``::`[`fwb`](https://ngreifer.github.io/fwb/reference/fwb.html)`(``data``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`res`` ``<-`` ``lme4``::`[`bootMer`](https://rdrr.io/pkg/lme4/man/bootMer.html)`(``fit``, ``statistic``, nsim ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`forest`` ``<-`` ``partykit``::`[`cforest`](https://rdrr.io/pkg/partykit/man/cforest.html)`(``Survived`` ``~`` ``.``, data ``=`` `[`as.data.frame`](https://rdrr.io/r/base/as.data.frame.html)`(``Titanic``)``, ntree ``=`` ``50L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`v`` ``<-`` ``sandwich``::`[`vcovBS`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)`(``fit``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`res`` ``<-`` ``SimDesign``::`[`runSimulation`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)`(``design``, ``replications``, ``generate``, ``analyse``, ``summarise``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Compatible with futurize
 
@@ -141,26 +131,24 @@ parallelizes code via the [futureverse](https://www.futureverse.org).
 You can combine the two, in either order, to get both progress reporting
 and parallelization:
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-
-library(futurize)
-plan(multisession)
-
-xs <- 1:100
-ys <- lapply(xs, slow_fcn) |> progressify() |> futurize()
-
-ys <- purrr::map(xs, slow_fcn) |> progressify() |> futurize()
-
-library(foreach)
-ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
-
-ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
-
-forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressify() |> futurize()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``)`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+\
+`ys`` ``<-`` ``purrr``::`[`map`](https://purrr.tidyverse.org/reference/map.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`foreach`](https://github.com/RevolutionAnalytics/foreach)`)`\
+`ys`` ``<-`` `[`foreach`](https://rdrr.io/pkg/foreach/man/foreach.html)`(``x ``=`` ``xs``)`` `[`%do%`](https://rdrr.io/pkg/foreach/man/foreach.html)` ``{`` ``slow_fcn``(``x``)`` ``}`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+\
+`ys`` ``<-`` ``plyr``::`[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+\
+`forest`` ``<-`` ``partykit``::`[`cforest`](https://rdrr.io/pkg/partykit/man/cforest.html)`(``dist`` ``~`` ``speed``, data ``=`` ``cars``, ntree ``=`` ``50L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`
 
 # Package index
 

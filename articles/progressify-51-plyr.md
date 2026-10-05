@@ -7,20 +7,18 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(plyr)
-
-slow_fcn <- function(x) {
-  Sys.sleep(0.1)  # emulate work
-  x^2
-}
-
-xs <- 1:100
-ys <- llply(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`plyr`](http://had.co.nz/plyr)`)`\
+\
+`slow_fcn`` ``<-`` ``function``(``x``)`` ``{`\
+`  `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``  ``# emulate work`\
+`  ``x``^``2`\
+`}`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -34,32 +32,28 @@ The **plyr** [`llply()`](https://rdrr.io/pkg/plyr/man/llply.html)
 function is commonly used to apply a function to the elements of a list
 and return a list. For example,
 
-``` r
-
-library(plyr)
-xs <- 1:100
-ys <- llply(xs, slow_fcn)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`plyr`](http://had.co.nz/plyr)`)`\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``slow_fcn``)`
 
 Here [`llply()`](https://rdrr.io/pkg/plyr/man/llply.html) provides no
 feedback on how far it has progressed, but we can easily add progress
 reporting by using:
 
-``` r
-
-library(plyr)
-
-library(progressify)
-handlers(global = TRUE)
-
-xs <- 1:100
-ys <- llply(xs, slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`plyr`](http://had.co.nz/plyr)`)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 

@@ -7,20 +7,18 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(purrr)
-
-slow_fcn <- function(x) {
-  Sys.sleep(0.1)  # emulate work
-  x^2
-}
-
-xs <- 1:100
-ys <- xs |> map(slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`purrr`](https://purrr.tidyverse.org/)`)`\
+\
+`slow_fcn`` ``<-`` ``function``(``x``)`` ``{`\
+`  `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)``  ``# emulate work`\
+`  ``x``^``2`\
+`}`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` ``xs`` ``|>`` `[`map`](https://purrr.tidyverse.org/reference/map.html)`(``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -35,40 +33,34 @@ The **purrr** [`map()`](https://purrr.tidyverse.org/reference/map.html)
 function is commonly used to apply a function to the elements of a
 vector or a list. For example,
 
-``` r
-
-library(purrr)
-xs <- 1:100
-ys <- map(xs, slow_fcn)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`purrr`](https://purrr.tidyverse.org/)`)`\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` `[`map`](https://purrr.tidyverse.org/reference/map.html)`(``xs``, ``slow_fcn``)`
 
 or equivalently using pipe syntax
 
-``` r
-
-xs <- 1:100
-ys <- xs |> map(slow_fcn)
-```
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` ``xs`` ``|>`` `[`map`](https://purrr.tidyverse.org/reference/map.html)`(``slow_fcn``)`
 
 Here [`map()`](https://purrr.tidyverse.org/reference/map.html) provides
 no feedback on how far it has progressed, but we can easily add progress
 reporting by using:
 
-``` r
-
-library(purrr)
-
-library(progressify)
-handlers(global = TRUE)
-
-xs <- 1:100
-ys <- xs |> map(slow_fcn) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`purrr`](https://purrr.tidyverse.org/)`)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` ``1``:``100`\
+`ys`` ``<-`` ``xs`` ``|>`` `[`map`](https://purrr.tidyverse.org/reference/map.html)`(``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 

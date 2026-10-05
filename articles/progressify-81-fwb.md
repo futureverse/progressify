@@ -7,16 +7,14 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(fwb)
-
-# Run fractional weighted bootstrap with progress signaling
-my_stat <- function(data, w) coef(lm(mpg ~ cyl, data = data, weights = w))
-res <- fwb(data = mtcars, statistic = my_stat, R = 1000) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`fwb`](https://ngreifer.github.io/fwb/)`)`\
+\
+`# Run fractional weighted bootstrap with progress signaling`\
+`my_stat`` ``<-`` ``function``(``data``, ``w``)`` `[`coef`](https://rdrr.io/r/stats/coef.html)`(`[`lm`](https://rdrr.io/r/stats/lm.html)`(``mpg`` ``~`` ``cyl``, data ``=`` ``data``, weights ``=`` ``w``)``)`\
+`res`` ``<-`` `[`fwb`](https://ngreifer.github.io/fwb/reference/fwb.html)`(``data ``=`` ``mtcars``, statistic ``=`` ``my_stat``, R ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -30,12 +28,10 @@ weighted bootstrap replicates. For example,
 [`fwb()`](https://ngreifer.github.io/fwb/reference/fwb.html) runs a
 statistic function `R` times:
 
-``` r
-
-library(fwb)
-my_stat <- function(data, w) coef(lm(mpg ~ cyl, data = data, weights = w))
-res <- fwb(data = mtcars, statistic = my_stat, R = 1000)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`fwb`](https://ngreifer.github.io/fwb/)`)`\
+`my_stat`` ``<-`` ``function``(``data``, ``w``)`` `[`coef`](https://rdrr.io/r/stats/coef.html)`(`[`lm`](https://rdrr.io/r/stats/lm.html)`(``mpg`` ``~`` ``cyl``, data ``=`` ``data``, weights ``=`` ``w``)``)`\
+`res`` ``<-`` `[`fwb`](https://ngreifer.github.io/fwb/reference/fwb.html)`(``data ``=`` ``mtcars``, statistic ``=`` ``my_stat``, R ``=`` ``1000``)`
 
 By default, [`fwb()`](https://ngreifer.github.io/fwb/reference/fwb.html)
 uses `verbose = TRUE`, which provides progress feedback via the
@@ -48,16 +44,14 @@ As an alternative, we can use the
 function to report on progress via any combination of **progressr**
 reporters. To do this, use:
 
-``` r
-
-library(fwb)
-
-library(progressify)
-handlers(global = TRUE)
-
-my_stat <- function(data, w) coef(lm(mpg ~ cyl, data = data, weights = w))
-res <- fwb(data = mtcars, statistic = my_stat, R = 1000) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`fwb`](https://ngreifer.github.io/fwb/)`)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`my_stat`` ``<-`` ``function``(``data``, ``w``)`` `[`coef`](https://rdrr.io/r/stats/coef.html)`(`[`lm`](https://rdrr.io/r/stats/lm.html)`(``mpg`` ``~`` ``cyl``, data ``=`` ``data``, weights ``=`` ``w``)``)`\
+`res`` ``<-`` `[`fwb`](https://ngreifer.github.io/fwb/reference/fwb.html)`(``data ``=`` ``mtcars``, statistic ``=`` ``my_stat``, R ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Comment: This will disable the built-in progress feedback by setting
 `verbose = FALSE` in order to avoid dual reporting.

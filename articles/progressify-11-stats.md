@@ -7,15 +7,13 @@ function. Easy!
 
 ## TL;DR
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-library(stats)
-
-d <- as.dendrogram(hclust(dist(USArrests)))
-d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n }) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(``stats``)`\
+\
+`d`` ``<-`` `[`as.dendrogram`](https://rdrr.io/r/stats/dendrogram.html)`(`[`hclust`](https://rdrr.io/r/stats/hclust.html)`(`[`dist`](https://rdrr.io/r/stats/dist.html)`(``USArrests``)``)``)`\
+`d2`` ``<-`` `[`dendrapply`](https://rdrr.io/r/stats/dendrapply.html)`(``d``, ``function``(``n``)`` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.01``)``; ``n`` ``}``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Introduction
 
@@ -27,28 +25,24 @@ reporting to functions such as
 which is commonly used to apply a function to the nodes of a dendrogram,
 as in:
 
-``` r
-
-d <- as.dendrogram(hclust(dist(USArrests)))
-d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n })
-```
+\
+`d`` ``<-`` `[`as.dendrogram`](https://rdrr.io/r/stats/dendrogram.html)`(`[`hclust`](https://rdrr.io/r/stats/hclust.html)`(`[`dist`](https://rdrr.io/r/stats/dist.html)`(``USArrests``)``)``)`\
+`d2`` ``<-`` `[`dendrapply`](https://rdrr.io/r/stats/dendrapply.html)`(``d``, ``function``(``n``)`` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.01``)``; ``n`` ``}``)`
 
 Here [`dendrapply()`](https://rdrr.io/r/stats/dendrapply.html) provides
 no feedback on how far it has progressed, but we can easily add progress
 reporting by using:
 
-``` r
-
-library(progressify)
-handlers(global = TRUE)
-
-d2 <- dendrapply(d, function(n) { Sys.sleep(0.01); n }) |> progressify()
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.html)`(``global ``=`` ``TRUE``)`\
+\
+`d2`` ``<-`` `[`dendrapply`](https://rdrr.io/r/stats/dendrapply.html)`(``d``, ``function``(``n``)`` ``{`` `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.01``)``; ``n`` ``}``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 Using the default progress handler, the progress reporting will appear
 as:
 
-``` plain
+```
   |=====                    |  20%
 ```
 
