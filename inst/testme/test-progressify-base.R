@@ -164,3 +164,45 @@ for (kk in seq_along(exprs)) {
 }
 
 options(oopts)
+
+
+## -------------------------------------------------------
+## The wrapped FUN must not carry a copy of the data
+## -------------------------------------------------------
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+oopts <- options(progressr.enable = TRUE)
+
+big <- lapply(1:3, function(i) rnorm(30000))  ## ~0.7 MB
+
+## Size of the largest object in the environment of the wrapped FUN that
+## calls this function. That environment is exported along with FUN to
+## parallel workers.
+fun_env_weight <- function(x) {
+  env <- parent.env(parent.frame())
+  names <- ls(env, all.names = TRUE)
+  sizes <- vapply(names, FUN = function(name) {
+    as.numeric(object.size(get(name, envir = env)))
+  }, FUN.VALUE = NA_real_)
+  max(c(0, sizes))
+}
+
+exprs <- list(
+  lapply = quote(lapply(big, fun_env_weight)),
+  sapply = quote(sapply(big, fun_env_weight)),
+  vapply = quote(vapply(big, fun_env_weight, FUN.VALUE = NA_real_)),
+  mapply = quote(mapply(fun_env_weight, big)),
+  .mapply = quote(.mapply(fun_env_weight, list(big), NULL))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  res <- eval(bquote(.(expr) |> progressify()))
+  weight <- max(unlist(res))
+  message(sprintf("Largest object in environment of FUN: %.0f bytes", weight))
+  stopifnot(weight < as.numeric(object.size(big)) / 2)
+}
+
+options(oopts)
