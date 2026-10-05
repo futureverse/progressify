@@ -6,6 +6,10 @@ library(crossmap)
 
 options(progressify.debug = TRUE)
 
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+options(progressr.enable = TRUE)
+
 xs <- list(1:5, 1:5)
 fcn <- function(x, y) x * y
 
@@ -133,6 +137,7 @@ exprs <- list(
   future_map2_vec = quote(crossmap::future_map2_vec(ys, ys, fcn)),
   future_pmap_vec = quote(future_pmap_vec(list(ys, ys), fcn)),
   future_pmap_vec = quote(crossmap::future_pmap_vec(list(ys, ys), fcn)),
+  future_pmap_vec_empty = quote(crossmap::future_pmap_vec(list(), fcn)),
   future_imap_vec = quote(future_imap_vec(ys, ~ .x + .y)),
   future_imap_vec = quote(crossmap::future_imap_vec(ys, ~ .x + .y))
 )

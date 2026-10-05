@@ -6,6 +6,10 @@ library(purrr)
 
 options(progressify.debug = TRUE)
 
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+options(progressr.enable = TRUE)
+
 y <- map(1:3, function(x) {
   print(x)
 }) |> progressify()
@@ -55,6 +59,10 @@ exprs <- list(
   pmap = quote(purrr::pmap(.l = list(xs, ys), .f = FUN2)),
   pmap = quote(pmap(list(xs, ys), FUN2)),
   pmap_dbl = quote(purrr::pmap_dbl(.l = list(xs, ys), .f = FUN2)),
+
+  ## Zero-length '.l'
+  pmap_empty = quote(purrr::pmap(.l = list(), .f = FUN2)),
+  pmap_dbl_empty = quote(purrr::pmap_dbl(.l = list(), .f = FUN2)),
 
   pwalk = quote(purrr::pwalk(.l = list(xs, ys), .f = function(x, y) invisible(NULL)))
 )

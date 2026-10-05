@@ -58,7 +58,6 @@ exprs <- list(
 for (kk in seq_along(exprs)) {
   name <- names(exprs)[kk]
   expr <- exprs[[kk]]
-  message()
   message(sprintf("=== %s ==========================", name))
   print(expr)
   message(sprintf("---------------------------------"))
@@ -86,5 +85,15 @@ for (kk in seq_along(exprs)) {
 
   str(res)
 }
+
+
+## Zero-length 'dots', i.e. nothing to iterate over
+message("=== future_.mapply() with zero-length 'dots' ===")
+expr <- quote(future_.mapply(g, list(), NULL))
+truth <- eval(expr)
+res <- count_updates(eval(bquote(.(expr) |> progressify())))
+n_updates <- attr(res, "n_updates")
+attr(res, "n_updates") <- NULL
+stopifnot(identical(res, truth), identical(n_updates, 0L))
 
 } # if (requireNamespace("future.apply"))

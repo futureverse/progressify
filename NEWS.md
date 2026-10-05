@@ -17,6 +17,13 @@
  * `progressify()` for `fwb()` of **fwb** would produce an error if
    `fwb()` argument `R` was not specified.
 
+ * `progressify()` for `pmap()` and `pmap_*()` of **purrr**, the
+   corresponding `future_pmap()` and `future_pmap_*()` of **furrr**,
+   `pmap_vec()` and `future_pmap_vec()` of **crossmap**, and
+   `.mapply()` and `future_.mapply()` would produce an error on
+   `subscript out of bounds` if there were zero elements to iterate
+   over.
+
 
 # Version 0.2.0 [2026-05-31]
 

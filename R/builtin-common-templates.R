@@ -7,9 +7,13 @@ template_along <- bquote_compile({
 })
 
 ## Length-based step count from first element of list
+## Zero elements, e.g. purrr::pmap(list(), ...), means zero steps
 template_along_first <- bquote_compile({
-  .progressr_progressor <- progressr::progressor(along = .(ALONG)[[1]])
-  .(ALONG)
+  .progressr_along <- .(ALONG)
+  .progressr_progressor <- progressr::progressor(
+    along = if (length(.progressr_along) > 0L) .progressr_along[[1]] else NULL
+  )
+  .progressr_along
 })
 
 ## Step count from numeric argument
