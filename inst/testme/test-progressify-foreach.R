@@ -68,4 +68,30 @@ for (kk in seq_along(exprs)) {
   stopifnot(identical(res3, res))
 }
 
+
+## -------------------------------------------------------
+## Nested foreach() via %:% is not supported
+## -------------------------------------------------------
+exprs <- list(
+  `%:%` = quote(
+    foreach(x = xs) %:% foreach(y = xs) %do% { x * y }
+  ),
+
+  `%:% when()` = quote(
+    foreach(x = xs) %:% when(x > 2) %do% { FUN(x) }
+  )
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message()
+  message(sprintf("=== %s ==========================", name))
+  print(expr)
+  expr_f <- bquote(.(expr) |> progressify())
+  res <- tryCatch(eval(expr_f), error = identity)
+  print(res)
+  stopifnot(inherits(res, "error"), grepl("%:%", conditionMessage(res), fixed = TRUE))
+}
+
 } # if (requireNamespace("foreach"))

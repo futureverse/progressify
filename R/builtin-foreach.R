@@ -23,6 +23,14 @@ progressify_foreach <- local({
 
     foreach_call <- expr[[2]]
 
+    ## Nested foreach() calls, e.g. foreach(...) %:% foreach(...) or
+    ## foreach(...) %:% when(...), are not supported, because the total
+    ## number of iterations cannot be inferred upfront
+    op <- foreach_call[[1]]
+    if (identical(op, as.symbol("%:%")) || identical(op, quote(foreach::`%:%`))) {
+      stop(sprintf("Cannot progressify nested foreach() calls using %%:%%: %s", paste(trimws(deparse(expr)), collapse = " ")), call. = FALSE)
+    }
+
     ## Find the first iteration argument in the foreach() call.
     ## Iteration arguments are passed via ... and do NOT start with "."
     foreach_names <- names(foreach_call)
