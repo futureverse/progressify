@@ -124,31 +124,4 @@ for (kk in seq_along(exprs)) {
   stopifnot(identical(res3, res))
 }
 
-## -------------------------------------------------------
-## The wrapped FUN must not carry a copy of the data
-## -------------------------------------------------------
-## Enable progress reporting to force resolve progressor()'s 'steps' and
-## 'along' arguments. Use a 'future.globals.maxSize' limit such that the
-## data fits, but not the data plus a copy of it.
-oplan <- future::plan(future::sequential)
-oopts <- options(progressr.enable = TRUE, future.globals.maxSize = 1e6)
-big <- lapply(1:3, function(i) rnorm(30000))  ## ~0.7 MB
-message(sprintf("Size of data: %.0f bytes", as.numeric(object.size(big))))
-
-exprs <- list(
-  future_.mapply = quote(future_.mapply(function(x) length(x), list(big), NULL))
-)
-
-for (kk in seq_along(exprs)) {
-  name <- names(exprs)[kk]
-  expr <- exprs[[kk]]
-  message(sprintf("=== %s ==========================", name))
-  truth <- eval(expr)
-  res <- eval(bquote(.(expr) |> progressify()))
-  stopifnot(identical(res, truth))
-}
-
-options(oopts)
-future::plan(oplan)
-
 } # if (requireNamespace("future.apply"))

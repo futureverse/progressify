@@ -2,9 +2,9 @@
 
 ## Bug Fixes
 
- * `progressify()` for `mapply()`, `Map()`, `.mapply()`, `apply()`, and
-   `tapply()` would produce an error on
-   `object '.progressr_progressor' not found`.
+ * `progressify()` for `mapply()`, `Map()`, `.mapply()`, `apply()`,
+   and `tapply()` would produce an error on `object
+   '.progressr_progressor' not found`.
 
  * `progressify()` for `future_mapply()`, `future_Map()`, and
    `future_.mapply()` of **future.apply** would produce an error on
@@ -23,6 +23,9 @@
    `.mapply()` and `future_.mapply()` would produce an error on
    `subscript out of bounds` if there were zero elements to iterate
    over.
+
+ * `progressify()` would evaluate the input argument twice, e.g. `X`
+   of `lapply()` and `.x` of `purrr::map()`.
 
 
 # Version 0.2.0 [2026-05-31]
