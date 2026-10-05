@@ -31,9 +31,13 @@ template_steps <- bquote_compile({
 })
 
 ## Step count from nrow() of 'data' argument
+## Evaluate 'data' only once. We must remove local '.progressr_data' before
+## returning it, otherwise FUN would carry it along, which we don't want for
+## parallel processing
 template_steps_nrow <- bquote_compile({
-  .progressr_progressor <- progressr::progressor(steps = nrow(.(DATA)))
-  .(DATA)
+  .progressr_data <- .(DATA)
+  .progressr_progressor <- progressr::progressor(steps = nrow(.progressr_data))
+  tryCatch(.progressr_data, finally = rm(.progressr_data))
 })
 
 ## Pass progressor via '...' arguments

@@ -147,7 +147,8 @@ exprs <- list(
   vapply = quote(vapply(data_of(xs), FUN, FUN.VALUE = NA_real_)),
   eapply = quote(eapply(data_of(es), FUN)),
   mapply = quote(mapply(FUN, data_of(xs))),
-  replicate = quote(replicate(data_of(3L), 42))
+  replicate = quote(replicate(data_of(3L), 42)),
+  by = quote(by(data_of(df), df$a, nrow))
 )
 
 for (kk in seq_along(exprs)) {
@@ -161,6 +162,8 @@ for (kk in seq_along(exprs)) {
   n_calls <- 0L
   res <- eval(bquote(.(expr) |> progressify()))
   message(sprintf("Number of evaluations: %d", n_calls))
+  ## by() records the (transpiled) call in attribute 'call'
+  attr(res, "call") <- attr(truth, "call") <- NULL
   stopifnot(n_calls == 1L, identical(res, truth))
 }
 
@@ -193,7 +196,8 @@ exprs <- list(
   sapply = quote(sapply(big, fun_env_weight)),
   vapply = quote(vapply(big, fun_env_weight, FUN.VALUE = NA_real_)),
   mapply = quote(mapply(fun_env_weight, big)),
-  .mapply = quote(.mapply(fun_env_weight, list(big), NULL))
+  .mapply = quote(.mapply(fun_env_weight, list(big), NULL)),
+  by = quote(by(data.frame(x = unlist(big)), rep(1:3, each = 30000), fun_env_weight))
 )
 
 for (kk in seq_along(exprs)) {

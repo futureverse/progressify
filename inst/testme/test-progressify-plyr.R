@@ -180,7 +180,9 @@ data_of <- function(value) {
 
 exprs <- list(
   rlply = quote(plyr::rlply(.n = data_of(3L), .expr = 42)),
-  raply = quote(plyr::raply(.n = data_of(3L), .expr = 42))
+  raply = quote(plyr::raply(.n = data_of(3L), .expr = 42)),
+  mlply = quote(plyr::mlply(.data = data_of(args_df), .fun = FUN_m)),
+  maply = quote(plyr::maply(.data = data_of(args_df), .fun = FUN_m))
 )
 
 for (kk in seq_along(exprs)) {

@@ -139,7 +139,8 @@ data_of <- function(value) {
 }
 
 exprs <- list(
-  future_replicate = quote(future_replicate(data_of(3L), 42))
+  future_replicate = quote(future_replicate(data_of(3L), 42)),
+  future_by = quote(future_by(data_of(df), df$a, nrow))
 )
 
 for (kk in seq_along(exprs)) {
@@ -153,6 +154,8 @@ for (kk in seq_along(exprs)) {
   n_calls <- 0L
   res <- eval(bquote(.(expr) |> progressify()))
   message(sprintf("Number of evaluations: %d", n_calls))
+  ## by() records the (transpiled) call in attribute 'call'
+  attr(res, "call") <- attr(truth, "call") <- NULL
   stopifnot(n_calls == 1L, identical(res, truth))
 }
 
@@ -183,7 +186,8 @@ fun_env_weight <- function(x) {
 exprs <- list(
   future_lapply = quote(future_lapply(big, fun_env_weight)),
   future_sapply = quote(future_sapply(big, fun_env_weight)),
-  future_.mapply = quote(future_.mapply(fun_env_weight, list(big), NULL))
+  future_.mapply = quote(future_.mapply(fun_env_weight, list(big), NULL)),
+  future_by = quote(future_by(data.frame(x = unlist(big)), rep(1:3, each = 30000), fun_env_weight))
 )
 
 for (kk in seq_along(exprs)) {
