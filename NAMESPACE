@@ -6,8 +6,10 @@ export(progressify_supported_functions)
 export(progressify_supported_packages)
 export(pz)
 importFrom(progressr,progressor)
-importFrom(utils,capture.output)
-importFrom(utils,getS3method)
-importFrom(utils,globalVariables)
-importFrom(utils,packageVersion)
-importFrom(utils,str)
+importFrom(utils,
+  capture.output,
+  getS3method,
+  globalVariables,
+  packageVersion,
+  str
+)
