@@ -14,6 +14,9 @@
    **future.apply** would produce an error on
    `object '.progressr_progressor' not found`.
 
+ * `progressify()` for `fwb()` of **fwb** would produce an error if
+   `fwb()` argument `R` was not specified.
+
 
 # Version 0.2.0 [2026-05-31]
 
