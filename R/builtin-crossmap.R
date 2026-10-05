@@ -17,10 +17,14 @@
 #
 progressify_crossmap <- local({
   ## xmap-style: number of iterations = product of all element lengths
+  ## Evaluate 'data' only once. We must remove local '.progressr_data' before
+  ## returning it, otherwise FUN would carry it along, which we don't want for
+  ## parallel processing
   template_steps_prod_lengths <- bquote_compile({
+    .progressr_data <- .(DATA)
     .progressr_progressor <- progressr::progressor(
-      steps = prod(lengths(.(DATA))))
-    .(DATA)
+      steps = prod(lengths(.progressr_data)))
+    tryCatch(.progressr_data, finally = rm(.progressr_data))
   })
 
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {

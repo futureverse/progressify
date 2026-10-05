@@ -176,4 +176,69 @@ for (kk in seq_along(exprs)) {
   stopifnot(identical(res3, res))
 }
 
+## -------------------------------------------------------
+## The data argument must be evaluated only once
+## -------------------------------------------------------
+## A function that returns 'value' and counts how many times it is called
+n_calls <- 0L
+data_of <- function(value) {
+  n_calls <<- n_calls + 1L
+  value
+}
+
+exprs <- list(
+  future_xmap = quote(future_xmap(data_of(xs), fcn)),
+  future_xmap_dbl = quote(future_xmap_dbl(data_of(xs), ~ .y * .x))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  n_calls <- 0L
+  truth <- eval(expr)
+  stopifnot(n_calls == 1L)
+
+  n_calls <- 0L
+  res <- eval(bquote(.(expr) |> progressify()))
+  message(sprintf("Number of evaluations: %d", n_calls))
+  stopifnot(n_calls == 1L, identical(res, truth))
+}
+
+
+## -------------------------------------------------------
+## The wrapped .f must not carry a copy of the data
+## -------------------------------------------------------
+big <- lapply(1:3, function(i) rnorm(30000))  ## ~0.7 MB
+
+## Size of the largest object in the environments of the wrapped .f that
+## calls this function, up to the global environment. Those environments
+## are exported along with .f to parallel workers.
+fun_env_weight <- function(...) {
+  env <- parent.env(parent.frame())
+  weight <- 0
+  while (!identical(env, globalenv()) && !identical(env, emptyenv())) {
+    for (name in ls(env, all.names = TRUE)) {
+      size <- as.numeric(object.size(get(name, envir = env)))
+      weight <- max(weight, size)
+    }
+    env <- parent.env(env)
+  }
+  weight
+}
+
+exprs <- list(
+  future_xmap = quote(future_xmap(list(big, 1:2), fun_env_weight))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  res <- eval(bquote(.(expr) |> progressify()))
+  weight <- max(unlist(res))
+  message(sprintf("Largest object in environment of .f: %.0f bytes", weight))
+  stopifnot(weight < as.numeric(object.size(big)) / 2)
+}
+
 } # if (requireNamespace("crossmap"))
