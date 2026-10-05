@@ -25,7 +25,7 @@
    over.
 
  * `progressify()` would evaluate the input argument twice, e.g. `X`
-   of `lapply()` and `.x` of `purrr::map()`.
+   of `lapply()`, `.x` of `purrr::map()`, and `n` of `replicate()`.
 
 
 # Version 0.2.0 [2026-05-31]

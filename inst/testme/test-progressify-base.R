@@ -146,7 +146,8 @@ exprs <- list(
   sapply = quote(sapply(data_of(xs), FUN)),
   vapply = quote(vapply(data_of(xs), FUN, FUN.VALUE = NA_real_)),
   eapply = quote(eapply(data_of(es), FUN)),
-  mapply = quote(mapply(FUN, data_of(xs)))
+  mapply = quote(mapply(FUN, data_of(xs))),
+  replicate = quote(replicate(data_of(3L), 42))
 )
 
 for (kk in seq_along(exprs)) {

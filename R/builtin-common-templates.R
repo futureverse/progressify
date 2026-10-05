@@ -23,9 +23,11 @@ template_along_first <- bquote_compile({
 })
 
 ## Step count from numeric argument
+## Evaluate 'steps' only once
 template_steps <- bquote_compile({
-  .progressr_progressor <- progressr::progressor(steps = .(STEPS))
-  .(STEPS)
+  .progressr_steps <- .(STEPS)
+  .progressr_progressor <- progressr::progressor(steps = .progressr_steps)
+  .progressr_steps
 })
 
 ## Step count from nrow() of 'data' argument
