@@ -71,7 +71,9 @@ template_expr <- bquote_compile(local({
 }))
 
 ## Wrap call with progressor in enclosing environment
+## Evaluate 'along' only once; 'EXPR' must refer to it as '.progressr_along'
 template_outer <- bquote_compile(local({
-  .progressr_progressor <- progressr::progressor(along = .(ALONG))
+  .progressr_along <- .(ALONG)
+  .progressr_progressor <- progressr::progressor(along = .progressr_along)
   .(EXPR)
 }))

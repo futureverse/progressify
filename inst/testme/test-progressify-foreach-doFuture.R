@@ -69,4 +69,44 @@ for (kk in seq_along(exprs)) {
   stopifnot(identical(res3, res))
 }
 
+## -------------------------------------------------------
+## The data argument must be evaluated only once
+## -------------------------------------------------------
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+oopts <- options(progressr.enable = TRUE)
+
+## A function that returns 'value' and counts how many times it is called
+n_calls <- 0L
+data_of <- function(value) {
+  n_calls <<- n_calls + 1L
+  value
+}
+
+exprs <- list(
+  `%dofuture%` = quote(
+    foreach(x = data_of(xs), .combine = c) %dofuture% { FUN(x) }
+  ),
+
+  `%dofuture%` = quote(
+    foreach(x = data_of(xs), y = xs, .combine = c) %dofuture% { FUN(x + y) }
+  )
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  n_calls <- 0L
+  truth <- eval(expr)
+  stopifnot(n_calls == 1L)
+
+  n_calls <- 0L
+  res <- eval(bquote(.(expr) |> progressify()))
+  message(sprintf("Number of evaluations: %d", n_calls))
+  stopifnot(n_calls == 1L, identical(res, truth))
+}
+
+options(oopts)
+
 } # if (requireNamespace("foreach") && requireNamespace("doFuture"))
