@@ -8,6 +8,12 @@
 
 ## Bug Fixes
 
+ * `progressify()` on an expression that is not a function call,
+   e.g. `{ }` or `local({ })`, would produce an obscure error on
+   "invalid type/length (symbol/1) in vector allocation". Now it
+   gives an informative error explaining that the expression is not
+   a function call.
+
  * `progressify()` for `mapply()`, `Map()`, `.mapply()`, `apply()`,
    and `tapply()` would produce an error on `object
    '.progressr_progressor' not found`.

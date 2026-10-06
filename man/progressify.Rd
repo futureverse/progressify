@@ -34,6 +34,30 @@ Returns the value of the evaluated expression \code{expr}.
 \description{
 Evaluate a regular map-reduce call with progress updates
 }
+\section{Expression unwrapping}{
+
+The transpilation mechanism includes logic to "unwrap" expressions
+enclosed in constructs such as \code{!}, \code{{ }}, \verb{( )}, \code{local()}, \code{I()},
+\code{identity()}, \code{invisible()}, \code{suppressMessages()}, \code{suppressWarnings()},
+\code{suppressPackageStartupMessages()}, \code{withCallingHandlers()}, and
+\code{with()}. The transpiler descends through wrapping
+constructs until it finds a transpilable expression, avoiding the
+need to place \code{progressify()} inside such constructs. This allows for
+patterns like:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- \{
+  lapply(xs, fcn)
+\} |> suppressMessages() |> progressify()
+}\if{html}{\out{</div>}}
+
+avoiding having to write:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- \{
+  lapply(xs, fcn) |> progressify()
+\} |> suppressMessages()
+}\if{html}{\out{</div>}}
+}
+
 \examples{
 handlers(global = TRUE) # listen to progress updates
 

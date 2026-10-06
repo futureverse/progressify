@@ -29,3 +29,22 @@ expr <- quote(withCallingHandlers(lapply(xs, FUN = sum), warning = identity))
 expr_t <- progressify(expr, substitute = FALSE, eval = FALSE)
 print(expr_t)
 stopifnot(identical(expr_t[[1]], as.name("withCallingHandlers")))
+
+
+message("*** progressify() on a non-call gives an informative error")
+exprs <- list(
+  quote({ }),
+  quote(local({ })),
+  quote(( 42 ))
+)
+for (expr in exprs) {
+  print(expr)
+  res <- tryCatch({
+    progressify(expr, substitute = FALSE, eval = FALSE)
+  }, error = identity)
+  print(res)
+  stopifnot(
+    inherits(res, "error"),
+    grepl("because it is not a function call", conditionMessage(res))
+  )
+}

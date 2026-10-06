@@ -16,6 +16,30 @@
 #' @returns
 #' Returns the value of the evaluated expression `expr`.
 #'
+#' @section Expression unwrapping:
+#' The transpilation mechanism includes logic to "unwrap" expressions
+#' enclosed in constructs such as `!`, `{ }`, `( )`, `local()`, `I()`,
+#' `identity()`, `invisible()`, `suppressMessages()`, `suppressWarnings()`,
+#' `suppressPackageStartupMessages()`, `withCallingHandlers()`, and
+#' `with()`. The transpiler descends through wrapping
+#' constructs until it finds a transpilable expression, avoiding the
+#' need to place `progressify()` inside such constructs. This allows for
+#' patterns like:
+#'
+#' ```r
+#' y <- {
+#'   lapply(xs, fcn)
+#' } |> suppressMessages() |> progressify()
+#' ```
+#'
+#' avoiding having to write:
+#'
+#' ```r
+#' y <- {
+#'   lapply(xs, fcn) |> progressify()
+#' } |> suppressMessages()
+#' ```
+#'
 #' @example incl/progressify-base.R
 #'
 #' @aliases pz
