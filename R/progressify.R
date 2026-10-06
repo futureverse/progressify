@@ -47,7 +47,7 @@
 #' @export
 progressify <- function(expr, substitute = TRUE, ..., when = TRUE, eval = TRUE, envir = parent.frame()) {
   if (substitute) expr <- substitute(expr)
-  debug <- isTRUE(getOption("progressify.debug"))
+  debug <- isDebugEnabled()
   if (debug) {
     mdebug_push("progressify() ...")
     on.exit(mdebug_pop())

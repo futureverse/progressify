@@ -6,7 +6,20 @@
    `withCallingHandlers(lapply(xs, fcn), warning = ...) |>
    progressify()`.
 
+ * Much more informative error messages when trying to progressify
+   an S3 or S4 generic function call that dispatches to a method that
+   is not supported, e.g. `summary(fit) |> progressify()`, and when
+   trying to progressify a function that is not part of a package.
+
+ * Error messages produced by `progressify()` now include the
+   **progressify** version.
+
 ## Bug Fixes
+
+ * `progressify()` on an S3 or S4 generic function call, where the
+   first argument is not a variable, e.g. `summary(get_fit()) |>
+   progressify()`, would evaluate that argument twice. Now it is
+   evaluated only once.
 
  * `progressify()` on an expression that is not a function call,
    e.g. `{ }` or `local({ })`, would produce an obscure error on

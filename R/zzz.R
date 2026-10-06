@@ -10,7 +10,7 @@
 
   update_package_option <- import_progressr("update_package_option")
   update_package_option("progressify.debug", mode = "logical")
-  debug <- isTRUE(getOption("progressify.debug"))
+  debug <- isDebugEnabled()
 
   if (debug) {
     envs <- Sys.getenv()

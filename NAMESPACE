@@ -10,6 +10,7 @@ importFrom(utils,
   capture.output,
   getS3method,
   globalVariables,
+  packageName,
   packageVersion,
   str
 )

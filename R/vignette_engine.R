@@ -17,7 +17,7 @@ register_vignette_engine_during_build_only <- function(pkgname) {
                                         smart = FALSE,
                                         extensions = "table",
                                         normalize = FALSE)
-
+      
       ## Embed images as <img src="data:image/png;base64...">
       mimes <- list(
         gif = "image/gif",
@@ -33,8 +33,8 @@ register_vignette_engine_during_build_only <- function(pkgname) {
         idxs <- grep(pattern, html)
         if (length(idxs) == 0) next
         if (!requireNamespace(stealth <- "base64enc", quietly = TRUE)) {
-          stop("This vignette requires the ", sQuote(stealth),
-               " package because it contains a ", sQuote(toupper(ext)),
+          stop("This vignette requires the ", sQuote(stealth), 
+               " package because it contains a ", sQuote(toupper(ext)), 
                " image")
         }
         ns <- getNamespace(stealth)

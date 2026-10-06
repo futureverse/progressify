@@ -32,7 +32,11 @@ transpile <- local({
   function(expr, options = list(...), ..., when = TRUE, eval = TRUE, envir = parent.frame(), disable = FALSE, type = "built-in", what = "transpile", unwrap = list(base::`{`, base::`(`, base::`!`, base::local, base::with, base::I, base::identity, base::invisible, base::suppressMessages, base::suppressWarnings, base::suppressPackageStartupMessages, base::withCallingHandlers), debug = FALSE) {
     if (debug) {
       mdebug_push("transpile() ...")
-      on.exit(mdebug_pop())
+      debug_stack <- mdebug_stack()
+      on.exit({
+        mdebug_stack(debug_stack)
+        mdebug_pop()
+      })
     }
   
     stopifnot(
@@ -130,9 +134,14 @@ class(transpile) <- c("transpiler", class(transpile))
 #' A transpiler function, or NULL if none exists.
 #'
 #' @noRd
-find_s3_method_transpiler <- function(fcn, fcn_name, call, envir, type, debug = FALSE) {
-  method <- find_s3_method(fcn, fcn_name = fcn_name, call = call, envir = envir, debug = debug)
+find_s3_method_transpiler <- function(fcn, fcn_name, call, envir, type, what = "transpile", debug = FALSE) {
+  method <- find_s3_method(fcn, fcn_name = fcn_name, call = call, envir = envir, what = what, debug = debug)
   if (is.null(method)) return(NULL)
+
+  ## Identify method at run time?
+  if (isTRUE(method[["deferred"]])) {
+    return(make_deferred_dispatch_transpiler(fcn_name, index = method[["index"]]))
+  }
 
   pkg <- method[["package"]]
   name <- method[["name"]]
@@ -150,16 +159,25 @@ find_s3_method_transpiler <- function(fcn, fcn_name, call, envir, type, debug = 
     }, error = function(e) NULL)
   }
 
-  ## No transpilers registered for this package?
-  if (is.null(transpilers)) return(NULL)
+  transpiler <- transpilers[[name]]
 
-  transpilers[[name]]
+  ## Method found, but there is no transpiler for it?
+  if (is.null(transpiler)) {
+    transpiler <- list(unsupported = c(method, type = "S3"))
+  }
+
+  transpiler
 } ## find_s3_method_transpiler()
 
 
-find_s4_method_transpiler <- function(fcn, fcn_name, call, envir, type, debug = FALSE) {
-  method <- find_s4_method(fcn, fcn_name = fcn_name, call = call, envir = envir, debug = debug)
+find_s4_method_transpiler <- function(fcn, fcn_name, call, envir, type, what = "transpile", debug = FALSE) {
+  method <- find_s4_method(fcn, fcn_name = fcn_name, call = call, envir = envir, what = what, debug = debug)
   if (is.null(method)) return(NULL)
+
+  ## Identify method at run time?
+  if (isTRUE(method[["deferred"]])) {
+    return(make_deferred_dispatch_transpiler(fcn_name, index = method[["index"]]))
+  }
 
   pkg <- method[["package"]]
   name <- method[["name"]]
@@ -177,11 +195,81 @@ find_s4_method_transpiler <- function(fcn, fcn_name, call, envir, type, debug = 
     }, error = function(e) NULL)
   }
 
-  ## No transpilers registered for this package?
-  if (is.null(transpilers)) return(NULL)
+  transpiler <- transpilers[[name]]
 
-  transpilers[[name]]
+  ## Method found, but there is no transpiler for it?
+  if (is.null(transpiler)) {
+    transpiler <- list(unsupported = c(method, type = "S4"))
+  }
+
+  transpiler
 } ## find_s4_method_transpiler()
+
+
+#' Creates a transpiler that identifies the S3 or S4 method at run time
+#'
+#' The transpiled expression evaluates the dispatch argument once,
+#' assigns it to a variable, and then transpiles the call with the
+#' dispatch argument replaced by that variable.
+#'
+#' @param fcn_name The name of the generic function.
+#'
+#' @param index The position of the dispatch argument in the call.
+#'
+#' @return
+#' A transpiler, which is a named list with elements `label` and
+#' `transpiler`.
+#'
+#' @noRd
+make_deferred_dispatch_transpiler <- function(fcn_name, index) {
+  list(
+    label = sprintf("%s() ~> evaluate dispatch argument once, then %s()", fcn_name, .packageName),
+    transpiler = function(expr, options = NULL) {
+      ## e.g. '...futurize.x'
+      name <- as.symbol(sprintf("...%s.x", .packageName))
+      value <- expr[[index]]
+      expr[[index]] <- name
+      call <- make_runtime_transpile_call(expr, options = options)
+      bquote(local({
+        .(name) <- .(value)
+        .(call)
+      }))
+    }
+  )
+} ## make_deferred_dispatch_transpiler()
+
+
+#' Signals an error that an S3 or S4 method is not supported
+#'
+#' @param method A named list with elements `package`, `name`, `class`,
+#' and `type` (`"S3"` or `"S4"`) of the method dispatched to.
+#'
+#' @param fcn_name,ns_name The name of the generic function and the
+#' namespace where it lives.
+#'
+#' @param what A character string describing what type of transpiler
+#' is used.
+#'
+#' @return
+#' Nothing; produces an error.
+#'
+#' @noRd
+stop_unsupported_method <- function(method, fcn_name, ns_name, what) {
+  type <- method[["type"]]
+  if (type == "S3") {
+    info <- sprintf("S3 method %s()", method[["name"]])
+  } else {
+    info <- "S4 method"
+  }
+  msg <- sprintf("Do not know how to %s %s(), because it dispatches to the %s of package %s for class %s, which is not supported", what, fcn_name, info, sQuote(method[["package"]]), sQuote(method[["class"]]))
+
+  ## A generic masking a base function, e.g. BiocGenerics::lapply()?
+  if (ns_name != "base" && exists(fcn_name, envir = baseenv(), mode = "function", inherits = FALSE)) {
+    msg <- sprintf("%s. If you meant base::%s(), call it explicitly, e.g. 'base::%s(...) |> %s()', possibly after coercing the first argument to a basic R object", msg, fcn_name, fcn_name, what)
+  }
+
+  stop_with_version(msg)
+} ## stop_unsupported_method()
 
 
 #' Get a registered transpiler for an R expression
@@ -205,7 +293,11 @@ find_s4_method_transpiler <- function(fcn, fcn_name, call, envir, type, debug = 
 get_transpiler <- function(expr, envir = parent.frame(), unwrap = list(), type, what, debug = FALSE) {
   if (debug) {
     mdebug_push("get_transpiler() ...")
-    on.exit(mdebug_pop())
+    debug_stack <- mdebug_stack()
+    on.exit({
+      mdebug_stack(debug_stack)
+      mdebug_pop()
+    })
     mdebug_push("Finding call to be transpiled ...")
   }
   
@@ -215,7 +307,7 @@ get_transpiler <- function(expr, envir = parent.frame(), unwrap = list(), type, 
   target <- if (length(call_pos) == 1L) expr else expr[[call_pos[-length(call_pos)]]]
   is_empty_braces <- is.call(target) && length(target) == 1L && identical(target[[1]], as.symbol("{"))
   if (!is.call(target) || is_empty_braces) {
-    stop(sprintf("Do not know how to %s %s, because it is not a function call", what, sQuote(paste(deparse(target), collapse = " "))))
+    stop_with_version(sprintf("Do not know how to %s %s, because it is not a function call", what, sQuote(paste(deparse(target), collapse = " "))))
   }
 
   call <- expr[[call_pos]]
@@ -248,6 +340,16 @@ get_transpiler <- function(expr, envir = parent.frame(), unwrap = list(), type, 
   transpiler_sets <- get_transpilers(type)
   transpilers <- transpiler_sets[[ns_name]]
   if (is.null(transpilers)) {
+    ## Trying to transpile a non-supported function not part of a package?
+    if (!isNamespaceLoaded(ns_name)) {
+      info <- if (grepl("^%.*%$", fcn_name)) {
+        sprintf("`%s`", fcn_name)
+      } else {
+        sprintf("%s()", fcn_name)
+      }
+      stop_with_version(sprintf("Do not know how to %s %s, because it is not part of a package (it lives in environment %s)", what, info, sQuote(ns_name)))
+    }
+
     if (!requireNamespace(ns_name, quietly = TRUE)) {
       info <- if (grepl("^%.*%$", fcn_name)) {
         sprintf("%s::`%s`", ns_name, fcn_name)
@@ -299,17 +401,21 @@ get_transpiler <- function(expr, envir = parent.frame(), unwrap = list(), type, 
     ## match.call(), so we reconstruct it here.
     full_call <- if (length(call_pos) == 1L) expr else expr[[call_pos[-length(call_pos)]]]
     if (is_s3_generic(fcn)) {
-      transpiler <- find_s3_method_transpiler(fcn, fcn_name, full_call, type, envir = envir, debug = debug)
+      transpiler <- find_s3_method_transpiler(fcn, fcn_name, full_call, type, envir = envir, what = what, debug = debug)
     } else if (inherits(fcn, "standardGeneric")) {
-      transpiler <- find_s4_method_transpiler(fcn, fcn_name, full_call, type, envir = envir, debug = debug)
+      transpiler <- find_s4_method_transpiler(fcn, fcn_name, full_call, type, envir = envir, what = what, debug = debug)
     } else {
       transpiler <- NULL
     }
+    unsupported <- transpiler[["unsupported"]]
+    if (!is.null(unsupported)) {
+      stop_unsupported_method(unsupported, fcn_name = fcn_name, ns_name = ns_name, what = what)
+    }
     if (is.null(transpiler)) {
       if (is.null(transpilers)) {
-        stop(sprintf("Function %s::%s() is not in one of the registered %s namespaces: %s", ns_name, fcn_name, what, commaq(names(transpiler_sets))))
+        stop_with_version(sprintf("Function %s::%s() is not in one of the registered %s namespaces: %s", ns_name, fcn_name, what, commaq(names(transpiler_sets))))
       }
-      stop(sprintf("Do not know how to %s function: %s()", what, deparse(call)))
+      stop_with_version(sprintf("Do not know how to %s function: %s()", what, deparse(call)))
     }
   } else {
     transpiler <- transpilers[[fcn_name]]
@@ -359,7 +465,12 @@ get_transpilers <- function(type) {
 append_transpilers <- function(type, ...) {
   transpiler_db <- .env[["transpiler_db"]]
   transpilers <- transpiler_db[[type]]
-  transpilers <- c(transpilers, ...)
+  if (is.null(transpilers)) transpilers <- list()
+
+  ## Add new, or replace existing, transpiler sets per package
+  sets <- c(...)
+  for (name in names(sets)) transpilers[name] <- sets[name]
+
   transpiler_db[[type]] <- transpilers
   .env[["transpiler_db"]] <- transpiler_db
 }
@@ -450,7 +561,7 @@ transpilers_for_package <- local({
       fcns <- db[[package]]
       if (debug) mprint(list(fcns = fcns))
       if (length(fcns) == 0L) {
-        stop(sprintf("There are no factory functions for creating %s transpilers for package %s", sQuote(type), sQuote(package)))
+        stop_with_version(sprintf("There are no factory functions for creating %s transpilers for package %s", sQuote(type), sQuote(package)))
       }
       req_pkgs <- lapply(fcns, FUN = function(fcn) fcn())
       req_pkgs <- unlist(req_pkgs, use.names = FALSE)
@@ -534,3 +645,10 @@ make_package_transpilers <- function(package, FUN, exports = TRUE, s3methods = T
 
   transpilers
 } ## make_package_transpilers()
+
+
+#' @importFrom utils packageName
+stop_with_version <- function(msg, ...) {
+  msg <- sprintf("[%s %s] %s", packageName(), getNamespaceVersion(packageName()), msg)
+  stop(msg, ...)
+}
