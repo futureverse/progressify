@@ -2,7 +2,22 @@
 
 ## Version (development version)
 
+### New Features
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  now unwraps
+  [`withCallingHandlers()`](https://rdrr.io/r/base/conditions.html),
+  e.g.
+  `withCallingHandlers(lapply(xs, fcn), warning = ...) |> progressify()`.
+
 ### Bug Fixes
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  on an expression that is not a function call,
+  e.g. [`{ }`](https://rdrr.io/r/base/Paren.html) or `local({ })`, would
+  produce an obscure error on “invalid type/length (symbol/1) in vector
+  allocation”. Now it gives an informative error explaining that the
+  expression is not a function call.
 
 - [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
   for [`mapply()`](https://rdrr.io/r/base/mapply.html),

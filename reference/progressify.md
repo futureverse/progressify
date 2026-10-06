@@ -46,6 +46,34 @@ progressify(
 
 Returns the value of the evaluated expression `expr`.
 
+## Expression unwrapping
+
+The transpilation mechanism includes logic to "unwrap" expressions
+enclosed in constructs such as `!`,
+[`{ }`](https://rdrr.io/r/base/Paren.html), `( )`,
+[`local()`](https://rdrr.io/r/base/eval.html),
+[`I()`](https://rdrr.io/r/base/AsIs.html),
+[`identity()`](https://rdrr.io/r/base/identity.html),
+[`invisible()`](https://rdrr.io/r/base/invisible.html),
+[`suppressMessages()`](https://rdrr.io/r/base/message.html),
+[`suppressWarnings()`](https://rdrr.io/r/base/warning.html),
+[`suppressPackageStartupMessages()`](https://rdrr.io/r/base/message.html),
+[`withCallingHandlers()`](https://rdrr.io/r/base/conditions.html), and
+[`with()`](https://rdrr.io/r/base/with.html). The transpiler descends
+through wrapping constructs until it finds a transpilable expression,
+avoiding the need to place `progressify()` inside such constructs. This
+allows for patterns like:
+
+    y <- {
+      lapply(xs, fcn)
+    } |> suppressMessages() |> progressify()
+
+avoiding having to write:
+
+    y <- {
+      lapply(xs, fcn) |> progressify()
+    } |> suppressMessages()
+
 ## Examples
 
 ``` r
