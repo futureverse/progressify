@@ -29,7 +29,7 @@
 transpile <- local({
   .enabled <- list()
   
-  function(expr, options = list(...), ..., when = TRUE, eval = TRUE, envir = parent.frame(), disable = FALSE, type = "built-in", what = "transpile", unwrap = list(base::`{`, base::`(`, base::`!`, base::local, base::with, base::I, base::identity, base::invisible, base::suppressMessages, base::suppressWarnings, base::suppressPackageStartupMessages), debug = FALSE) {
+  function(expr, options = list(...), ..., when = TRUE, eval = TRUE, envir = parent.frame(), disable = FALSE, type = "built-in", what = "transpile", unwrap = list(base::`{`, base::`(`, base::`!`, base::local, base::with, base::I, base::identity, base::invisible, base::suppressMessages, base::suppressWarnings, base::suppressPackageStartupMessages, base::withCallingHandlers), debug = FALSE) {
     if (debug) {
       mdebug_push("transpile() ...")
       on.exit(mdebug_pop())
@@ -124,7 +124,7 @@ class(transpile) <- c("transpiler", class(transpile))
 #'
 #' @inheritParams find_s3_method
 #'
-#' @param type
+#' @param type Type of the transpiler to use.
 #'
 #' @return
 #' A transpiler function, or NULL if none exists.

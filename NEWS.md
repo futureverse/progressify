@@ -1,5 +1,11 @@
 # Version (development version)
 
+## New Features
+
+ * `progressify()` now unwraps `withCallingHandlers()`, e.g.
+   `withCallingHandlers(lapply(xs, fcn), warning = ...) |>
+   progressify()`.
+
 ## Bug Fixes
 
  * `progressify()` for `mapply()`, `Map()`, `.mapply()`, `apply()`,
