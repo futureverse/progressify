@@ -1,7 +1,13 @@
 # Version (development version)
 
- * ...
- 
+## Bug Fixes
+
+ * `progressify()` for `fwb()` of **fwb** (>= 1.0.0) would signal one
+   fewer progress update than the number of bootstrap replicates (`R`),
+   unless called with `simple = FALSE` or `wtype = "multinom"`. This
+   bug affected the default call, i.e. `fwb(data, statistic) |>
+   progressify()`.
+   
 
 # Version 0.4.0 [2026-10-17]
 

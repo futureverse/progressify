@@ -3,7 +3,9 @@
 # local({
 #   .progressr_steps <- R
 #   .progressr_simple <- if (is.null(simple)) wtype != "multinom" else simple
-#   .progressr_skip_count <- if (.progressr_simple) 2L else 1L
+#   ## .progressr_simple is TRUE by default. fwb (>= 1.0.0) calls statistic()
+#   ## once before the R replicates, and fwb (< 1.0.0) twice.
+#   .progressr_skip_count <- if (.progressr_simple && <fwb_is_legacy_simple>) 2L else 1L
 #   .progressr_progressor <- progressr::progressor(steps = .progressr_steps)
 #   fwb::fwb(
 #     data = x,
@@ -22,10 +24,20 @@
 # })
 #
 progressify_fwb <- local({
+  fwb_is_legacy_simple <- local({
+    cache <- NULL
+    function() {
+      if (is.null(cache)) {
+        cache <<- (utils::packageVersion("fwb") < "1.0.0")
+      }
+      cache
+    }
+  })
+
   template_fwb_outer <- bquote_compile(local({
     .progressr_steps <- .(STEPS)
     .progressr_simple <- if (is.null(.(SIMPLE))) .(WTYPE) != "multinom" else .(SIMPLE)
-    .progressr_skip_count <- if (.progressr_simple) 2L else 1L
+    .progressr_skip_count <- if (.progressr_simple && .(LEGACY_SIMPLE)) 2L else 1L
     .progressr_progressor <- progressr::progressor(steps = .progressr_steps)
     .(EXPR)
   }))
@@ -90,7 +102,8 @@ progressify_fwb <- local({
     )
     parts <- c(parts, progressr_args)
 
-    bquote_apply(template_fwb_outer, STEPS = steps, SIMPLE = simple_expr, WTYPE = wtype_expr, EXPR = as.call(parts))
+    bquote_apply(template_fwb_outer, STEPS = steps, SIMPLE = simple_expr, WTYPE = wtype_expr,
+                 LEGACY_SIMPLE = fwb_is_legacy_simple(), EXPR = as.call(parts))
   } ## progressify_fwb()
 })
 
