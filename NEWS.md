@@ -39,6 +39,11 @@
    **future.apply** would produce an error on
    `object '.progressr_progressor' not found`.
 
+ * When used with parallel processing, `progressify()` on `apply()`
+   and `tapply()`, and the **future.apply** counterparts, would
+   cause copies of the full input data to be exported to parallel
+   worker.
+
  * `progressify()` for `fwb()` of **fwb** would produce an error if
    `fwb()` argument `R` was not specified.
 

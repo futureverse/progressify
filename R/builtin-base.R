@@ -180,17 +180,15 @@ progressify_mapply_family <- local({
 #   .progressr_progressor <- progressr::progressor(
 #     steps = prod(dim(.progressr_X)[.progressr_MARGIN])
 #   )
-#   apply(X = .progressr_X, MARGIN = .progressr_MARGIN, FUN = function(...) {
+#   apply(X = tryCatch({
+#     .progressr_X
+#   }, finally = rm(.progressr_X)), MARGIN = tryCatch({
+#     .progressr_MARGIN
+#   }, finally = rm(.progressr_MARGIN)), FUN = function(...) {
 #     on.exit(.progressr_progressor())
 #     ...FUN(...)
 #   }, ...)
 # })
-#
-# apply() calls FUN exactly prod(dim(X)[MARGIN]) times and forwards its '...'
-# to FUN.  'X' and 'MARGIN' are captured once to avoid double evaluation and so
-# that the step count can be computed from both.  FUN is wrapped as a closure
-# that captures '...FUN' and '.progressr_progressor' from the enclosing local()
-# environment.
 #
 # Shared by base's apply() and future.apply's future_apply(), which have the
 # same signature and '...'-forwarding behaviour (future.* arguments stay named
@@ -212,10 +210,14 @@ progressify_apply_family <- local({
     orig_MARGIN <- parts[[idx_MARGIN]]
     orig_FUN    <- parts[[idx_FUN]]
 
-    ## Refer to the captured copies inside the rebuilt call, and wrap FUN as a
-    ## closure capturing '...FUN' and '.progressr_progressor'.
-    parts[[idx_X]]      <- quote(.progressr_X)
-    parts[[idx_MARGIN]] <- quote(.progressr_MARGIN)
+    ## HACK: Remove original objects when resolved to avoid them
+    ## being exported to parallel workers
+    parts[[idx_X]]      <- quote(tryCatch({
+      .progressr_X
+    }, finally = rm(.progressr_X)))
+    parts[[idx_MARGIN]] <- quote(tryCatch({
+      .progressr_MARGIN
+    }, finally = rm(.progressr_MARGIN)))
     parts[[idx_FUN]]    <- bquote_apply(template_FUN_closure)
 
     call <- as.call(parts)
@@ -230,7 +232,11 @@ progressify_apply_family <- local({
         if (is.character(.progressr_m)) {
           .progressr_m <- match(.progressr_m, names(dimnames(.progressr_X)))
         }
-        prod(dim(.progressr_X)[.progressr_m])
+        ## HACK: Remove original objects when resolved to avoid them
+        ## being exported to parallel workers
+        tryCatch({
+          prod(dim(.progressr_X)[.progressr_m])
+        }, finally = rm(.progressr_m))
       })
       .(call)
     }))
@@ -247,18 +253,15 @@ progressify_apply_family <- local({
 #   .progressr_progressor <- progressr::progressor(
 #     steps = nlevels(interaction(as.list(.progressr_INDEX), drop = TRUE))
 #   )
-#   tapply(X = .progressr_X, INDEX = .progressr_INDEX, FUN = function(...) {
+#   tapply(X = tryCatch({
+#     .progressr_X
+#   }, finally = rm(.progressr_X)), INDEX = tryCatch({
+#     .progressr_INDEX
+#   }, finally = rm(.progressr_INDEX)), FUN = function(...) {
 #     on.exit(.progressr_progressor())
 #     ...FUN(...)
 #   }, ...)
 # })
-#
-# tapply() calls FUN once per non-empty group combination of 'INDEX' and
-# forwards its '...' to FUN.  The step count equals the number of non-empty
-# group combinations, i.e. nlevels(interaction(INDEX, drop = TRUE)).  'X' and
-# 'INDEX' are captured once (INDEX is referenced both when computing the step
-# count and in the call).  FUN is wrapped as a closure that captures '...FUN'
-# and '.progressr_progressor' from the enclosing local() environment.
 #
 # Shared by base's tapply() and future.apply's future_tapply().
 progressify_tapply_family <- local({
@@ -283,10 +286,14 @@ progressify_tapply_family <- local({
     orig_INDEX <- parts[[idx_INDEX]]
     orig_FUN   <- parts[[idx_FUN]]
 
-    ## Refer to the captured copies inside the rebuilt call, and wrap FUN as a
-    ## closure capturing '...FUN' and '.progressr_progressor'.
-    parts[[idx_X]]     <- quote(.progressr_X)
-    parts[[idx_INDEX]] <- quote(.progressr_INDEX)
+    ## HACK: Remove original objects when resolved to avoid them
+    ## being exported to parallel workers
+    parts[[idx_X]]     <- quote(tryCatch({
+      .progressr_X
+    }, finally = rm(.progressr_X)))
+    parts[[idx_INDEX]] <- quote(tryCatch({
+      .progressr_INDEX
+    }, finally = rm(.progressr_INDEX)))
     parts[[idx_FUN]]   <- bquote_apply(template_FUN_closure)
 
     call <- as.call(parts)
@@ -298,7 +305,9 @@ progressify_tapply_family <- local({
       .progressr_progressor <- progressr::progressor(steps = {
         .progressr_idx <- .progressr_INDEX
         if (!is.list(.progressr_idx)) .progressr_idx <- list(.progressr_idx)
-        nlevels(interaction(.progressr_idx, drop = TRUE))
+        tryCatch({
+          nlevels(interaction(.progressr_idx, drop = TRUE))
+        }, finally = rm(.progressr_idx))
       })
       .(call)
     }))

@@ -191,13 +191,18 @@ fun_env_weight <- function(x) {
   max(c(0, sizes))
 }
 
+m_big <- matrix(unlist(big), ncol = 3)
+idx_big <- rep(seq_along(big), each = length(big[[1]]))
+
 exprs <- list(
   lapply = quote(lapply(big, fun_env_weight)),
   sapply = quote(sapply(big, fun_env_weight)),
   vapply = quote(vapply(big, fun_env_weight, FUN.VALUE = NA_real_)),
   mapply = quote(mapply(fun_env_weight, big)),
   .mapply = quote(.mapply(fun_env_weight, list(big), NULL)),
-  by = quote(by(data.frame(x = unlist(big)), rep(1:3, each = 30000), fun_env_weight))
+  by = quote(by(data.frame(x = unlist(big)), rep(1:3, each = 30000), fun_env_weight)),
+  apply = quote(apply(m_big, 2, fun_env_weight)),
+  tapply = quote(tapply(unlist(big), idx_big, fun_env_weight))
 )
 
 for (kk in seq_along(exprs)) {
