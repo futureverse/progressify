@@ -1,4 +1,10 @@
-# Version (development version)
+# Version 0.4.0 [2026-10-17]
+
+## Significant Changes
+
+ * `progressify()` on S3 and S4 generic function calls has been
+   redesigned completely. For example, it now avoids evaluating the
+   left-hand side (LHS) twice, e.g. `summary(fit) |> progressify()`.
 
 ## New Features
 
@@ -42,7 +48,7 @@
  * When used with parallel processing, `progressify()` on `apply()`
    and `tapply()`, and the **future.apply** counterparts, would
    cause copies of the full input data to be exported to parallel
-   worker.
+   workers.
 
  * `progressify()` for `fwb()` of **fwb** would produce an error if
    `fwb()` argument `R` was not specified.
