@@ -57,15 +57,11 @@ if (requireNamespace("SimDesign", quietly = TRUE)) {
     # Ensure results are equivalent
     stopifnot(all.equal(strip_attributes(res), strip_attributes(truth)))
 
-    # Workaround SimDesign 2.27 ignoring verbose=FALSE on HPC environments,
-    # cf. https://github.com/philchalmers/SimDesign/issues/105
     output <- utils::capture.output({
       set.seed(42)
       res2 <- eval(bquote(.(expr) |> progressify()))
     })
-    if (length(truth_output) == 0L) {
-      stopifnot(length(output) == 0L)
-    }
+    stopifnot(identical(output, truth_output))
 
     # Ensure repeated evaluation is identical
     stopifnot(all.equal(strip_attributes(res2), strip_attributes(res)))
