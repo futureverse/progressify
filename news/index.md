@@ -58,6 +58,13 @@
   of **future.apply** would produce an error on
   `object '.progressr_progressor' not found`.
 
+- When used with parallel processing,
+  [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  on [`apply()`](https://rdrr.io/r/base/apply.html) and
+  [`tapply()`](https://rdrr.io/r/base/tapply.html), and the
+  **future.apply** counterparts, would cause copies of the full input
+  data to be exported to parallel worker.
+
 - [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
   for [`fwb()`](https://ngreifer.github.io/fwb/reference/fwb.html) of
   **fwb** would produce an error if

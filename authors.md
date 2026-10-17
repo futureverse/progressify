@@ -11,13 +11,13 @@ Source:
 [`DESCRIPTION`](https://github.com/futureverse/progressify/blob/HEAD/DESCRIPTION)
 
 Bengtsson H (2026). *progressify: Progress Reporting of Common Functions
-via One Magic Function*. R package version 0.2.0-9020,
+via One Magic Function*. R package version 0.2.0-9021,
 <https://progressify.futureverse.org>.
 
 @Manual{,\
   title = {progressify: Progress Reporting of Common Functions via One Magic Function},\
   author = {Henrik Bengtsson},\
   year = {2026},\
-  note = {R package version 0.2.0-9020},\
+  note = {R package version 0.2.0-9021},\
   url = {https://progressify.futureverse.org},\
 }
