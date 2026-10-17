@@ -63,8 +63,14 @@ progressify_fwb <- local({
 
     parts <- as.list(expr)
 
-    steps <- if (length(idx_R) == 1L) parts[[idx_R]] else 999L
-    parts[[idx_R]] <- quote(.progressr_steps)
+    if (length(idx_R) == 1L) {
+      steps <- parts[[idx_R]]
+      parts[[idx_R]] <- quote(.progressr_steps)
+    } else {
+      ## 'R' not specified; use the default of fwb::fwb()
+      steps <- formals(fcn)[["R"]]
+      parts$R <- quote(.progressr_steps)
+    }
 
     simple_expr <- if (length(idx_simple) == 1L) parts[[idx_simple]] else quote(NULL)
     wtype_expr <- if (length(idx_wtype) == 1L) parts[[idx_wtype]] else quote(getOption("fwb_wtype", "exp"))

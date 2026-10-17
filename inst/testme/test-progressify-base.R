@@ -21,6 +21,15 @@ FUN <- function(x, na.rm = TRUE) {
 
 es <- as.environment(xs)
 
+m <- matrix(1:6, nrow = 2, dimnames = list(rows = c("r1", "r2"),
+                                           cols = c("c1", "c2", "c3")))
+df <- data.frame(a = 1:3, b = 4:6)
+
+ints <- 1:6
+grp1 <- c("a", "a", "b", "b", "a", "b")
+grp2 <- c("x", "y", "x", "y", "x", "y")
+gdf <- data.frame(grp1 = grp1, grp2 = grp2)
+
 
 exprs <- list(
   lapply = quote(lapply(X = xs, FUN = FUN)),
@@ -45,7 +54,38 @@ exprs <- list(
   
   replicate = quote(replicate(10, { 42 })),
   replicate = quote(replicate(n = 10, { 1 + 2 })),
-  replicate = quote(base::replicate(n = 10, 3 + 4))
+  replicate = quote(base::replicate(n = 10, 3 + 4)),
+
+  mapply = quote(mapply(FUN, xs)),
+  mapply = quote(mapply(FUN = FUN, xs)),
+  mapply = quote(base::mapply(FUN, xs, SIMPLIFY = FALSE)),
+  mapply = quote(base::mapply(FUN, xs, USE.NAMES = FALSE)),
+  mapply = quote(mapply(FUN, 1:3, MoreArgs = list(na.rm = FALSE))),
+
+  Map = quote(Map(FUN, xs)),
+  Map = quote(base::Map(FUN, xs)),
+
+  .mapply = quote(.mapply(FUN, list(xs), NULL)),
+  .mapply = quote(base::.mapply(FUN, dots = list(xs), MoreArgs = NULL)),
+
+  apply = quote(apply(m, 1, FUN)),
+  apply = quote(apply(m, 2, FUN)),
+  apply = quote(apply(X = m, MARGIN = 2, FUN = FUN)),
+  apply = quote(base::apply(m, c(1, 2), FUN)),
+  apply = quote(apply(m, "cols", FUN)),
+  apply = quote(apply(m, 1, FUN, na.rm = FALSE)),
+  apply = quote(apply(m, 2, quantile, probs = 0.5)),
+  apply = quote(apply(df, 2, FUN)),
+
+  tapply = quote(tapply(ints, grp1, FUN)),
+  tapply = quote(tapply(X = ints, INDEX = grp1, FUN = FUN)),
+  tapply = quote(base::tapply(ints, list(grp1, grp2), FUN)),
+  tapply = quote(tapply(ints, gdf, FUN)),
+  tapply = quote(tapply(ints, grp1, FUN, na.rm = FALSE)),
+  tapply = quote(tapply(ints, grp1, paste, collapse = "-")),
+  tapply = quote(tapply(ints, grp1, sum, default = 0)),
+  tapply = quote(tapply(ints, factor(grp1, levels = c("a", "b", "c")), FUN)),
+  tapply = quote(tapply(ints, grp1, FUN = NULL))
 )
 
 for (kk in seq_along(exprs)) {
@@ -83,3 +123,96 @@ for (kk in seq_along(exprs)) {
   res3 <- eval(expr_f3)
   stopifnot(identical(res3, res))
 }
+
+
+## -------------------------------------------------------
+## The data argument must be evaluated only once
+## -------------------------------------------------------
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+oopts <- options(progressr.enable = TRUE)
+
+## A function that returns 'value' and counts how many times it is called
+n_calls <- 0L
+data_of <- function(value) {
+  n_calls <<- n_calls + 1L
+  value
+}
+
+es <- as.environment(xs)
+
+exprs <- list(
+  lapply = quote(lapply(data_of(xs), FUN)),
+  sapply = quote(sapply(data_of(xs), FUN)),
+  vapply = quote(vapply(data_of(xs), FUN, FUN.VALUE = NA_real_)),
+  eapply = quote(eapply(data_of(es), FUN)),
+  mapply = quote(mapply(FUN, data_of(xs))),
+  replicate = quote(replicate(data_of(3L), 42)),
+  by = quote(by(data_of(df), df$a, nrow))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  n_calls <- 0L
+  truth <- eval(expr)
+  stopifnot(n_calls == 1L)
+
+  n_calls <- 0L
+  res <- eval(bquote(.(expr) |> progressify()))
+  message(sprintf("Number of evaluations: %d", n_calls))
+  ## by() records the (transpiled) call in attribute 'call'
+  attr(res, "call") <- attr(truth, "call") <- NULL
+  stopifnot(n_calls == 1L, identical(res, truth))
+}
+
+options(oopts)
+
+
+## -------------------------------------------------------
+## The wrapped FUN must not carry a copy of the data
+## -------------------------------------------------------
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+oopts <- options(progressr.enable = TRUE)
+
+big <- lapply(1:3, function(i) rnorm(30000))  ## ~0.7 MB
+
+## Size of the largest object in the environment of the wrapped FUN that
+## calls this function. That environment is exported along with FUN to
+## parallel workers.
+fun_env_weight <- function(x) {
+  env <- parent.env(parent.frame())
+  names <- ls(env, all.names = TRUE)
+  sizes <- vapply(names, FUN = function(name) {
+    as.numeric(object.size(get(name, envir = env)))
+  }, FUN.VALUE = NA_real_)
+  max(c(0, sizes))
+}
+
+m_big <- matrix(unlist(big), ncol = 3)
+idx_big <- rep(seq_along(big), each = length(big[[1]]))
+
+exprs <- list(
+  lapply = quote(lapply(big, fun_env_weight)),
+  sapply = quote(sapply(big, fun_env_weight)),
+  vapply = quote(vapply(big, fun_env_weight, FUN.VALUE = NA_real_)),
+  mapply = quote(mapply(fun_env_weight, big)),
+  .mapply = quote(.mapply(fun_env_weight, list(big), NULL)),
+  by = quote(by(data.frame(x = unlist(big)), rep(1:3, each = 30000), fun_env_weight)),
+  apply = quote(apply(m_big, 2, fun_env_weight)),
+  tapply = quote(tapply(unlist(big), idx_big, fun_env_weight))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  res <- eval(bquote(.(expr) |> progressify()))
+  weight <- max(unlist(res))
+  message(sprintf("Largest object in environment of FUN: %.0f bytes", weight))
+  stopifnot(weight < as.numeric(object.size(big)) / 2)
+}
+
+options(oopts)

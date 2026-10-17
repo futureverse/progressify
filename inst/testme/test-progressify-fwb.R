@@ -14,7 +14,8 @@ if (requireNamespace("fwb", quietly = TRUE)) {
   exprs <- list(
     fwb_simple_true = quote(fwb(data = data, statistic = my_stat, R = 10L, simple = TRUE, verbose = FALSE)),
     fwb_simple_false = quote(fwb(data = data, statistic = my_stat, R = 10L, simple = FALSE, verbose = FALSE)),
-    fwb_verbose_default = quote(fwb(data = data, statistic = my_stat, R = 10L))
+    fwb_verbose_default = quote(fwb(data = data, statistic = my_stat, R = 10L)),
+    fwb_R_default = quote(fwb(data = data, statistic = my_stat, verbose = FALSE))
   )
 
   for (name in names(exprs)) {

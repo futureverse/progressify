@@ -24,6 +24,15 @@ FUN <- function(x, na.rm = TRUE) {
 
 es <- as.environment(xs)
 
+m <- matrix(1:6, nrow = 2, dimnames = list(rows = c("r1", "r2"),
+                                           cols = c("c1", "c2", "c3")))
+df <- data.frame(a = 1:3, b = 4:6)
+
+ints <- 1:6
+grp1 <- c("a", "a", "b", "b", "a", "b")
+grp2 <- c("x", "y", "x", "y", "x", "y")
+gdf <- data.frame(grp1 = grp1, grp2 = grp2)
+
 
 exprs <- list(
   future_lapply = quote(future_lapply(X = xs, FUN = FUN)),
@@ -48,7 +57,35 @@ exprs <- list(
   
   future_replicate = quote(future_replicate(10, { 42 })),
   future_replicate = quote(future_replicate(n = 10, { 1 + 2 })),
-  future_replicate = quote(future.apply::future_replicate(n = 10, 3 + 4))
+  future_replicate = quote(future.apply::future_replicate(n = 10, 3 + 4)),
+
+  future_mapply = quote(future_mapply(FUN, xs)),
+  future_mapply = quote(future_mapply(FUN = FUN, xs)),
+  future_mapply = quote(future.apply::future_mapply(FUN, xs, SIMPLIFY = FALSE)),
+  future_mapply = quote(future.apply::future_mapply(FUN, xs, USE.NAMES = FALSE)),
+  future_mapply = quote(future_mapply(FUN, 1:3, MoreArgs = list(na.rm = FALSE))),
+
+  future_Map = quote(future_Map(FUN, xs)),
+  future_Map = quote(future.apply::future_Map(FUN, xs)),
+
+  future_.mapply = quote(future_.mapply(FUN, list(xs), NULL)),
+  future_.mapply = quote(future.apply::future_.mapply(FUN, dots = list(xs), MoreArgs = NULL)),
+
+  future_apply = quote(future_apply(m, 1, FUN)),
+  future_apply = quote(future_apply(m, 2, FUN)),
+  future_apply = quote(future_apply(X = m, MARGIN = 2, FUN = FUN)),
+  future_apply = quote(future.apply::future_apply(m, c(1, 2), FUN)),
+  future_apply = quote(future_apply(m, "cols", FUN)),
+  future_apply = quote(future_apply(m, 1, FUN, na.rm = FALSE)),
+  future_apply = quote(future_apply(m, 2, quantile, probs = 0.5)),
+  future_apply = quote(future_apply(df, 2, FUN)),
+
+  future_tapply = quote(future_tapply(ints, grp1, FUN)),
+  future_tapply = quote(future_tapply(X = ints, INDEX = grp1, FUN = FUN)),
+  future_tapply = quote(future.apply::future_tapply(ints, list(grp1, grp2), FUN)),
+  future_tapply = quote(future_tapply(ints, gdf, FUN)),
+  future_tapply = quote(future_tapply(ints, grp1, FUN, na.rm = FALSE)),
+  future_tapply = quote(future_tapply(ints, grp1, paste, collapse = "-"))
 )
 
 for (kk in seq_along(exprs)) {
@@ -86,5 +123,84 @@ for (kk in seq_along(exprs)) {
   res3 <- eval(expr_f3)
   stopifnot(identical(res3, res))
 }
+
+## -------------------------------------------------------
+## The data argument must be evaluated only once
+## -------------------------------------------------------
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+oopts <- options(progressr.enable = TRUE)
+
+## A function that returns 'value' and counts how many times it is called
+n_calls <- 0L
+data_of <- function(value) {
+  n_calls <<- n_calls + 1L
+  value
+}
+
+exprs <- list(
+  future_replicate = quote(future_replicate(data_of(3L), 42)),
+  future_by = quote(future_by(data_of(df), df$a, nrow))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  n_calls <- 0L
+  truth <- eval(expr)
+  stopifnot(n_calls == 1L)
+
+  n_calls <- 0L
+  res <- eval(bquote(.(expr) |> progressify()))
+  message(sprintf("Number of evaluations: %d", n_calls))
+  ## by() records the (transpiled) call in attribute 'call'
+  attr(res, "call") <- attr(truth, "call") <- NULL
+  stopifnot(n_calls == 1L, identical(res, truth))
+}
+
+options(oopts)
+
+## -------------------------------------------------------
+## The wrapped FUN must not carry a copy of the data
+## -------------------------------------------------------
+## Enable progress reporting to force resolve progressor()'s 'steps' and
+## 'along' arguments
+oopts <- options(progressr.enable = TRUE)
+oplan <- future::plan(future::sequential)
+
+big <- lapply(1:3, function(i) rnorm(30000))  ## ~0.7 MB
+
+## Size of the largest object in the environment of the wrapped FUN that
+## calls this function. That environment is exported along with FUN to
+## parallel workers.
+fun_env_weight <- function(x) {
+  env <- parent.env(parent.frame())
+  names <- ls(env, all.names = TRUE)
+  sizes <- vapply(names, FUN = function(name) {
+    as.numeric(object.size(get(name, envir = env)))
+  }, FUN.VALUE = NA_real_)
+  max(c(0, sizes))
+}
+
+exprs <- list(
+  future_lapply = quote(future_lapply(big, fun_env_weight)),
+  future_sapply = quote(future_sapply(big, fun_env_weight)),
+  future_.mapply = quote(future_.mapply(fun_env_weight, list(big), NULL)),
+  future_by = quote(future_by(data.frame(x = unlist(big)), rep(1:3, each = 30000), fun_env_weight))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message(sprintf("=== %s ==========================", name))
+  res <- eval(bquote(.(expr) |> progressify()))
+  weight <- max(unlist(res))
+  message(sprintf("Largest object in environment of FUN: %.0f bytes", weight))
+  stopifnot(weight < as.numeric(object.size(big)) / 2)
+}
+
+options(oopts)
+future::plan(oplan)
 
 } # if (requireNamespace("future.apply"))

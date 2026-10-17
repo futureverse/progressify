@@ -13,10 +13,13 @@
 #
 progressify_stats <- local({
   ## Pre-compiled bquote templates
+  ## Evaluate 'data' only once. We must remove local '.progressr_data' before
+  ## returning it, otherwise FUN would carry it along
   template_steps_dendro <- bquote_compile({
+    .progressr_data <- .(DATA)
     .progressr_progressor <- progressr::progressor(
-      steps = 2L * attr(.(DATA), "members") - 1L)
-    .(DATA)
+      steps = 2L * attr(.progressr_data, "members") - 1L)
+    tryCatch(.progressr_data, finally = rm(.progressr_data))
   })
 
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {

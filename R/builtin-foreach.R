@@ -1,8 +1,9 @@
 # foreach(x = xs, .combine = c) %do% { sqrt(x) } =>
 #
 # local({
-#   .progressr_progressor <- progressr::progressor(along = xs)
-#   foreach(x = xs, .combine = c) %do% {
+#   .progressr_along <- xs
+#   .progressr_progressor <- progressr::progressor(along = .progressr_along)
+#   foreach(x = .progressr_along, .combine = c) %do% {
 #     on.exit(.progressr_progressor())
 #     sqrt(x)
 #   }
@@ -23,6 +24,14 @@ progressify_foreach <- local({
 
     foreach_call <- expr[[2]]
 
+    ## Nested foreach() calls, e.g. foreach(...) %:% foreach(...) or
+    ## foreach(...) %:% when(...), are not supported, because the total
+    ## number of iterations cannot be inferred upfront
+    op <- foreach_call[[1]]
+    if (identical(op, as.symbol("%:%")) || identical(op, quote(foreach::`%:%`))) {
+      stop(sprintf("Cannot progressify nested foreach() calls using %%:%%: %s", paste(trimws(deparse(expr)), collapse = " ")), call. = FALSE)
+    }
+
     ## Find the first iteration argument in the foreach() call.
     ## Iteration arguments are passed via ... and do NOT start with "."
     foreach_names <- names(foreach_call)
@@ -30,11 +39,18 @@ progressify_foreach <- local({
     iter_idxs <- which(nzchar(foreach_names) & !startsWith(foreach_names, "."))
     stopifnot(length(iter_idxs) >= 1L)
 
-    ## Use the first iteration argument to determine progress steps
-    iter_expr <- foreach_call[[iter_idxs[1]]]
+    ## Use the first iteration argument to determine progress steps.
+    ## It is evaluated only once, before calling foreach(), which then
+    ## iterates over the evaluated value. This cannot be done inside the
+    ## foreach() argument itself, because foreach evaluates its arguments
+    ## in a temporary environment.
+    iter_idx <- iter_idxs[1]
+    iter_expr <- foreach_call[[iter_idx]]
+    foreach_call[[iter_idx]] <- quote(.progressr_along)
 
     ## Wrap body with on.exit() progress signal
     parts <- as.list(expr)
+    parts[[2]] <- foreach_call
     parts[[3]] <- bquote_apply(template_body, BODY = expr[[3]])
 
     ## Wrap everything in local() with progressor initialization

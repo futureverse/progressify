@@ -1,8 +1,77 @@
+# Version 0.4.0 [2026-10-17]
+
+## Significant Changes
+
+ * `progressify()` on S3 and S4 generic function calls has been
+   redesigned completely. For example, it now avoids evaluating the
+   left-hand side (LHS) twice, e.g. `summary(fit) |> progressify()`.
+
+## New Features
+
+ * `progressify()` now unwraps `withCallingHandlers()`, e.g.
+   `withCallingHandlers(lapply(xs, fcn), warning = ...) |>
+   progressify()`.
+
+ * Much more informative error messages when trying to progressify
+   an S3 or S4 generic function call that dispatches to a method that
+   is not supported, e.g. `summary(fit) |> progressify()`, and when
+   trying to progressify a function that is not part of a package.
+
+ * Error messages produced by `progressify()` now include the
+   **progressify** version.
+
+## Bug Fixes
+
+ * `progressify()` on an S3 or S4 generic function call, where the
+   first argument is not a variable, e.g. `summary(get_fit()) |>
+   progressify()`, would evaluate that argument twice. Now it is
+   evaluated only once.
+
+ * `progressify()` on an expression that is not a function call,
+   e.g. `{ }` or `local({ })`, would produce an obscure error on
+   "invalid type/length (symbol/1) in vector allocation". Now it
+   gives an informative error explaining that the expression is not
+   a function call.
+
+ * `progressify()` for `mapply()`, `Map()`, `.mapply()`, `apply()`,
+   and `tapply()` would produce an error on `object
+   '.progressr_progressor' not found`.
+
+ * `progressify()` for `future_mapply()`, `future_Map()`, and
+   `future_.mapply()` of **future.apply** would produce an error on
+   `length(idx_FUN) == 1L is not TRUE`.
+
+ * `progressify()` for `future_apply()` and `future_tapply()` of
+   **future.apply** would produce an error on
+   `object '.progressr_progressor' not found`.
+
+ * When used with parallel processing, `progressify()` on `apply()`
+   and `tapply()`, and the **future.apply** counterparts, would
+   cause copies of the full input data to be exported to parallel
+   workers.
+
+ * `progressify()` for `fwb()` of **fwb** would produce an error if
+   `fwb()` argument `R` was not specified.
+
+ * `progressify()` for `pmap()` and `pmap_*()` of **purrr**, the
+   corresponding `future_pmap()` and `future_pmap_*()` of **furrr**,
+   `pmap_vec()` and `future_pmap_vec()` of **crossmap**, and
+   `.mapply()` and `future_.mapply()` would produce an error on
+   `subscript out of bounds` if there were zero elements to iterate
+   over.
+
+ * `progressify()` would evaluate the input argument twice, e.g. `X`
+   of `lapply()`, `.x` of `purrr::map()`, `n` of `replicate()`,
+   `data` of `by()`, `.l` of `crossmap::xmap()`, `X` of
+   `stats::dendrapply()`, and the first iteration argument of
+   `foreach()`.
+
+
 # Version 0.2.0 [2026-05-31]
 
 ## Significant Changes
 
- * Changed the package license to Apache License (>= 2).
+ * Changed the package license to permissive Apache License (>= 2).
 
 ## New Features
 
