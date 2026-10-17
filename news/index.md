@@ -1,6 +1,13 @@
 # Changelog
 
-## Version (development version)
+## Version 0.4.0
+
+### Significant Changes
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  on S3 and S4 generic function calls has been redesigned completely.
+  For example, it now avoids evaluating the left-hand side (LHS) twice,
+  e.g. `summary(fit) |> progressify()`.
 
 ### New Features
 
@@ -63,7 +70,7 @@
   on [`apply()`](https://rdrr.io/r/base/apply.html) and
   [`tapply()`](https://rdrr.io/r/base/tapply.html), and the
   **future.apply** counterparts, would cause copies of the full input
-  data to be exported to parallel worker.
+  data to be exported to parallel workers.
 
 - [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
   for [`fwb()`](https://ngreifer.github.io/fwb/reference/fwb.html) of
