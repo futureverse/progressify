@@ -1,5 +1,16 @@
 # Changelog
 
+## Version (development version)
+
+### Bug Fixes
+
+- [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  for [`fwb()`](https://ngreifer.github.io/fwb/reference/fwb.html) of
+  **fwb** (\>= 1.0.0) would signal one fewer progress update than the
+  number of bootstrap replicates (`R`), unless called with
+  `simple = FALSE` or `wtype = "multinom"`. This bug affected the
+  default call, i.e. `fwb(data, statistic) |> progressify()`.
+
 ## Version 0.4.0
 
 ### Significant Changes
