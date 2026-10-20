@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,9 +96,13 @@
 <ul><li>
 <code><a href="../reference/progressify.html">progressify()</a></code> for <code><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb()</a></code> of <strong>fwb</strong> (&gt;= 1.0.0) would signal one fewer progress update than the number of bootstrap replicates (<code>R</code>), unless called with <code>simple = FALSE</code> or <code>wtype = "multinom"</code>. This bug affected the default call, i.e. <code>fwb(data, statistic) |&gt; progressify()</code>.</li>
 </ul></div>
+<div class="section level3">
+<h3 id="miscellaneous-development-version">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-development-version"></a></h3>
+<ul><li>Now using <code>genericFunction</code> for S4 classes rather than <code>standardGeneric</code>, which will be removed in R (&gt;= 4.7.0).</li>
+</ul></div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.4.0" id="version-040">Version 0.4.0<a class="anchor" aria-label="anchor" href="#version-040"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.4.0" id="version-040">Version 0.4.0<a class="anchor" aria-label="anchor" href="#version-040"></a></h2><p class="text-muted">CRAN release: 2026-10-17</p>
 <div class="section level3">
 <h3 id="significant-changes-0-4-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-4-0"></a></h3>
 <ul><li>
