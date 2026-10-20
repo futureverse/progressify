@@ -7,6 +7,11 @@
    unless called with `simple = FALSE` or `wtype = "multinom"`. This
    bug affected the default call, i.e. `fwb(data, statistic) |>
    progressify()`.
+
+## Miscellaneous
+
+ * Now using `genericFunction` for S4 classes rather than
+   `standardGeneric`, which will be removed in R (>= 4.7.0).
    
 
 # Version 0.4.0 [2026-10-17]
