@@ -97,6 +97,7 @@ CRAN packages that have optional built-in support for parallelization.
 | Package | Functions |
 |----|----|
 | **[boot](https://cran.r-project.org/package=boot)** | `boot()`, `censboot()`, `tsboot()` |
+| **[car](https://cran.r-project.org/package=car)** | `Boot()` |
 | **[fwb](https://cran.r-project.org/package=fwb)** | `fwb()` |
 | **[lme4](https://cran.r-project.org/package=lme4)** | `bootMer()`, `confint(..., method = "boot")` |
 | **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()`, `varimp()` |
@@ -114,6 +115,8 @@ Here are some examples:
 
 \
 `res`` ``<-`` ``boot``::`[`boot`](https://rdrr.io/pkg/boot/man/boot.html)`(``data``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`res`` ``<-`` ``car``::`[`Boot`](https://rdrr.io/pkg/car/man/Boot.html)`(``fit``, R ``=`` ``999``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
 `res`` ``<-`` ``fwb``::`[`fwb`](https://ngreifer.github.io/fwb/reference/fwb.html)`(``data``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
