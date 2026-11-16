@@ -100,6 +100,7 @@ parallelization.
 | Package                    | Functions                                                                    |
 |----------------------------|------------------------------------------------------------------------------|
 | **[boot]**                 | `boot()`, `censboot()`, `tsboot()`                                           |
+| **[car]**                  | `Boot()`                                                                     |
 | **[fwb]**                  | `fwb()`                                                                      |
 | **[lme4]**                 | `bootMer()`, `confint(..., method = "boot")`                                 |
 | **[partykit]**             | `cforest()`, `varimp()`                                                      |
@@ -114,6 +115,8 @@ Here are some examples:
 
 ```r
 res <- boot::boot(data, statistic, R = 100) |> progressify()
+
+res <- car::Boot(fit, R = 999) |> progressify()
 
 res <- fwb::fwb(data, statistic, R = 100) |> progressify()
 
@@ -175,6 +178,7 @@ whereas `|> progressify() |> futurize()` gives an error.
 
 [futureverse]: https://www.futureverse.org
 [boot]: https://cran.r-project.org/package=boot
+[car]: https://cran.r-project.org/package=car
 [crossmap]: https://cran.r-project.org/package=crossmap
 [doFuture]: https://doFuture.futureverse.org
 [foreach]: https://cran.r-project.org/package=foreach

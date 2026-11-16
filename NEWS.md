@@ -19,6 +19,9 @@
    progressify()`, which reports on progress for each of the `R`
    simulations.
 
+ * Add support for domain-specific CRAN package **car**, e.g. `res <-
+   car::Boot(fit, R = 999) |> progressify()`.
+
 ## Documentation
 
  * Document that `progressify()` cannot yet be combined with
