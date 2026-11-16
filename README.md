@@ -105,6 +105,7 @@ parallelization.
 | **[partykit]**             | `cforest()`, `varimp()`                                                      |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 | **[SimDesign]**            | `runSimulation()`                                                            |
+| **[Sim.DiffProc]**         | `MCM.sde()`                                                                  |
 | **[tm]**                   | `tm_map()`, `TermDocumentMatrix()`, `DocumentTermMatrix()`, `tm_index()`     |
 
 _Table 2: CRAN packages with domain-specific functions currently supported by `progressify()` for progress reporting._
@@ -125,6 +126,8 @@ vi <- partykit::varimp(forest) |> progressify()
 v <- sandwich::vcovBS(fit) |> progressify()
 
 res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()
+
+res <- Sim.DiffProc::MCM.sde(model, statistic, R = 100) |> progressify()
 
 tdm <- tm::TermDocumentMatrix(corpus) |> progressify()
 ```
@@ -165,7 +168,9 @@ These cannot yet be combined. With `|> progressify() |> futurize()`,
 the **partykit** and **sandwich** functions give an error and the
 **tm** functions run in parallel without reporting on progress. With
 `|> futurize() |> progressify()`, they report on progress, but run
-sequentially.
+sequentially. For **Sim.DiffProc**, use `|> futurize() |>
+progressify()`, which reports on progress and runs in parallel,
+whereas `|> progressify() |> futurize()` gives an error.
 
 
 [futureverse]: https://www.futureverse.org
@@ -184,5 +189,6 @@ sequentially.
 [purrr]: https://cran.r-project.org/package=purrr
 [sandwich]: https://cran.r-project.org/package=sandwich
 [SimDesign]: https://cran.r-project.org/package=SimDesign
+[Sim.DiffProc]: https://cran.r-project.org/package=Sim.DiffProc
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html
 [tm]: https://cran.r-project.org/package=tm

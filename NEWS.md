@@ -14,6 +14,11 @@
    functions are `tm_map()`, `TermDocumentMatrix()`,
    `DocumentTermMatrix()`, and `tm_index()`.
 
+ * Add support for domain-specific CRAN package **Sim.DiffProc**,
+   e.g. `res <- Sim.DiffProc::MCM.sde(model, statistic, R = 100) |>
+   progressify()`, which reports on progress for each of the `R`
+   simulations.
+
 ## Documentation
 
  * Document that `progressify()` cannot yet be combined with
