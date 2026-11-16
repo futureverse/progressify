@@ -82,4 +82,15 @@ functions:
  * `varimp()` for `cforest` objects
 
 
+# Limitations
+
+The `progressify()` function cannot yet be combined with `futurize()`
+of the **[futurize]** package for **partykit** functions, because both
+work by setting the `applyfun` argument, which only one of them can
+control. With `|> progressify() |> futurize()`, there is an error.
+With `|> futurize() |> progressify()`, there is progress reporting,
+but the processing is sequential.
+
+
 [partykit]: https://cran.r-project.org/package=partykit
+[futurize]: https://futurize.futureverse.org

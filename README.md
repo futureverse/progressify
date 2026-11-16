@@ -154,8 +154,18 @@ ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
 
-forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressify() |> futurize()
+res <- boot::boot(data, statistic, R = 100) |> progressify() |> futurize()
 ```
+
+An exception is functions where both **progressify** and **futurize**
+work by setting the same argument or option, which only one of them
+can control. This is the case for **partykit** (`applyfun`),
+**sandwich** (`applyfun`), and **tm** (`tm_parLapply_engine()`).
+These cannot yet be combined. With `|> progressify() |> futurize()`,
+the **partykit** and **sandwich** functions give an error and the
+**tm** functions run in parallel without reporting on progress. With
+`|> futurize() |> progressify()`, they report on progress, but run
+sequentially.
 
 
 [futureverse]: https://www.futureverse.org

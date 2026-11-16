@@ -14,6 +14,14 @@
    functions are `tm_map()`, `TermDocumentMatrix()`,
    `DocumentTermMatrix()`, and `tm_index()`.
 
+## Documentation
+
+ * Document that `progressify()` cannot yet be combined with
+   `futurize()` for **partykit**, **sandwich**, and **tm** functions,
+   because both set the same `applyfun` argument or
+   `tm_parLapply_engine()` option. Removed a **partykit** example
+   from the README that combined the two.
+
 ## Bug Fixes
 
  * `progressify()` for `fwb()` of **fwb** (>= 1.0.0) would signal one
