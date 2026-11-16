@@ -1,5 +1,10 @@
 # Version (development version)
 
+## New Features
+
+ * Add support for `varimp()` of **partykit** for `cforest` objects,
+   e.g. `vi <- partykit::varimp(forest) |> progressify()`.
+
 ## Bug Fixes
 
  * `progressify()` for `fwb()` of **fwb** (>= 1.0.0) would signal one

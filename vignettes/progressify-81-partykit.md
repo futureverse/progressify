@@ -65,6 +65,13 @@ appear as:
   |=====                    |  20%
 ```
 
+Similarly, we can report on progress when calculating the variable
+importance of the trees in the forest:
+
+```r
+vi <- varimp(forest) |> progressify()
+```
+
 
 # Supported Functions
 
@@ -72,6 +79,7 @@ The `progressify()` function supports the following **partykit**
 functions:
 
  * `cforest()`
+ * `varimp()` for `cforest` objects
 
 
 [partykit]: https://cran.r-project.org/package=partykit

@@ -66,4 +66,66 @@ for (kk in seq_along(exprs)) {
   stopifnot(identical(pred_res3, pred_res))
 }
 
+
+## -------------------------------------------------------
+## varimp() for 'cforest' objects
+## -------------------------------------------------------
+ntree <- 10L
+set.seed(42L)
+forest <- cforest(Survived ~ ., data = tt, ntree = ntree)
+
+exprs <- list(
+  varimp = quote(varimp(forest)),
+  varimp = quote(partykit::varimp(forest)),
+  varimp = quote(varimp(forest, nperm = 2L)),
+  varimp.cforest = quote(varimp.cforest(forest)),
+  varimp.cforest = quote(partykit::varimp.cforest(forest)),
+  ## Dispatch argument is not a variable => method identified at run time
+  varimp = quote(varimp(cforest(Survived ~ ., data = tt, ntree = ntree)))
+)
+
+for (kk in seq_along(exprs)) {
+  name <- names(exprs)[kk]
+  expr <- exprs[[kk]]
+  message()
+  message(sprintf("=== %s ==========================", name))
+  print(expr)
+  message(sprintf("---------------------------------"))
+
+  set.seed(1L)
+  truth <- eval(expr)
+
+  expr_f <- bquote(.(expr) |> progressify())
+  print(expr_f)
+
+  ## Count progress updates; progressr.enable = TRUE makes progressor()
+  ## signal 'progression' conditions also in non-interactive mode
+  nupdates <- 0L
+  oopts <- options(progressr.enable = TRUE)
+  set.seed(1L)
+  res <- withCallingHandlers(eval(expr_f), progression = function(p) {
+    if (identical(p[["type"]], "update")) nupdates <<- nupdates + 1L
+    invokeRestart("muffleProgression")
+  })
+  options(oopts)
+  str(list(truth = truth, res = res, nupdates = nupdates))
+  stopifnot(identical(res, truth))
+  stopifnot(nupdates == ntree)
+
+  ## No output
+  out <- utils::capture.output({
+    set.seed(1L)
+    res2 <- eval(expr_f)
+  })
+  stopifnot(identical(out, character(0L)))
+  stopifnot(identical(res2, truth))
+}
+
+
+## varimp() for non-supported 'constparty' objects
+tree <- ctree(Survived ~ ., data = tt)
+res <- tryCatch(varimp(tree) |> progressify(), error = identity)
+print(res)
+stopifnot(inherits(res, "error"))
+
 } # if (requireNamespace("partykit"))

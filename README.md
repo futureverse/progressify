@@ -102,7 +102,7 @@ parallelization.
 | **[boot]**                 | `boot()`, `censboot()`, `tsboot()`                                           |
 | **[fwb]**                  | `fwb()`                                                                      |
 | **[lme4]**                 | `bootMer()`                                                                  |
-| **[partykit]**             | `cforest()`                                                                  |
+| **[partykit]**             | `cforest()`, `varimp()`                                                      |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 | **[SimDesign]**            | `runSimulation()`                                                            |
 
@@ -118,6 +118,7 @@ res <- fwb::fwb(data, statistic, R = 100) |> progressify()
 res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()
 
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
+vi <- partykit::varimp(forest) |> progressify()
 
 v <- sandwich::vcovBS(fit) |> progressify()
 
