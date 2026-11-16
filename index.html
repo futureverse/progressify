@@ -17,8 +17,8 @@
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Progress Reporting of Common Functions via One Magic Function">
-<meta name="description" content="The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with Rs native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. lapply(x, fcn) |&gt; progressify() and purrr::map(x, fcn) |&gt; progressify(). It is compatible with the parallel-processing map-reduce packages future.apply, furrr, crossmap, foreach, doFuture, and futurize. It also supports domain-specific packages including boot, fwb, lme4, partykit, sandwich, and SimDesign, e.g. boot::boot(data, stat, R) |&gt; progressify()'.">
-<meta property="og:description" content="The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with Rs native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. lapply(x, fcn) |&gt; progressify() and purrr::map(x, fcn) |&gt; progressify(). It is compatible with the parallel-processing map-reduce packages future.apply, furrr, crossmap, foreach, doFuture, and futurize. It also supports domain-specific packages including boot, fwb, lme4, partykit, sandwich, and SimDesign, e.g. boot::boot(data, stat, R) |&gt; progressify()'.">
+<meta name="description" content="The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with Rs native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. lapply(x, fcn) |&gt; progressify() and purrr::map(x, fcn) |&gt; progressify(). It is compatible with the parallel-processing map-reduce packages future.apply, furrr, crossmap, foreach, doFuture, and futurize. It also supports domain-specific packages including boot, fwb, lme4, partykit, sandwich, SimDesign, and tm, e.g. boot::boot(data, stat, R) |&gt; progressify()'.">
+<meta property="og:description" content="The progressify() function rewrites (transpiles) calls to sequential and parallel map-reduce functions such as base::lapply(), purrr::map(), foreach::foreach(), and plyr::llply() to signal progress updates. By combining this function with Rs native pipe operator, you have a straightforward way to report progress on iterative computations with minimal refactoring, e.g. lapply(x, fcn) |&gt; progressify() and purrr::map(x, fcn) |&gt; progressify(). It is compatible with the parallel-processing map-reduce packages future.apply, furrr, crossmap, foreach, doFuture, and futurize. It also supports domain-specific packages including boot, fwb, lme4, partykit, sandwich, SimDesign, and tm, e.g. boot::boot(data, stat, R) |&gt; progressify()'.">
 <!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=G-SB3EQSD9FR"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -35,7 +35,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -257,11 +257,15 @@
 </tr>
 <tr>
 <td><strong><a href="https://cran.r-project.org/package=lme4" class="external-link">lme4</a></strong></td>
-<td><code>bootMer()</code></td>
+<td>
+<code>bootMer()</code>, <code>confint(..., method = "boot")</code>
+</td>
 </tr>
 <tr>
 <td><strong><a href="https://cran.r-project.org/package=partykit" class="external-link">partykit</a></strong></td>
-<td><code>cforest()</code></td>
+<td>
+<code>cforest()</code>, <code>varimp()</code>
+</td>
 </tr>
 <tr>
 <td><strong><a href="https://cran.r-project.org/package=sandwich" class="external-link">sandwich</a></strong></td>
@@ -273,6 +277,12 @@
 <td><strong><a href="https://cran.r-project.org/package=SimDesign" class="external-link">SimDesign</a></strong></td>
 <td><code>runSimulation()</code></td>
 </tr>
+<tr>
+<td><strong><a href="https://cran.r-project.org/package=tm" class="external-link">tm</a></strong></td>
+<td>
+<code>tm_map()</code>, <code>TermDocumentMatrix()</code>, <code>DocumentTermMatrix()</code>, <code>tm_index()</code>
+</td>
+</tr>
 </tbody>
 </table>
 <p><em>Table 2: CRAN packages with domain-specific functions currently supported by <code><a href="reference/progressify.html">progressify()</a></code> for progress reporting.</em></p>
@@ -283,12 +293,16 @@
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">fwb</span><span class="fu">::</span><span class="fu"><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">statistic</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/bootMer.html" class="external-link">bootMer</a></span><span class="op">(</span><span class="va">fit</span>, <span class="va">statistic</span>, nsim <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">ci</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">fit</span>, method <span class="op">=</span> <span class="st">"boot"</span>, nsim <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">Survived</span> <span class="op">~</span> <span class="va">.</span>, data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">Titanic</span><span class="op">)</span>, ntree <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">vi</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/varimp.html" class="external-link">varimp</a></span><span class="op">(</span><span class="va">forest</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fu">sandwich</span><span class="fu">::</span><span class="fu"><a href="https://zeileis.codeberg.page/sandwich/reference/vcovBS.html" class="external-link">vcovBS</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">SimDesign</span><span class="fu">::</span><span class="fu"><a href="http://philchalmers.github.io/SimDesign/reference/runSimulation.html" class="external-link">runSimulation</a></span><span class="op">(</span><span class="va">design</span>, <span class="va">replications</span>, <span class="va">generate</span>, <span class="va">analyse</span>, <span class="va">summarise</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">SimDesign</span><span class="fu">::</span><span class="fu"><a href="http://philchalmers.github.io/SimDesign/reference/runSimulation.html" class="external-link">runSimulation</a></span><span class="op">(</span><span class="va">design</span>, <span class="va">replications</span>, <span class="va">generate</span>, <span class="va">analyse</span>, <span class="va">summarise</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tdm</span> <span class="op">&lt;-</span> <span class="fu">tm</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tm/man/matrix.html" class="external-link">TermDocumentMatrix</a></span><span class="op">(</span><span class="va">corpus</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -312,7 +326,8 @@
 <span></span>
 <span><span class="va">ys</span> <span class="op">&lt;-</span> <span class="fu">plyr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/plyr/man/llply.html" class="external-link">llply</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">slow_fcn</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">forest</span> <span class="op">&lt;-</span> <span class="fu">partykit</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest</a></span><span class="op">(</span><span class="va">dist</span> <span class="op">~</span> <span class="va">speed</span>, data <span class="op">=</span> <span class="va">cars</span>, ntree <span class="op">=</span> <span class="fl">50L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">boot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/boot/man/boot.html" class="external-link">boot</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">statistic</span>, R <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>An exception is functions where both <strong>progressify</strong> and <strong>futurize</strong> work by setting the same argument or option, which only one of them can control. This is the case for <strong>partykit</strong> (<code>applyfun</code>), <strong>sandwich</strong> (<code>applyfun</code>), and <strong>tm</strong> (<code>tm_parLapply_engine()</code>). These cannot yet be combined. With <code>|&gt; progressify() |&gt; futurize()</code>, the <strong>partykit</strong> and <strong>sandwich</strong> functions give an error and the <strong>tm</strong> functions run in parallel without reporting on progress. With <code>|&gt; futurize() |&gt; progressify()</code>, they report on progress, but run sequentially.</p>
 </div>
 </div>
 

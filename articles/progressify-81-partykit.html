@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -187,6 +187,10 @@ progressed, but we can easily add progress reporting by using:</p>
 <p>Using the default progress handler, the progress reporting will
 appear as:</p>
 <pre class="plain"><code>  |=====                    |  20%</code></pre>
+<p>Similarly, we can report on progress when calculating the variable
+importance of the trees in the forest:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">vi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/partykit/man/varimp.html" class="external-link">varimp</a></span><span class="op">(</span><span class="va">forest</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="supported-functions">Supported Functions<a class="anchor" aria-label="anchor" href="#supported-functions"></a>
@@ -195,7 +199,20 @@ appear as:</p>
 <strong>partykit</strong> functions:</p>
 <ul>
 <li><code><a href="https://rdrr.io/pkg/partykit/man/cforest.html" class="external-link">cforest()</a></code></li>
+<li>
+<code><a href="https://rdrr.io/pkg/partykit/man/varimp.html" class="external-link">varimp()</a></code> for <code>cforest</code> objects</li>
 </ul>
+</div>
+<div class="section level2">
+<h2 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
+</h2>
+<p>The <code><a href="../reference/progressify.html">progressify()</a></code> function cannot yet be combined with
+<code><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize()</a></code> of the <strong><a href="https://futurize.futureverse.org" class="external-link">futurize</a></strong> package
+for <strong>partykit</strong> functions, because both work by setting
+the <code>applyfun</code> argument, which only one of them can control.
+With <code>|&gt; progressify() |&gt; futurize()</code>, there is an
+error. With <code>|&gt; futurize() |&gt; progressify()</code>, there is
+progress reporting, but the processing is sequential.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

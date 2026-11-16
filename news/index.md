@@ -2,6 +2,36 @@
 
 ## Version (development version)
 
+### New Features
+
+- Add support for
+  [`varimp()`](https://rdrr.io/pkg/partykit/man/varimp.html) of
+  **partykit** for `cforest` objects,
+  e.g. `vi <- partykit::varimp(forest) |> progressify()`.
+
+- Add support for [`confint()`](https://rdrr.io/r/stats/confint.html) of
+  **lme4** with `method = "boot"`,
+  e.g. `ci <- confint(fit, method = "boot", nsim = 100) |> progressify()`.
+
+- Add support for domain-specific CRAN package **tm**,
+  e.g. `tdm <- tm::TermDocumentMatrix(corpus) |> progressify()`.
+  Supported functions are
+  [`tm_map()`](https://rdrr.io/pkg/tm/man/tm_map.html),
+  [`TermDocumentMatrix()`](https://rdrr.io/pkg/tm/man/matrix.html),
+  [`DocumentTermMatrix()`](https://rdrr.io/pkg/tm/man/matrix.html), and
+  [`tm_index()`](https://rdrr.io/pkg/tm/man/tm_filter.html).
+
+### Documentation
+
+- Document that
+  [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+  cannot yet be combined with
+  [`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+  for **partykit**, **sandwich**, and **tm** functions, because both set
+  the same `applyfun` argument or
+  [`tm_parLapply_engine()`](https://rdrr.io/pkg/tm/man/hpc.html) option.
+  Removed a **partykit** example from the README that combined the two.
+
 ### Bug Fixes
 
 - [`progressify()`](https://progressify.futureverse.org/reference/progressify.md)

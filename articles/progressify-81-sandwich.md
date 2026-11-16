@@ -73,3 +73,16 @@ function supports the following **sandwich** functions:
 
 - [`vcovBS()`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)
 - [`vcovJK()`](https://zeileis.codeberg.page/sandwich/reference/vcovJK.html)
+
+## Limitations
+
+The
+[`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+function cannot yet be combined with
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+of the **[futurize](https://futurize.futureverse.org)** package for
+**sandwich** functions, because both work by setting the `applyfun`
+argument, which only one of them can control. With
+`|> progressify() |> futurize()`, there is an error. With
+`|> futurize() |> progressify()`, there is progress reporting, but the
+processing is sequential.

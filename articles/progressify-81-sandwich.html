@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -204,6 +204,17 @@ progressified:</p>
 <li><code><a href="https://zeileis.codeberg.page/sandwich/reference/vcovBS.html" class="external-link">vcovBS()</a></code></li>
 <li><code><a href="https://zeileis.codeberg.page/sandwich/reference/vcovJK.html" class="external-link">vcovJK()</a></code></li>
 </ul>
+</div>
+<div class="section level2">
+<h2 id="limitations">Limitations<a class="anchor" aria-label="anchor" href="#limitations"></a>
+</h2>
+<p>The <code><a href="../reference/progressify.html">progressify()</a></code> function cannot yet be combined with
+<code><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize()</a></code> of the <strong><a href="https://futurize.futureverse.org" class="external-link">futurize</a></strong> package
+for <strong>sandwich</strong> functions, because both work by setting
+the <code>applyfun</code> argument, which only one of them can control.
+With <code>|&gt; progressify() |&gt; futurize()</code>, there is an
+error. With <code>|&gt; futurize() |&gt; progressify()</code>, there is
+progress reporting, but the processing is sequential.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -197,6 +197,10 @@ However, we can easily add progress reporting using the
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/bootMer.html" class="external-link">bootMer</a></span><span class="op">(</span><span class="va">fm1</span>, <span class="va">my_stat</span>, nsim <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The same works for parametric bootstrap confidence intervals, which
+use <code><a href="https://rdrr.io/pkg/lme4/man/bootMer.html" class="external-link">bootMer()</a></code> internally:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ci</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint</a></span><span class="op">(</span><span class="va">fm1</span>, method <span class="op">=</span> <span class="st">"boot"</span>, nsim <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/progressify.html">progressify</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="supported-functions">Supported Functions<a class="anchor" aria-label="anchor" href="#supported-functions"></a>
@@ -205,6 +209,10 @@ However, we can easily add progress reporting using the
 <strong>lme4</strong> functions:</p>
 <ul>
 <li><code><a href="https://rdrr.io/pkg/lme4/man/bootMer.html" class="external-link">bootMer()</a></code></li>
+<li>
+<code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> for <code>merMod</code> objects with
+<code>method = "boot"</code>
+</li>
 </ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

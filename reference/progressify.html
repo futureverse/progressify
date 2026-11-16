@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -163,7 +163,7 @@ patterns like:</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># listen to progress updates</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in globalCallingHandlers(condition = global_progression_handler):</span> should not be called with handlers on the stack</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> progressr::handlers(global = TRUE) cannot be called when condition handlers are active, which is a limitation of R's globalCallingHandlers(). Detected active handlers from: tryCatch(), withCallingHandlers(). This happens when it is called via tryCatch(), try(), withCallingHandlers(), suppressMessages(), suppressWarnings(), etc., from within a 'knitr', 'rmarkdown', or 'quarto' document, from a 'testthat' test, or from a package's .onLoad() or .onAttach() function. Instead, call it at the top level, e.g. at the R prompt, at the top of your R script, or in your ~/.Rprofile startup file. Alternatively, use with_progress() to report on progress for a specific expression.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">xs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span>X <span class="op">=</span> <span class="va">xs</span>, FUN <span class="op">=</span> <span class="va">sum</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">progressify</span><span class="op">(</span><span class="op">)</span></span></span>

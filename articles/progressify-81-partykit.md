@@ -56,6 +56,12 @@ as:
   |=====                    |  20%
 ```
 
+Similarly, we can report on progress when calculating the variable
+importance of the trees in the forest:
+
+\
+`vi`` ``<-`` `[`varimp`](https://rdrr.io/pkg/partykit/man/varimp.html)`(``forest``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
+
 ## Supported Functions
 
 The
@@ -63,3 +69,18 @@ The
 function supports the following **partykit** functions:
 
 - [`cforest()`](https://rdrr.io/pkg/partykit/man/cforest.html)
+- [`varimp()`](https://rdrr.io/pkg/partykit/man/varimp.html) for
+  `cforest` objects
+
+## Limitations
+
+The
+[`progressify()`](https://progressify.futureverse.org/reference/progressify.md)
+function cannot yet be combined with
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+of the **[futurize](https://futurize.futureverse.org)** package for
+**partykit** functions, because both work by setting the `applyfun`
+argument, which only one of them can control. With
+`|> progressify() |> futurize()`, there is an error. With
+`|> futurize() |> progressify()`, there is progress reporting, but the
+processing is sequential.

@@ -78,7 +78,7 @@ avoiding having to write:
 
 ``` r
 handlers(global = TRUE) # listen to progress updates
-#> Error in globalCallingHandlers(condition = global_progression_handler): should not be called with handlers on the stack
+#> Error: progressr::handlers(global = TRUE) cannot be called when condition handlers are active, which is a limitation of R's globalCallingHandlers(). Detected active handlers from: tryCatch(), withCallingHandlers(). This happens when it is called via tryCatch(), try(), withCallingHandlers(), suppressMessages(), suppressWarnings(), etc., from within a 'knitr', 'rmarkdown', or 'quarto' document, from a 'testthat' test, or from a package's .onLoad() or .onAttach() function. Instead, call it at the top level, e.g. at the R prompt, at the top of your R script, or in your ~/.Rprofile startup file. Alternatively, use with_progress() to report on progress for a specific expression.
 
 xs <- list(1, 1:2, 1:2, 1:5)
 y <- lapply(X = xs, FUN = sum) |> progressify()

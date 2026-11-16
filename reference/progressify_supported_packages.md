@@ -28,6 +28,7 @@ pkgs
 #>  [1] "SimDesign"    "base"         "boot"         "crossmap"     "doFuture"    
 #>  [6] "foreach"      "furrr"        "future.apply" "fwb"          "lme4"        
 #> [11] "partykit"     "plyr"         "purrr"        "sandwich"     "stats"       
+#> [16] "tm"          
 
 fcns <- progressify_supported_functions("base")
 print(fcns)

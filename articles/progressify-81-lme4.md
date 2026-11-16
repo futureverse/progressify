@@ -62,6 +62,12 @@ function:
 \
 `res`` ``<-`` `[`bootMer`](https://rdrr.io/pkg/lme4/man/bootMer.html)`(``fm1``, ``my_stat``, nsim ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
+The same works for parametric bootstrap confidence intervals, which use
+[`bootMer()`](https://rdrr.io/pkg/lme4/man/bootMer.html) internally:
+
+\
+`ci`` ``<-`` `[`confint`](https://rdrr.io/r/stats/confint.html)`(``fm1``, method ``=`` ``"boot"``, nsim ``=`` ``1000``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
+
 ## Supported Functions
 
 The
@@ -69,3 +75,5 @@ The
 function supports the following **lme4** functions:
 
 - [`bootMer()`](https://rdrr.io/pkg/lme4/man/bootMer.html)
+- [`confint()`](https://rdrr.io/r/stats/confint.html) for `merMod`
+  objects with `method = "boot"`

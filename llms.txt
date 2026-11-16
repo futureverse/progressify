@@ -98,10 +98,11 @@ CRAN packages that have optional built-in support for parallelization.
 |----|----|
 | **[boot](https://cran.r-project.org/package=boot)** | `boot()`, `censboot()`, `tsboot()` |
 | **[fwb](https://cran.r-project.org/package=fwb)** | `fwb()` |
-| **[lme4](https://cran.r-project.org/package=lme4)** | `bootMer()` |
-| **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()` |
+| **[lme4](https://cran.r-project.org/package=lme4)** | `bootMer()`, `confint(..., method = "boot")` |
+| **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()`, `varimp()` |
 | **[sandwich](https://cran.r-project.org/package=sandwich)** | `vcovBS()`, `vcovJK()` |
 | **[SimDesign](https://cran.r-project.org/package=SimDesign)** | `runSimulation()` |
+| **[tm](https://cran.r-project.org/package=tm)** | `tm_map()`, `TermDocumentMatrix()`, `DocumentTermMatrix()`, `tm_index()` |
 
 *Table 2: CRAN packages with domain-specific functions currently
 supported by
@@ -116,12 +117,16 @@ Here are some examples:
 `res`` ``<-`` ``fwb``::`[`fwb`](https://ngreifer.github.io/fwb/reference/fwb.html)`(``data``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
 `res`` ``<-`` ``lme4``::`[`bootMer`](https://rdrr.io/pkg/lme4/man/bootMer.html)`(``fit``, ``statistic``, nsim ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+`ci`` ``<-`` `[`confint`](https://rdrr.io/r/stats/confint.html)`(``fit``, method ``=`` ``"boot"``, nsim ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
 `forest`` ``<-`` ``partykit``::`[`cforest`](https://rdrr.io/pkg/partykit/man/cforest.html)`(``Survived`` ``~`` ``.``, data ``=`` `[`as.data.frame`](https://rdrr.io/r/base/as.data.frame.html)`(``Titanic``)``, ntree ``=`` ``50L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+`vi`` ``<-`` ``partykit``::`[`varimp`](https://rdrr.io/pkg/partykit/man/varimp.html)`(``forest``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
 `v`` ``<-`` ``sandwich``::`[`vcovBS`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)`(``fit``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
-`res`` ``<-`` ``SimDesign``::`[`runSimulation`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)`(``design``, ``replications``, ``generate``, ``analyse``, ``summarise``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
+`res`` ``<-`` ``SimDesign``::`[`runSimulation`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)`(``design``, ``replications``, ``generate``, ``analyse``, ``summarise``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`tdm`` ``<-`` ``tm``::`[`TermDocumentMatrix`](https://rdrr.io/pkg/tm/man/matrix.html)`(``corpus``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
 ## Compatible with futurize
 
@@ -148,7 +153,17 @@ and parallelization:
 \
 `ys`` ``<-`` ``plyr``::`[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``slow_fcn``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
 \
-`forest`` ``<-`` ``partykit``::`[`cforest`](https://rdrr.io/pkg/partykit/man/cforest.html)`(``dist`` ``~`` ``speed``, data ``=`` ``cars``, ntree ``=`` ``50L``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`
+`res`` ``<-`` ``boot``::`[`boot`](https://rdrr.io/pkg/boot/man/boot.html)`(``data``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`
+
+An exception is functions where both **progressify** and **futurize**
+work by setting the same argument or option, which only one of them can
+control. This is the case for **partykit** (`applyfun`), **sandwich**
+(`applyfun`), and **tm** (`tm_parLapply_engine()`). These cannot yet be
+combined. With `|> progressify() |> futurize()`, the **partykit** and
+**sandwich** functions give an error and the **tm** functions run in
+parallel without reporting on progress. With
+`|> futurize() |> progressify()`, they report on progress, but run
+sequentially.
 
 # Package index
 
@@ -192,3 +207,5 @@ and parallelization:
   functions](https://progressify.futureverse.org/articles/progressify-81-sandwich.md):
 - [Progress updates for 'SimDesign'
   functions](https://progressify.futureverse.org/articles/progressify-81-SimDesign.md):
+- [Progress updates for 'tm'
+  functions](https://progressify.futureverse.org/articles/progressify-81-tm.md):
