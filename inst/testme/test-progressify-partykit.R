@@ -125,7 +125,7 @@ for (kk in seq_along(exprs)) {
 ## varimp() for non-supported 'constparty' objects
 tree <- ctree(Survived ~ ., data = tt)
 res <- tryCatch(varimp(tree) |> progressify(), error = identity)
-print(res)
 stopifnot(inherits(res, "error"))
+message("Expected error: ", conditionMessage(res))
 
 } # if (requireNamespace("partykit"))
