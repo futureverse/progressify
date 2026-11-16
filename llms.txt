@@ -102,6 +102,7 @@ CRAN packages that have optional built-in support for parallelization.
 | **[partykit](https://cran.r-project.org/package=partykit)** | `cforest()`, `varimp()` |
 | **[sandwich](https://cran.r-project.org/package=sandwich)** | `vcovBS()`, `vcovJK()` |
 | **[SimDesign](https://cran.r-project.org/package=SimDesign)** | `runSimulation()` |
+| **[Sim.DiffProc](https://cran.r-project.org/package=Sim.DiffProc)** | `MCM.sde()` |
 | **[tm](https://cran.r-project.org/package=tm)** | `tm_map()`, `TermDocumentMatrix()`, `DocumentTermMatrix()`, `tm_index()` |
 
 *Table 2: CRAN packages with domain-specific functions currently
@@ -125,6 +126,8 @@ Here are some examples:
 `v`` ``<-`` ``sandwich``::`[`vcovBS`](https://zeileis.codeberg.page/sandwich/reference/vcovBS.html)`(``fit``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
 `res`` ``<-`` ``SimDesign``::`[`runSimulation`](http://philchalmers.github.io/SimDesign/reference/runSimulation.md)`(``design``, ``replications``, ``generate``, ``analyse``, ``summarise``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
+\
+`res`` ``<-`` ``Sim.DiffProc``::`[`MCM.sde`](https://rdrr.io/pkg/Sim.DiffProc/man/MCM.sde.html)`(``model``, ``statistic``, R ``=`` ``100``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`\
 \
 `tdm`` ``<-`` ``tm``::`[`TermDocumentMatrix`](https://rdrr.io/pkg/tm/man/matrix.html)`(``corpus``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.md)`(``)`
 
@@ -163,7 +166,9 @@ combined. With `|> progressify() |> futurize()`, the **partykit** and
 **sandwich** functions give an error and the **tm** functions run in
 parallel without reporting on progress. With
 `|> futurize() |> progressify()`, they report on progress, but run
-sequentially.
+sequentially. For **Sim.DiffProc**, use
+`|> futurize() |> progressify()`, which reports on progress and runs in
+parallel, whereas `|> progressify() |> futurize()` gives an error.
 
 # Package index
 
@@ -205,6 +210,8 @@ sequentially.
   functions](https://progressify.futureverse.org/articles/progressify-81-partykit.md):
 - [Progress updates for 'sandwich'
   functions](https://progressify.futureverse.org/articles/progressify-81-sandwich.md):
+- [Progress updates for 'Sim.DiffProc'
+  functions](https://progressify.futureverse.org/articles/progressify-81-Sim.DiffProc.md):
 - [Progress updates for 'SimDesign'
   functions](https://progressify.futureverse.org/articles/progressify-81-SimDesign.md):
 - [Progress updates for 'tm'

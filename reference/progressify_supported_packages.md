@@ -25,10 +25,10 @@ A character vector of package or function names.
 ``` r
 pkgs <- progressify_supported_packages()
 pkgs
-#>  [1] "SimDesign"    "base"         "boot"         "crossmap"     "doFuture"    
-#>  [6] "foreach"      "furrr"        "future.apply" "fwb"          "lme4"        
-#> [11] "partykit"     "plyr"         "purrr"        "sandwich"     "stats"       
-#> [16] "tm"          
+#>  [1] "Sim.DiffProc" "SimDesign"    "base"         "boot"         "crossmap"    
+#>  [6] "doFuture"     "foreach"      "furrr"        "future.apply" "fwb"         
+#> [11] "lme4"         "partykit"     "plyr"         "purrr"        "sandwich"    
+#> [16] "stats"        "tm"          
 
 fcns <- progressify_supported_functions("base")
 print(fcns)

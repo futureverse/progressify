@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,6 +96,7 @@
 <ul><li><p>Add support for <code><a href="https://rdrr.io/pkg/partykit/man/varimp.html" class="external-link">varimp()</a></code> of <strong>partykit</strong> for <code>cforest</code> objects, e.g. <code>vi &lt;- partykit::varimp(forest) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> of <strong>lme4</strong> with <code>method = "boot"</code>, e.g. <code>ci &lt;- confint(fit, method = "boot", nsim = 100) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for domain-specific CRAN package <strong>tm</strong>, e.g. <code>tdm &lt;- tm::TermDocumentMatrix(corpus) |&gt; progressify()</code>. Supported functions are <code><a href="https://rdrr.io/pkg/tm/man/tm_map.html" class="external-link">tm_map()</a></code>, <code><a href="https://rdrr.io/pkg/tm/man/matrix.html" class="external-link">TermDocumentMatrix()</a></code>, <code><a href="https://rdrr.io/pkg/tm/man/matrix.html" class="external-link">DocumentTermMatrix()</a></code>, and <code><a href="https://rdrr.io/pkg/tm/man/tm_filter.html" class="external-link">tm_index()</a></code>.</p></li>
+<li><p>Add support for domain-specific CRAN package <strong>Sim.DiffProc</strong>, e.g. <code>res &lt;- Sim.DiffProc::MCM.sde(model, statistic, R = 100) |&gt; progressify()</code>, which reports on progress for each of the <code>R</code> simulations.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-development-version">Documentation<a class="anchor" aria-label="anchor" href="#documentation-development-version"></a></h3>

@@ -15,9 +15,10 @@ articles:
   progressify-81-lme4: progressify-81-lme4.html
   progressify-81-partykit: progressify-81-partykit.html
   progressify-81-sandwich: progressify-81-sandwich.html
+  progressify-81-Sim.DiffProc: progressify-81-Sim.DiffProc.html
   progressify-81-SimDesign: progressify-81-SimDesign.html
   progressify-81-tm: progressify-81-tm.html
-last_built: 2026-11-16T00:31Z
+last_built: 2026-11-16T00:42Z
 urls:
   reference: https://progressify.futureverse.org/reference
   article: https://progressify.futureverse.org/articles

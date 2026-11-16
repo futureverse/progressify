@@ -21,6 +21,10 @@
   [`DocumentTermMatrix()`](https://rdrr.io/pkg/tm/man/matrix.html), and
   [`tm_index()`](https://rdrr.io/pkg/tm/man/tm_filter.html).
 
+- Add support for domain-specific CRAN package **Sim.DiffProc**,
+  e.g. `res <- Sim.DiffProc::MCM.sde(model, statistic, R = 100) |> progressify()`,
+  which reports on progress for each of the `R` simulations.
+
 ### Documentation
 
 - Document that
