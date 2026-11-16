@@ -9,6 +9,11 @@
    e.g. `ci <- confint(fit, method = "boot", nsim = 100) |>
    progressify()`.
 
+ * Add support for domain-specific CRAN package **tm**, e.g. `tdm <-
+   tm::TermDocumentMatrix(corpus) |> progressify()`. Supported
+   functions are `tm_map()`, `TermDocumentMatrix()`,
+   `DocumentTermMatrix()`, and `tm_index()`.
+
 ## Bug Fixes
 
  * `progressify()` for `fwb()` of **fwb** (>= 1.0.0) would signal one

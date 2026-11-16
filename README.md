@@ -105,6 +105,7 @@ parallelization.
 | **[partykit]**             | `cforest()`, `varimp()`                                                      |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 | **[SimDesign]**            | `runSimulation()`                                                            |
+| **[tm]**                   | `tm_map()`, `TermDocumentMatrix()`, `DocumentTermMatrix()`, `tm_index()`     |
 
 _Table 2: CRAN packages with domain-specific functions currently supported by `progressify()` for progress reporting._
 
@@ -124,6 +125,8 @@ vi <- partykit::varimp(forest) |> progressify()
 v <- sandwich::vcovBS(fit) |> progressify()
 
 res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()
+
+tdm <- tm::TermDocumentMatrix(corpus) |> progressify()
 ```
 
 
@@ -172,3 +175,4 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 [sandwich]: https://cran.r-project.org/package=sandwich
 [SimDesign]: https://cran.r-project.org/package=SimDesign
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html
+[tm]: https://cran.r-project.org/package=tm
