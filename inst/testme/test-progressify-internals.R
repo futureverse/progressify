@@ -7,11 +7,11 @@ message("*** Internals")
 # Debug functions
 # --------------------------------------------------------------------
 message("debug_indent()")
-oopts <- options(warn = 2L)
+oopts_warn <- options(warn = 2L)
 res <- tryCatch(progressify:::debug_indent(delta = -1L), error = identity)
 print(res)
 stopifnot(inherits(res, "error"))
-options(oopts)
+options(oopts_warn)
 
 
 # --------------------------------------------------------------------

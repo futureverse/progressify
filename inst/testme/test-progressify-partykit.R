@@ -101,13 +101,13 @@ for (kk in seq_along(exprs)) {
   ## Count progress updates; progressr.enable = TRUE makes progressor()
   ## signal 'progression' conditions also in non-interactive mode
   nupdates <- 0L
-  oopts <- options(progressr.enable = TRUE)
+  oopts_progressr <- options(progressr.enable = TRUE)
   set.seed(1L)
   res <- withCallingHandlers(eval(expr_f), progression = function(p) {
     if (identical(p[["type"]], "update")) nupdates <<- nupdates + 1L
     invokeRestart("muffleProgression")
   })
-  options(oopts)
+  options(oopts_progressr)
   str(list(truth = truth, res = res, nupdates = nupdates))
   stopifnot(identical(res, truth))
   stopifnot(nupdates == ntree)

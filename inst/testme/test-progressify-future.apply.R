@@ -129,7 +129,7 @@ for (kk in seq_along(exprs)) {
 ## -------------------------------------------------------
 ## Enable progress reporting to force resolve progressor()'s 'steps' and
 ## 'along' arguments
-oopts <- options(progressr.enable = TRUE)
+oopts_progressr <- options(progressr.enable = TRUE)
 
 ## A function that returns 'value' and counts how many times it is called
 n_calls <- 0L
@@ -159,14 +159,14 @@ for (kk in seq_along(exprs)) {
   stopifnot(n_calls == 1L, identical(res, truth))
 }
 
-options(oopts)
+options(oopts_progressr)
 
 ## -------------------------------------------------------
 ## The wrapped FUN must not carry a copy of the data
 ## -------------------------------------------------------
 ## Enable progress reporting to force resolve progressor()'s 'steps' and
 ## 'along' arguments
-oopts <- options(progressr.enable = TRUE)
+oopts_progressr <- options(progressr.enable = TRUE)
 oplan <- future::plan(future::sequential)
 
 big <- lapply(1:3, function(i) rnorm(30000))  ## ~0.7 MB
@@ -200,7 +200,7 @@ for (kk in seq_along(exprs)) {
   stopifnot(weight < as.numeric(object.size(big)) / 2)
 }
 
-options(oopts)
+options(oopts_progressr)
 future::plan(oplan)
 
 } # if (requireNamespace("future.apply"))
