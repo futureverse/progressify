@@ -173,6 +173,22 @@ sequentially. For **Sim.DiffProc**, use
 `|> futurize() |> progressify()`, which reports on progress and runs in
 parallel, whereas `|> progressify() |> futurize()` gives an error.
 
+## Installation
+
+R package progressify is available on
+[CRAN](https://cran.r-project.org/package=progressify) and can be
+installed in R as:
+
+\
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"progressify"``)`
+
+### Pre-release version
+
+To install the pre-release version, use:
+
+\
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"progressify"``, repos ``=`` `[`c`](https://rdrr.io/r/base/c.html)`(``"https://futureverse-devel.r-universe.dev"``, ``"https://cloud.r-project.org"``)``)`
+
 # Package index
 
 ## All functions
