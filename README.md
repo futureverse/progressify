@@ -176,6 +176,24 @@ progressify()`, which reports on progress and runs in parallel,
 whereas `|> progressify() |> futurize()` gives an error.
 
 
+## Installation
+
+R package progressify is available on [CRAN](https://cran.r-project.org/package=progressify) and can be installed in R as:
+
+```r
+install.packages("progressify")
+```
+
+
+### Pre-release version
+
+To install the pre-release version, use:
+
+```r
+install.packages("progressify", repos = c("https://futureverse-devel.r-universe.dev", "https://cloud.r-project.org"))
+```
+
+
 [futureverse]: https://www.futureverse.org
 [boot]: https://cran.r-project.org/package=boot
 [car]: https://cran.r-project.org/package=car
