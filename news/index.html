@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressify</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.0-9009</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.5.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,9 +90,9 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.5.0" id="version-050">Version 0.5.0<a class="anchor" aria-label="anchor" href="#version-050"></a></h2>
 <div class="section level3">
-<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-5-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-5-0"></a></h3>
 <ul><li><p>Add support for <code><a href="https://rdrr.io/pkg/partykit/man/varimp.html" class="external-link">varimp()</a></code> of <strong>partykit</strong> for <code>cforest</code> objects, e.g. <code>vi &lt;- partykit::varimp(forest) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for <code><a href="https://rdrr.io/r/stats/confint.html" class="external-link">confint()</a></code> of <strong>lme4</strong> with <code>method = "boot"</code>, e.g. <code>ci &lt;- confint(fit, method = "boot", nsim = 100) |&gt; progressify()</code>.</p></li>
 <li><p>Add support for domain-specific CRAN package <strong>tm</strong>, e.g. <code>tdm &lt;- tm::TermDocumentMatrix(corpus) |&gt; progressify()</code>. Supported functions are <code><a href="https://rdrr.io/pkg/tm/man/tm_map.html" class="external-link">tm_map()</a></code>, <code><a href="https://rdrr.io/pkg/tm/man/matrix.html" class="external-link">TermDocumentMatrix()</a></code>, <code><a href="https://rdrr.io/pkg/tm/man/matrix.html" class="external-link">DocumentTermMatrix()</a></code>, and <code><a href="https://rdrr.io/pkg/tm/man/tm_filter.html" class="external-link">tm_index()</a></code>.</p></li>
@@ -100,16 +100,16 @@
 <li><p>Add support for domain-specific CRAN package <strong>car</strong>, e.g. <code>res &lt;- car::Boot(fit, R = 999) |&gt; progressify()</code>.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-development-version">Documentation<a class="anchor" aria-label="anchor" href="#documentation-development-version"></a></h3>
+<h3 id="documentation-0-5-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-5-0"></a></h3>
 <ul><li>Document that <code><a href="../reference/progressify.html">progressify()</a></code> cannot yet be combined with <code><a href="https://futurize.futureverse.org/reference/futurize.html" class="external-link">futurize()</a></code> for <strong>partykit</strong>, <strong>sandwich</strong>, and <strong>tm</strong> functions, because both set the same <code>applyfun</code> argument or <code><a href="https://rdrr.io/pkg/tm/man/hpc.html" class="external-link">tm_parLapply_engine()</a></code> option. Removed a <strong>partykit</strong> example from the README that combined the two.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-5-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-5-0"></a></h3>
 <ul><li>
 <code><a href="../reference/progressify.html">progressify()</a></code> for <code><a href="https://ngreifer.github.io/fwb/reference/fwb.html" class="external-link">fwb()</a></code> of <strong>fwb</strong> (&gt;= 1.0.0) would signal one fewer progress update than the number of bootstrap replicates (<code>R</code>), unless called with <code>simple = FALSE</code> or <code>wtype = "multinom"</code>. This bug affected the default call, i.e. <code>fwb(data, statistic) |&gt; progressify()</code>.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="miscellaneous-development-version">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-development-version"></a></h3>
+<h3 id="miscellaneous-0-5-0">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-5-0"></a></h3>
 <ul><li>Now using <code>genericFunction</code> for S4 classes rather than <code>standardGeneric</code>, which will be removed in R (&gt;= 4.7.0).</li>
 </ul></div>
 </div>
