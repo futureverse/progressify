@@ -69,6 +69,13 @@ my_stat <- function(fit) {
 res <- bootMer(fm1, my_stat, nsim = 1000) |> progressify()
 ```
 
+The same works for parametric bootstrap confidence intervals, which
+use `bootMer()` internally:
+
+```r
+ci <- confint(fm1, method = "boot", nsim = 1000) |> progressify()
+```
+
 
 # Supported Functions
 
@@ -76,6 +83,7 @@ The `progressify()` function supports the following **lme4**
 functions:
 
  * `bootMer()`
+ * `confint()` for `merMod` objects with `method = "boot"`
 
 
 [lme4]: https://cran.r-project.org/package=lme4

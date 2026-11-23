@@ -65,6 +65,13 @@ appear as:
   |=====                    |  20%
 ```
 
+Similarly, we can report on progress when calculating the variable
+importance of the trees in the forest:
+
+```r
+vi <- varimp(forest) |> progressify()
+```
+
 
 # Supported Functions
 
@@ -72,6 +79,18 @@ The `progressify()` function supports the following **partykit**
 functions:
 
  * `cforest()`
+ * `varimp()` for `cforest` objects
+
+
+# Limitations
+
+The `progressify()` function cannot yet be combined with `futurize()`
+of the **[futurize]** package for **partykit** functions, because both
+work by setting the `applyfun` argument, which only one of them can
+control. With `|> progressify() |> futurize()`, there is an error.
+With `|> futurize() |> progressify()`, there is progress reporting,
+but the processing is sequential.
 
 
 [partykit]: https://cran.r-project.org/package=partykit
+[futurize]: https://futurize.futureverse.org

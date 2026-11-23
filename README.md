@@ -100,11 +100,14 @@ parallelization.
 | Package                    | Functions                                                                    |
 |----------------------------|------------------------------------------------------------------------------|
 | **[boot]**                 | `boot()`, `censboot()`, `tsboot()`                                           |
+| **[car]**                  | `Boot()`                                                                     |
 | **[fwb]**                  | `fwb()`                                                                      |
-| **[lme4]**                 | `bootMer()`                                                                  |
-| **[partykit]**             | `cforest()`                                                                  |
+| **[lme4]**                 | `bootMer()`, `confint(..., method = "boot")`                                 |
+| **[partykit]**             | `cforest()`, `varimp()`                                                      |
 | **[sandwich]**             | `vcovBS()`, `vcovJK()`                                                       |
 | **[SimDesign]**            | `runSimulation()`                                                            |
+| **[Sim.DiffProc]**         | `MCM.sde()`                                                                  |
+| **[tm]**                   | `tm_map()`, `TermDocumentMatrix()`, `DocumentTermMatrix()`, `tm_index()`     |
 
 _Table 2: CRAN packages with domain-specific functions currently supported by `progressify()` for progress reporting._
 
@@ -113,15 +116,23 @@ Here are some examples:
 ```r
 res <- boot::boot(data, statistic, R = 100) |> progressify()
 
+res <- car::Boot(fit, R = 999) |> progressify()
+
 res <- fwb::fwb(data, statistic, R = 100) |> progressify()
 
 res <- lme4::bootMer(fit, statistic, nsim = 100) |> progressify()
+ci <- confint(fit, method = "boot", nsim = 100) |> progressify()
 
 forest <- partykit::cforest(Survived ~ ., data = as.data.frame(Titanic), ntree = 50L) |> progressify()
+vi <- partykit::varimp(forest) |> progressify()
 
 v <- sandwich::vcovBS(fit) |> progressify()
 
 res <- SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()
+
+res <- Sim.DiffProc::MCM.sde(model, statistic, R = 100) |> progressify()
+
+tdm <- tm::TermDocumentMatrix(corpus) |> progressify()
 ```
 
 
@@ -149,12 +160,43 @@ ys <- foreach(x = xs) %do% { slow_fcn(x) } |> progressify() |> futurize()
 
 ys <- plyr::llply(xs, slow_fcn) |> progressify() |> futurize()
 
-forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressify() |> futurize()
+res <- boot::boot(data, statistic, R = 100) |> progressify() |> futurize()
+```
+
+An exception is functions where both **progressify** and **futurize**
+work by setting the same argument or option, which only one of them
+can control. This is the case for **partykit** (`applyfun`),
+**sandwich** (`applyfun`), and **tm** (`tm_parLapply_engine()`).
+These cannot yet be combined. With `|> progressify() |> futurize()`,
+the **partykit** and **sandwich** functions give an error and the
+**tm** functions run in parallel without reporting on progress. With
+`|> futurize() |> progressify()`, they report on progress, but run
+sequentially. For **Sim.DiffProc**, use `|> futurize() |>
+progressify()`, which reports on progress and runs in parallel,
+whereas `|> progressify() |> futurize()` gives an error.
+
+
+## Installation
+
+R package progressify is available on [CRAN](https://cran.r-project.org/package=progressify) and can be installed in R as:
+
+```r
+install.packages("progressify")
+```
+
+
+### Pre-release version
+
+To install the pre-release version, use:
+
+```r
+install.packages("progressify", repos = c("https://futureverse-devel.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
 
 [futureverse]: https://www.futureverse.org
 [boot]: https://cran.r-project.org/package=boot
+[car]: https://cran.r-project.org/package=car
 [crossmap]: https://cran.r-project.org/package=crossmap
 [doFuture]: https://doFuture.futureverse.org
 [foreach]: https://cran.r-project.org/package=foreach
@@ -169,4 +211,6 @@ forest <- partykit::cforest(dist ~ speed, data = cars, ntree = 50L) |> progressi
 [purrr]: https://cran.r-project.org/package=purrr
 [sandwich]: https://cran.r-project.org/package=sandwich
 [SimDesign]: https://cran.r-project.org/package=SimDesign
+[Sim.DiffProc]: https://cran.r-project.org/package=Sim.DiffProc
 [supported progressr handlers]: https://progressr.futureverse.org/articles/progressr-11-handlers.html
+[tm]: https://cran.r-project.org/package=tm

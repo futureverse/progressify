@@ -1,3 +1,49 @@
+# Version 0.5.0 [2026-11-23]
+
+## New Features
+
+ * Add support for `varimp()` of **partykit** for `cforest` objects,
+   e.g. `vi <- partykit::varimp(forest) |> progressify()`.
+
+ * Add support for `confint()` of **lme4** with `method = "boot"`,
+   e.g. `ci <- confint(fit, method = "boot", nsim = 100) |>
+   progressify()`.
+
+ * Add support for domain-specific CRAN package **tm**, e.g. `tdm <-
+   tm::TermDocumentMatrix(corpus) |> progressify()`. Supported
+   functions are `tm_map()`, `TermDocumentMatrix()`,
+   `DocumentTermMatrix()`, and `tm_index()`.
+
+ * Add support for domain-specific CRAN package **Sim.DiffProc**,
+   e.g. `res <- Sim.DiffProc::MCM.sde(model, statistic, R = 100) |>
+   progressify()`, which reports on progress for each of the `R`
+   simulations.
+
+ * Add support for domain-specific CRAN package **car**, e.g. `res <-
+   car::Boot(fit, R = 999) |> progressify()`.
+
+## Documentation
+
+ * Document that `progressify()` cannot yet be combined with
+   `futurize()` for **partykit**, **sandwich**, and **tm** functions,
+   because both set the same `applyfun` argument or
+   `tm_parLapply_engine()` option. Removed a **partykit** example
+   from the README that combined the two.
+
+## Bug Fixes
+
+ * `progressify()` for `fwb()` of **fwb** (>= 1.0.0) would signal one
+   fewer progress update than the number of bootstrap replicates (`R`),
+   unless called with `simple = FALSE` or `wtype = "multinom"`. This
+   bug affected the default call, i.e. `fwb(data, statistic) |>
+   progressify()`.
+
+## Miscellaneous
+
+ * Now using `genericFunction` for S4 classes rather than
+   `standardGeneric`, which will be removed in R (>= 4.7.0).
+   
+
 # Version 0.4.0 [2026-10-17]
 
 ## Significant Changes
@@ -100,7 +146,7 @@
    SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()`.
 
 
-# Version 0.1.0 (2026-04-01)
+# Version 0.1.0 [2026-04-07]
 
 This is a retake of the previous, proof-of-concept version. Starting
 with this version, we are now borrowing from the **futurize** package,
@@ -143,7 +189,7 @@ which implements closely related "parallelization" transpilers.
    which packages and functions are supported by `progressify()`.
  
 
-# Version 0.0.1 (2025-05-06)
+# Version 0.0.1 [2025-05-06]
 
 ## New Features
 

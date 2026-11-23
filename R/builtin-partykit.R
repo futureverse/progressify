@@ -4,6 +4,12 @@
 #   lapply(...) |> progressify::progressify()
 # })
 #
+# partykit::varimp(<cforest>, ...) =>
+#
+# partykit::varimp(<cforest>, ..., applyfun = function(...) {
+#   lapply(...) |> progressify::progressify()
+# })
+#
 progressify_partykit <- local({
   function(expr, fcn_name, fcn, ..., envir = parent.frame()) {
     parts <- as.list(expr)
@@ -17,7 +23,8 @@ progressify_partykit <- local({
 
 append_builtin_transpilers_for_partykit <- local({
   known_fcns <- list(
-    cforest = c
+    cforest = c,
+    varimp.cforest = c
   )
 
   template <- bquote_compile(function(expr, options) {
@@ -32,7 +39,7 @@ append_builtin_transpilers_for_partykit <- local({
   }
 
   function() {
-    ## partykit::cforest(), ...
+    ## partykit::cforest(), partykit::varimp(<cforest>)
     transpilers <- list()
     for (fcn_name in names(known_fcns)) {
       transpilers[[fcn_name]] <- list(

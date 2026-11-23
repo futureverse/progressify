@@ -42,4 +42,78 @@ if (requireNamespace("lme4", quietly = TRUE)) {
 
     message(sprintf("Testing %s ... done", name))
   }
+
+
+  ## -------------------------------------------------------
+  ## confint(<merMod>, method = "boot")
+  ## -------------------------------------------------------
+  fm2 <- lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
+  nsim <- 10L
+
+  exprs <- list(
+    confint = quote(confint(fm2, method = "boot", nsim = nsim)),
+    confint = quote(stats::confint(fm2, method = "boot", nsim = nsim)),
+    confint = quote(confint(fm2, parm = "Days", level = 0.90, method = "boot", nsim = nsim)),
+    confint = quote(confint(fm2, method = "boot", nsim = nsim, FUN = fixef)),
+    confint = quote(confint(fm2, method = "boot", nsim = nsim, quiet = TRUE)),
+    confint = quote(confint(fm2, method = "boot", nsim = nsim, .progress = "txt")),
+    ## Dispatch argument is not a variable => method identified at run time
+    confint = quote(confint(lmer(Reaction ~ Days + (1 | Subject), sleepstudy), method = "boot", nsim = nsim))
+  )
+
+  for (kk in seq_along(exprs)) {
+    name <- names(exprs)[kk]
+    expr <- exprs[[kk]]
+    message(sprintf("Testing %s ...", name))
+    print(expr)
+
+    set.seed(42)
+    truth <- suppressMessages(eval(expr))
+    if (identical(expr[[".progress"]], "txt")) {
+      ## Not comparing to built-in text progress bar output
+      expr[[".progress"]] <- NULL
+    }
+
+    expr_f <- bquote(.(expr) |> progressify())
+    print(expr_f)
+
+    ## Count progress updates; progressr.enable = TRUE makes progressor()
+    ## signal 'progression' conditions also in non-interactive mode
+    search_before <- search()
+    nupdates <- 0L
+    oopts_progressr <- options(progressr.enable = TRUE)
+    set.seed(42)
+    res <- withCallingHandlers(eval(expr_f), progression = function(p) {
+      if (identical(p[["type"]], "update")) nupdates <<- nupdates + 1L
+      invokeRestart("muffleProgression")
+    })
+    options(oopts_progressr)
+    print(list(truth = truth, res = res, nupdates = nupdates))
+    stopifnot(
+      all.equal(res, truth),
+      nupdates == nsim,
+      identical(search(), search_before)
+    )
+
+    ## No stdout output
+    out <- utils::capture.output({
+      set.seed(42)
+      res2 <- suppressMessages(eval(expr_f))
+    })
+    stopifnot(length(out) == 0L, all.equal(res2, truth))
+
+    message(sprintf("Testing %s ... done", name))
+  }
+
+
+  ## Methods other than "boot" are not supported
+  for (method in c("profile", "Wald")) {
+    expr <- bquote(confint(fm2, method = .(method)))
+    res <- tryCatch(eval(bquote(.(expr) |> progressify())), error = identity)
+    stopifnot(inherits(res, "error"))
+    message("Expected error: ", conditionMessage(res))
+  }
+  res <- tryCatch(confint(fm2) |> progressify(), error = identity)
+  stopifnot(inherits(res, "error"))
+  message("Expected error: ", conditionMessage(res))
 }
