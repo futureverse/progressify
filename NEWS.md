@@ -1,4 +1,4 @@
-# Version (development version)
+# Version 0.5.0 [2026-11-23]
 
 ## New Features
 
@@ -146,7 +146,7 @@
    SimDesign::runSimulation(design, replications, generate, analyse, summarise) |> progressify()`.
 
 
-# Version 0.1.0 (2026-04-01)
+# Version 0.1.0 [2026-04-07]
 
 This is a retake of the previous, proof-of-concept version. Starting
 with this version, we are now borrowing from the **futurize** package,
@@ -189,7 +189,7 @@ which implements closely related "parallelization" transpilers.
    which packages and functions are supported by `progressify()`.
  
 
-# Version 0.0.1 (2025-05-06)
+# Version 0.0.1 [2025-05-06]
 
 ## New Features
 
